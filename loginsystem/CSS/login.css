@@ -1,3 +1,28 @@
 html{
     background-image: linear-gradient(rgb(156, 156, 255), white);
 }
+
+body{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+
+    #login_body{
+        display: flex;
+        flex-flow: column wrap;
+        align-self: center;
+        img{
+            height: auto;
+        }
+        form{
+            display:block;
+        }
+    }
+}
+
+h2, label{
+    font-family:'Times New Roman', Times, serif;
+    font-weight: 500;
+    color: rgb(0, 0, 155);
+    text-shadow: 0px 0px 2px blue;
+}
