@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="CSS/navbar.css">
 <p>Hello Navbar</p>
 <?php
 if($_SERVER['REQUEST_URI'] === "/WCContactDB/staff_only/partners.php" or "/WCContactDB/staff_only/clients.php"){
