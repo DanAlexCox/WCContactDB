@@ -7,7 +7,7 @@ require ('../../vendor/autoload.php');
 
 try {
     //Create a new PHPMailer instance
-$mail=new PHPMailer();
+$mail=new PHPMailer(true);
 $mail->CharSet = 'UTF-8';
 
 //Tell PHPMailer to use SMTP
@@ -17,17 +17,18 @@ $mail->IsSMTP();
 //SMTP::DEBUG_OFF = off (for production use)
 //SMTP::DEBUG_CLIENT = client messages
 //SMTP::DEBUG_SERVER = client and server messages
-$mail->SMTPDebug = SMTP::DEBUG_SERVER;
-$mail->Host = 'smtp.gmail.com';
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-$mail->Port = 465;
+$mail->Host = 'ams203.greengeeks.net';
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+$mail->Port = 587;
 $mail->SMTPAuth = true;
+$mail->SMTPDebug = 2; // Set to 2 for detailed debug output, 0 for no output
+$mail->Debugoutput = 'html'; // Output errors in a readable format
 
-$mail->Username = 'adala738@gmail.com';
-$mail->Password   = 'Space2017!';
+$mail->Username = 'daniel@womensconsortium.org.uk';
+$mail->Password   = 'Dorothy2023:)';
 
 //Do not use user-submitted addresses in here
-$mail->setFrom('adala738@gmail.com', 'First Last');
+$mail->setFrom('daniel@womensconsortium.org.uk', 'First Last');
 
 //$mail->AddReplyTo('no-reply@mycomp.com','no-reply');
 $mail->Subject    = 'PHPMailer gmail smtp test';
@@ -40,6 +41,8 @@ $mail->AddAddress('daniel@womensconsortium.org.uk', 'title1');
 //$mail->AddAddress('abc2@gmail.com', 'title2'); /* ... */
 
 $mail->Body = "Hello World";
+
+$mail->isHTML(true);
 
 //Replace the plain text body with one created manually
 $mail->AltBody = 'Hello World part 2';
@@ -73,7 +76,7 @@ if(!$mail->send()) {
     </head>
     <body>
         <?php
-        include "navbar.php";
+        //include "navbar.php";
         //Tasks:
         //- Locate Partnership table
         //- View partnership table (later make specific permissions for specially authorized users)
