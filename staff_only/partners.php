@@ -42,7 +42,7 @@ include "connectdb.php";
                 echo "<tr>";
                 echo "<td>".$row['Partner']."</td>";
                 echo "<td>".$row['Contact']."</td>";
-                echo "<td><input type='checkbox' class='checkbox' name='button[]' value='".$row['Contact']."'></td>";
+                echo "<td><input type='checkbox' class='checkbox' name='button[]' value='".$row['partner_ID']."'></td>";
                 echo "</tr>";
                 array_push($rowset, $row);
             }
@@ -56,13 +56,16 @@ include "connectdb.php";
             echo "<div class='pcontact'>";
         
             // Display the email form
-            echo "<form method='post' action='send_email.php' class='sndeml'>";
-        
+            echo "<form method='post' action='partners.php' class='sndeml'>";
             // Loop through selected checkboxes
+            $buttons = array();
             foreach ($_POST['button'] as $partnerID) {
                 echo "<input type='hidden' name='selected_partners[]' value='" . htmlspecialchars($partnerID) . "'>";
-                echo "<p>Selected Partner ID: " . htmlspecialchars($partnerID) . "</p>";
+                array_push($buttons, $partnerID);
             }
+            $buttonsString = implode(", ", $buttons);
+            echo "<input type ='text' class = 'email' value = '".htmlspecialchars($buttonsString)."'>";
+
             echo "</form>";
             
             //Create a new PHPMailer instance
