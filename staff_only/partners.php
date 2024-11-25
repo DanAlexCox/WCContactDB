@@ -4,65 +4,8 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 require ('../../vendor/autoload.php');
+include "connectdb.php";
 
-try {
-    //Create a new PHPMailer instance
-$mail=new PHPMailer(true);
-$mail->CharSet = 'UTF-8';
-
-//Tell PHPMailer to use SMTP
-$mail->IsSMTP();
-
-//Enable SMTP debugging
-//SMTP::DEBUG_OFF = off (for production use)
-//SMTP::DEBUG_CLIENT = client messages
-//SMTP::DEBUG_SERVER = client and server messages
-$mail->Host = 'ams203.greengeeks.net';
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-$mail->Port = 587;
-$mail->SMTPAuth = true;
-$mail->SMTPDebug = 2; // Set to 2 for detailed debug output, 0 for no output
-$mail->Debugoutput = 'html'; // Output errors in a readable format
-
-$mail->Username = 'daniel@womensconsortium.org.uk';
-$mail->Password   = 'Dorothy2023:)';
-
-//Do not use user-submitted addresses in here
-$mail->setFrom('daniel@womensconsortium.org.uk', 'First Last');
-
-//$mail->AddReplyTo('no-reply@mycomp.com','no-reply');
-$mail->Subject    = 'PHPMailer gmail smtp test';
-
-//Read an HTML message body from an external file, convert referenced images to embedded,
-//convert HTML into a basic plain-text alternative body
-// $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
-
-$mail->AddAddress('daniel@womensconsortium.org.uk', 'title1');
-//$mail->AddAddress('abc2@gmail.com', 'title2'); /* ... */
-
-$mail->Body = "Hello World";
-
-$mail->isHTML(true);
-
-//Replace the plain text body with one created manually
-$mail->AltBody = 'Hello World part 2';
-
-//Attach an image file
-//$mail->addAttachment('images/phpmailer_mini.png');
-
-if(!$mail->send()) {
-    echo 'Mailer Error: ' . $mail->ErrorInfo;
-} else {
-    echo 'Message sent!';
-    //Section 2: IMAP
-    //Uncomment these to save your message in the 'Sent Mail' folder.
-    #if (save_mail($mail)) {
-    #    echo "Message saved!";
-    #}
-}
-} catch(Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}
 ?>
 
 <html>
@@ -72,15 +15,97 @@ if(!$mail->send()) {
     <head>
         <title>Partners</title>
         <link rel="stylesheet" type="text/css" href="CSS/main.css">
+        <link rel="stylesheet" type="text/css" href="CSS/partner.css">
         <link rel="icon" type="image/x-icon" href="CSS/images/w-logo-blue.png">
     </head>
+    <?php
+    include "navbar.php";
+    ?>
     <body>
         <?php
-        //include "navbar.php";
+        
         //Tasks:
         //- Locate Partnership table
         //- View partnership table (later make specific permissions for specially authorized users)
+            $stmt = "SELECT `partner_name` AS `Partner`, `representative` AS `Contact` FROM `partners` AS `Associates`";
+            $query = $pdo->prepare($stmt);
+            $query->execute();
+
+            $rowset = array();
+            echo "<table class='ptnr'>";
+            foreach($query as $row){
+        //verify no dupes
+            echo "<tr><th>Partner</th><th>Representative</th><th>Select</th></tr>";
+            if(!in_array($row, $rowset)){
+                echo "<tr>";
+                echo "<td>".$row['Partner']."</td>";
+                echo "<td>".$row['Contact']."</td>";
+                echo "<td>Select</td>";
+                echo "</tr>";
+                array_push($rowset, $row);
+            }
+            }
+            echo "</table>";
         //- Contact partners
+        echo "<div class='pcontact'>";
+        try {
+            //Create a new PHPMailer instance
+                $mail=new PHPMailer(true);
+                $mail->CharSet = 'UTF-8';
+            echo "<p>Send email</p>";
+            //Tell PHPMailer to use SMTP
+                $mail->IsSMTP();
+        
+            //Enable SMTP debugging
+            //SMTP::DEBUG_OFF = off (for production use)
+            //SMTP::DEBUG_CLIENT = client messages
+            //SMTP::DEBUG_SERVER = client and server messages
+                $mail->Host = 'ams203.greengeeks.net';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port = 587;
+                $mail->SMTPAuth = true;
+                $mail->SMTPDebug = 2; // Set to 2 for detailed debug output, 0 for no output
+                $mail->Debugoutput = 'html'; // Output errors in a readable format
+        
+                $mail->Username = 'daniel@womensconsortium.org.uk';
+                $mail->Password   = 'Dorothy2023:)';
+        
+            //Do not use user-submitted addresses in here
+                $mail->setFrom('daniel@womensconsortium.org.uk', 'First Last');
+        
+            //$mail->AddReplyTo('no-reply@mycomp.com','no-reply');
+                $mail->Subject    = 'PHPMailer gmail smtp test';
+        
+            //Read an HTML message body from an external file, convert referenced images to embedded,
+            //convert HTML into a basic plain-text alternative body
+            // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
+        
+                $mail->AddAddress('daniel@womensconsortium.org.uk', 'title1');
+                //$mail->AddAddress('abc2@gmail.com', 'title2'); /* ... */
+                $mail->Body = "Hello World";
+        
+                $mail->isHTML(true);
+        
+            //Replace the plain text body with one created manually
+                $mail->AltBody = 'Hello World part 2';
+        
+            //Attach an image file
+                //$mail->addAttachment('images/phpmailer_mini.png');
+        
+                // if(!$mail->send()) {
+                //     echo 'Mailer Error: ' . $mail->ErrorInfo;
+                // } else {
+                //     echo 'Message sent!';
+                //     //Section 2: IMAP
+                //     //Uncomment these to save your message in the 'Sent Mail' folder.
+                //     #if (save_mail($mail)) {
+                //     #    echo "Message saved!";
+                //     #}
+                // }
+        } catch(Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+        echo "</div>";
         //(all partner modifications can only be done with proper authorization)
         //- Add partner details
         //- Modify partner details
