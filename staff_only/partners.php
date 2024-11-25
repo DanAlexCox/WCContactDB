@@ -27,39 +27,51 @@ include "connectdb.php";
         //Tasks:
         //- Locate Partnership table
         //- View partnership table (later make specific permissions for specially authorized users)
-            $stmt = "SELECT `partner_name` AS `Partner`, `representative` AS `Contact` FROM `partners` AS `Associates`";
+            $stmt = "SELECT `partner_ID`, `partner_name` AS `Partner`, `representative` AS `Contact` FROM `partners` AS `Associates`";
             $query = $pdo->prepare($stmt);
             $query->execute();
 
             $rowset = array();
-            echo "<table class='ptnr'>";
-            foreach($query as $row){
-        //verify no dupes
+
+            echo "<form method='post' action='partners.php' class='emlptnr'><table class='ptnr'>";
             echo "<tr><th>Partner</th><th>Representative</th><th>Select</th></tr>";
+            foreach($query as $row){
+            //verify no dupes
+            
             if(!in_array($row, $rowset)){
                 echo "<tr>";
                 echo "<td>".$row['Partner']."</td>";
                 echo "<td>".$row['Contact']."</td>";
-                echo "<td>Select</td>";
+                echo "<td><input type='checkbox' class='checkbox' name='button[]' value='".$row['Contact']."'></td>";
                 echo "</tr>";
                 array_push($rowset, $row);
             }
             }
             echo "</table>";
+            echo "<input type='submit' class='mkemlbtn' value='Contact'>";
+            echo "</form>";
+
         //- Contact partners
-        echo "<div class='pcontact'>";
-        try {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button'])) {
+            echo "<div class='pcontact'>";
+        
+            // Display the email form
+            echo "<form method='post' action='send_email.php' class='sndeml'>";
+        
+            // Loop through selected checkboxes
+            foreach ($_POST['button'] as $partnerID) {
+                echo "<input type='hidden' name='selected_partners[]' value='" . htmlspecialchars($partnerID) . "'>";
+                echo "<p>Selected Partner ID: " . htmlspecialchars($partnerID) . "</p>";
+            }
+            echo "</form>";
+            
             //Create a new PHPMailer instance
+            try{
                 $mail=new PHPMailer(true);
                 $mail->CharSet = 'UTF-8';
-            echo "<p>Send email</p>";
             //Tell PHPMailer to use SMTP
                 $mail->IsSMTP();
-        
-            //Enable SMTP debugging
-            //SMTP::DEBUG_OFF = off (for production use)
-            //SMTP::DEBUG_CLIENT = client messages
-            //SMTP::DEBUG_SERVER = client and server messages
+
                 $mail->Host = 'ams203.greengeeks.net';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
@@ -102,10 +114,11 @@ include "connectdb.php";
                 //     #    echo "Message saved!";
                 //     #}
                 // }
-        } catch(Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            } catch(Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+            echo "</div>";
         }
-        echo "</div>";
         //(all partner modifications can only be done with proper authorization)
         //- Add partner details
         //- Modify partner details
