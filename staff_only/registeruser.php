@@ -1,6 +1,6 @@
 <?php
-include('connectdb.php');
 session_start();
+include('connectdb.php');
         if(isset($_POST['registerbtn'])) {
             $address = $_POST['new_email'];
             $new_username = $_POST['new_username'];
