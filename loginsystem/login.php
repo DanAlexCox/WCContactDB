@@ -37,7 +37,7 @@ if(isset($_GET['msg'])){
             if(isset($success_message)){
                 echo "<p style='color:green;'>$success_message</p>";
             }?> 
-            <form class="login_form" action="../loginsystem/login.php" method="post">
+            <form class="login_form" action="login.php" method="post">
                 <label for id="login_email">Email</label>
                 <input type="email" id="login_email" name="Email" placeholder="Insert here" required></input><br>
                 <label for id="login_pass">Password</label>
@@ -58,7 +58,7 @@ if(isset($_GET['msg'])){
                     $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 
                     if($user) {
-                        if(password_verify($passwordSubmit, $user['Password']) OR $passwordSubmit == $user['password']) {
+                        if(password_verify($passwordSubmit, $user['password'])) {
                             //1. Add session data for username and userID
                             $_SESSION['username'] = $user['username'];
                             $_SESSION['User_ID'] = $user['User_ID'];
