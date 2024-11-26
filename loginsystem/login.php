@@ -62,6 +62,7 @@ if(isset($_GET['msg'])){
                             //1. Add session data for username and userID
                             $_SESSION['username'] = $user['username'];
                             $_SESSION['User_ID'] = $user['User_ID'];
+                            $_SESSION['useremail'] = $user['staff_email'];
                                 header("Location: ../staff_only/staff_portal.php");
                                 //If not correct password, add relevant error message
                             } else {
