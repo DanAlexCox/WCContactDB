@@ -1,10 +1,19 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-require ('../../vendor/autoload.php');
 include "connectdb.php";
+
+if(isset($_GET['error'])){
+    // Sanitize the message to prevent XSS
+    $error = htmlspecialchars($_GET['error']);
+    // Display a JavaScript alert with the message
+    echo "<script>alert('$error');</script>";
+}
+
+if(isset($_GET['msg'])){
+    // Sanitize the message to prevent XSS
+    $msg = htmlspecialchars($_GET['msg']);
+    // Display a JavaScript alert with the message
+    echo "<script>alert('$msg');</script>";
+}
 
 ?>
 
@@ -27,13 +36,13 @@ include "connectdb.php";
         //Tasks:
         //- Locate Partnership table
         //- View partnership table (later make specific permissions for specially authorized users)
-            $stmt = "SELECT `partner_ID`, `partner_name` AS `Partner`, `representative` AS `Contact` FROM `partners` AS `Associates`";
+            $stmt = "SELECT `partner_ID`, `partner_email`, `partner_name` AS `Partner`, `representative` AS `Contact` FROM `partners` AS `Associates`";
             $query = $pdo->prepare($stmt);
             $query->execute();
 
             $rowset = array();
 
-            echo "<form method='post' action='partners.php' class='emlptnr'><table class='ptnr'>";
+            echo "<form method = 'post' action = 'partners.php' class = 'emlptnr'><table class = 'ptnr'>";
             echo "<tr><th>Partner</th><th>Representative</th><th>Select</th></tr>";
             foreach($query as $row){
             //verify no dupes
@@ -42,7 +51,8 @@ include "connectdb.php";
                 echo "<tr>";
                 echo "<td>".$row['Partner']."</td>";
                 echo "<td>".$row['Contact']."</td>";
-                echo "<td><input type='checkbox' class='checkbox' name='button[]' value='".$row['partner_ID']."'></td>";
+                echo "<td><input type = 'checkbox' class = 'checkbox' name = 'email[]' value = '".$row['partner_email']."'></td>";
+                echo "<input type = 'hidden' name = 'contactname[]' value = '".$row['Partner']."'>";
                 echo "</tr>";
                 array_push($rowset, $row);
             }
@@ -52,75 +62,35 @@ include "connectdb.php";
             echo "</form>";
 
         //- Contact partners
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
             echo "<div class='pcontact'>";
         
             // Display the email form
-            echo "<form method='post' action='partners.php' class='sndeml'>";
+            echo "<form method='post' action='sendemail.php' class='sndeml'>";
             // Loop through selected checkboxes
             $buttons = array();
-            foreach ($_POST['button'] as $partnerID) {
-                echo "<input type='hidden' name='selected_partners[]' value='" . htmlspecialchars($partnerID) . "'>";
-                array_push($buttons, $partnerID);
+            foreach ($_POST['email'] as $partnerEM) {
+                echo "<input type='hidden' name='selected_emails[]' value='" . htmlspecialchars($partnerEM) . "'>";
+                array_push($buttons, $partnerEM);
             }
             $buttonsString = implode(", ", $buttons);
-            echo "<input type ='text' class = 'email' value = '".htmlspecialchars($buttonsString)."'>";
 
-            echo "</form>";
-            
-            //Create a new PHPMailer instance
-            try{
-                $mail=new PHPMailer(true);
-                $mail->CharSet = 'UTF-8';
-            //Tell PHPMailer to use SMTP
-                $mail->IsSMTP();
-
-                $mail->Host = 'ams203.greengeeks.net';
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->Port = 587;
-                $mail->SMTPAuth = true;
-                $mail->SMTPDebug = 2; // Set to 2 for detailed debug output, 0 for no output
-                $mail->Debugoutput = 'html'; // Output errors in a readable format
-        
-                $mail->Username = 'daniel@womensconsortium.org.uk';
-                $mail->Password   = 'Dorothy2023:)';
-        
-            //Do not use user-submitted addresses in here
-                $mail->setFrom('daniel@womensconsortium.org.uk', 'First Last');
-        
-            //$mail->AddReplyTo('no-reply@mycomp.com','no-reply');
-                $mail->Subject    = 'PHPMailer gmail smtp test';
-        
-            //Read an HTML message body from an external file, convert referenced images to embedded,
-            //convert HTML into a basic plain-text alternative body
-            // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
-        
-                $mail->AddAddress('daniel@womensconsortium.org.uk', 'title1');
-                //$mail->AddAddress('abc2@gmail.com', 'title2'); /* ... */
-                $mail->Body = "Hello World";
-        
-                $mail->isHTML(true);
-        
-            //Replace the plain text body with one created manually
-                $mail->AltBody = 'Hello World part 2';
-        
-            //Attach an image file
-                //$mail->addAttachment('images/phpmailer_mini.png');
-        
-                // if(!$mail->send()) {
-                //     echo 'Mailer Error: ' . $mail->ErrorInfo;
-                // } else {
-                //     echo 'Message sent!';
-                //     //Section 2: IMAP
-                //     //Uncomment these to save your message in the 'Sent Mail' folder.
-                //     #if (save_mail($mail)) {
-                //     #    echo "Message saved!";
-                //     #}
-                // }
-            } catch(Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            $part = array();
+            foreach($_POST['contactname'] as $contactNM){
+                echo "<input type = 'hidden' name = 'selected_contacts[]' value = '".htmlspecialchars($contactNM)."'>";
+                array_push($part, $contactNM);
             }
-            echo "</div>";
+            $partString = implode(", ", $part);
+
+            echo "<label for class='email'>Email</label><br>";
+            echo "<input type = 'text' class = 'email' name ='emails[]' value = '".htmlspecialchars($buttonsString)."' readonly><br>";
+            echo "<label for class='title'>Title</label><br>";
+            echo "<input type = 'text' class = 'title' name = 'title' placeholder = 'Insert title' required><br>";
+            echo "<label for class='description'>Description</label><br>";
+            echo "<input type = 'text' class = 'description' name = 'description' placeholder = 'Insert details here'><br>";
+            echo "<input type = 'hidden' name = 'contacts[]' value = ". htmlspecialchars($partString) .">";
+            echo "<button type='submit' name='sndemlbtn'>Send</button>";
+            echo "</form>";
         }
         //(all partner modifications can only be done with proper authorization)
         //- Add partner details
