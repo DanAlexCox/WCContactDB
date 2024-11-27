@@ -35,14 +35,14 @@ if(isset($_GET['msg'])){
         <?php
         
         //Tasks:
-        //- Locate Partnership table
+        //- Locate Partnership table (complete)
             $stmt = "SELECT `partner_ID`, `partner_email`, `partner_name` AS `Partner`, `representative` AS `Contact` FROM `partners` AS `Associates`";
             $query = $pdo->prepare($stmt);
             $query->execute();
 
             $rowset = array();
 
-            //- View partnership table (later make specific permissions for specially authorized users)
+        //- View partnership table (complete later make specific permissions for specially authorized users)
 
             echo "<form method = 'post' action = 'partners.php' class = 'emlptnr'><table class = 'ptnr'>";
             echo "<tr><th>Partner</th><th>Representative</th><th>Select</th></tr>";
@@ -63,13 +63,13 @@ if(isset($_GET['msg'])){
             echo "<input type='submit' class='mkemlbtn' value='Contact'>";
             echo "</form>";
 
-        //- Contact partners
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
-            echo "<div class='pcontact'>";
+        //- Contact partners (complete)
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
+                echo "<div class='pcontact'>";
         
-            // Display the email form
+        // Display the email form (complete)
             echo "<form id='emailForm' method='post' onsubmit='return checkPassword();' action='sendemail.php' class='sndeml'>";
-            // Loop through selected checkboxes
+        // Loop through selected checkboxes (complete)
             $buttons = array();
             foreach ($_POST['email'] as $partnerEM) {
                 echo "<input type='hidden' name='selected_emails[]' value='" . htmlspecialchars($partnerEM) . "'>";
@@ -94,9 +94,11 @@ if(isset($_GET['msg'])){
             echo "<input type='hidden' name='sndemlbtn' value='1'>";
             echo "<button type='submit'>Send</button>";
             echo "</form>";
-        }
-        //(all partner modifications can only be done with proper authorization)
+            }
+        //(later all partner modifications can only be done with proper authorization)
         //- Add partner details
+            echo "<a href='addpartner.php'><button>Add a partner</button></a>";
+
         //- Modify partner details
         //- Remove partner
         ?>
