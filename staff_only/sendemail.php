@@ -13,7 +13,7 @@ if(isset($_POST['sndemlbtn'])) {
 
                 $emailfrom = $_SESSION['useremail'];
                 $emailfromname = $_SESSION['username'];
-                $emailfrompass = "Dorothy2023:)";   //change later to verify password
+                $emailfrompass = $_SESSION['passgood'];   //change later to verify password
 
                 $title = $_POST['title'];
                 $description = $_POST['description'];
@@ -71,6 +71,7 @@ if(isset($_POST['sndemlbtn'])) {
                     if(!$mail->send()) {
                         echo 'Mailer Error: ' . $mail->ErrorInfo;
                     } else {
+                        unset($_SESSION['passgood']);
                         $msg = 'Email sent!';
                         header("Location: partners.php?msg=".$msg);
                         exit();
