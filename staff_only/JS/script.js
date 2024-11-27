@@ -1,8 +1,11 @@
-async function checkPassword() {
+document.getElementById('emailForm').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Prevent default submission
+    const form = this; // Reference to the specific form
+
     const inputPass = prompt("Enter your password to send the email:");
     if (inputPass === null || inputPass.trim() === "") {
         alert("Password input canceled or empty.");
-        return false; // Prevent form submission
+        return false; // Stop form submission
     }
 
     // Send the password to the server for verification
@@ -17,22 +20,12 @@ async function checkPassword() {
 
         if (data.success) {
             alert("Password verified. Submitting the form.");
-            return true; // Allow form submission
+            form.submit(); // Submit this specific form
         } else {
             alert(data.error || "Password verification failed.");
-            return false; // Prevent form submission
         }
     } catch (error) {
         console.error("Error during password verification:", error);
         alert("An error occurred. Please try again.");
-        return false; // Prevent form submission
-    }
-}
-
-document.querySelector('form').addEventListener('submit', async function (event) {
-    event.preventDefault(); // Prevent default form submission
-    const canSubmit = await checkPassword();
-    if (canSubmit) {
-        this.submit(); // Manually submit the form if password is verified
     }
 });

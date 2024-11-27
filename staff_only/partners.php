@@ -68,7 +68,7 @@ if(isset($_GET['msg'])){
             echo "<div class='pcontact'>";
         
             // Display the email form
-            echo "<form method='post' onsubmit='return checkPassword();' action='sendemail.php' class='sndeml'>";
+            echo "<form id='emailForm' method='post' onsubmit='return checkPassword();' action='sendemail.php' class='sndeml'>";
             // Loop through selected checkboxes
             $buttons = array();
             foreach ($_POST['email'] as $partnerEM) {
@@ -91,7 +91,8 @@ if(isset($_GET['msg'])){
             echo "<label for class='description'>Description</label><br>";
             echo "<input type = 'text' class = 'description' name = 'description' placeholder = 'Insert details here'><br>";
             echo "<input type = 'hidden' name = 'contacts[]' value = ". htmlspecialchars($partString) .">";
-            echo "<button type='submit' name='sndemlbtn'>Send</button>";
+            echo "<input type='hidden' name='sndemlbtn' value='1'>";
+            echo "<button type='submit'>Send</button>";
             echo "</form>";
         }
         //(all partner modifications can only be done with proper authorization)
