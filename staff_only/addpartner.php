@@ -63,7 +63,7 @@ if(isset($_GET['msg'])){
             <?php
         //cancel button back to partner.php, submit popup are you sure "Yes" submit, "No" undo submit (done)
             ?>
-            <a href="partner.php"><button name="cancelAdd">Cancel</button></a>
+            <a href="partners.php"><button name="cancelAdd">Cancel</button></a>
             <?php
             //see form onsubmit
 

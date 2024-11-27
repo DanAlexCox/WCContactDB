@@ -114,5 +114,7 @@ if(isset($_GET['msg'])){
             }
         }
         ?>
+        <!--Cancel button-->
+            <a href = "partners.php"><button name="cancelUpdate">Cancel</button></a>
     </body>
 </html>
