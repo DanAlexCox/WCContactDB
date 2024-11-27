@@ -128,7 +128,7 @@ if(isset($_GET['msg'])){
             echo "<a href='addpartner.php'><button>Add a partner</button></a>";
 
         //- Modify partner details
-        
+            echo "<a href='modifypartner.php'><button>Modify an existing partner</button></a>";
         ?>
 
 
