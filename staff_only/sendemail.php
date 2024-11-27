@@ -68,18 +68,18 @@ if(isset($_POST['sndemlbtn'])) {
                 //Attach an image file
                     //$mail->addAttachment('images/phpmailer_mini.png');
         
-                    // if(!$mail->send()) {
-                    //     echo 'Mailer Error: ' . $mail->ErrorInfo;
-                    // } else {
-                    //     $msg = 'Email sent!';
-                    //     header("Location: partners.php?msg=".$msg);
-                    //     exit();
-                    //     //Section 2: IMAP
-                    //     //Uncomment these to save your message in the 'Sent Mail' folder.
-                    //     #if (save_mail($mail)) {
-                    //     #    echo "Message saved!";
-                    //     #}
-                    // }
+                    if(!$mail->send()) {
+                        echo 'Mailer Error: ' . $mail->ErrorInfo;
+                    } else {
+                        $msg = 'Email sent!';
+                        header("Location: partners.php?msg=".$msg);
+                        exit();
+                        //Section 2: IMAP
+                        //Uncomment these to save your message in the 'Sent Mail' folder.
+                        #if (save_mail($mail)) {
+                        #    echo "Message saved!";
+                        #}
+                    }
                 }
             } catch(Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
