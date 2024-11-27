@@ -1,6 +1,5 @@
 <?php
 session_start();
-include "connectdb.php";
 
 if(isset($_GET['error'])){
     // Sanitize the message to prevent XSS
@@ -36,7 +35,7 @@ if(isset($_GET['msg'])){
     <?php
         //Make the form (Partner_name(organisation), address (postcode for now only), representative (prefix, first name, last name), representative email (done))
             ?>
-            <form method="post" action="addpartner.php" id="partnerForm" onsubmit="return confirmPartner();" class="adptnr">
+            <form method="post" action="addpartnerconfirmed.php" id="partnerForm" onsubmit="return confirmPartner();" class="adptnr">
                 <label for class="org">Organisation Name</label>
                 <input type="text" name="Organisation" class="org" placeholder="Enter here" required><br>
                 <!--post code only, later add more detail address -->
@@ -59,17 +58,17 @@ if(isset($_GET['msg'])){
                 <input type="text" name="Surname" class="Surnm" placeholder="Enter here" required><br>
                 <label for class="contacteml">Email Address</label>
                 <input type="text" name="EmailAddress" class="contacteml" placeholder="Enter here" required><br>
-                <button type="submit">Add</button>
+                <button type="submit" name="regpartner">Add</button>
             </form>
             <?php
-        //cancel button back to partner.php, submit popup are you sure "Yes" submit, "No" undo submit
+        //cancel button back to partner.php, submit popup are you sure "Yes" submit, "No" undo submit (done)
             ?>
             <a href="partner.php"><button name="cancelAdd">Cancel</button></a>
             <?php
             //see form onsubmit
 
-        //make pdo query with sql injection prevention
-        //popup successfully added partner, send back to partner.php
+        //make pdo query with sql injection prevention (done see addpartnerconfirmed.php)
+        //popup successfully added partner, send back to partner.php (done see addpartnerconfirmed.php)
     ?>
     </body>
 </html>
