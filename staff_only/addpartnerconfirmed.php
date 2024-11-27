@@ -15,12 +15,12 @@ if(isset($_POST['regpartner'])){
     $ptnr_stmt->bindParam(':pe', $neweml);
     
     if($ptnr_stmt->execute()){
-        $msg = "Added successfully";
+        $msg = "Added successfully.";
         header("Location: partners.php?msg=".$msg);
         exit();
     } else {
         $error = "Error adding. Please try again.";
-        header("Location: addpartner.php?error=".$msg);
+        header("Location: addpartner.php?error=".$error);
         exit();
     }
 }   
