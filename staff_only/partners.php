@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "connectdb.php";
 
 if(isset($_GET['error'])){
@@ -14,7 +15,6 @@ if(isset($_GET['msg'])){
     // Display a JavaScript alert with the message
     echo "<script>alert('$msg');</script>";
 }
-
 ?>
 
 <html>
@@ -26,6 +26,7 @@ if(isset($_GET['msg'])){
         <link rel="stylesheet" type="text/css" href="CSS/main.css">
         <link rel="stylesheet" type="text/css" href="CSS/partner.css">
         <link rel="icon" type="image/x-icon" href="CSS/images/w-logo-blue.png">
+        <script defer src="JS/script.js"></script>
     </head>
     <?php
     include "navbar.php";
@@ -35,12 +36,13 @@ if(isset($_GET['msg'])){
         
         //Tasks:
         //- Locate Partnership table
-        //- View partnership table (later make specific permissions for specially authorized users)
             $stmt = "SELECT `partner_ID`, `partner_email`, `partner_name` AS `Partner`, `representative` AS `Contact` FROM `partners` AS `Associates`";
             $query = $pdo->prepare($stmt);
             $query->execute();
 
             $rowset = array();
+
+            //- View partnership table (later make specific permissions for specially authorized users)
 
             echo "<form method = 'post' action = 'partners.php' class = 'emlptnr'><table class = 'ptnr'>";
             echo "<tr><th>Partner</th><th>Representative</th><th>Select</th></tr>";
@@ -66,7 +68,7 @@ if(isset($_GET['msg'])){
             echo "<div class='pcontact'>";
         
             // Display the email form
-            echo "<form method='post' action='sendemail.php' class='sndeml'>";
+            echo "<form method='post' onsubmit='return checkPassword();' action='sendemail.php' class='sndeml'>";
             // Loop through selected checkboxes
             $buttons = array();
             foreach ($_POST['email'] as $partnerEM) {
