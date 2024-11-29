@@ -72,7 +72,7 @@ if(isset($_GET['msg'])){
                     echo "<div class='pcontact'>";
         
         // Display the email form (complete)
-                    echo "<form id='emailForm' method='post' onsubmit='return checkPassword();' action='sendemail.php' class='sndeml'>";
+                    echo "<form id='emailForm' method='post' onsubmit='return checkPassword();' action='sendpemail.php' class='sndeml'>";
         // Loop through selected checkboxes (complete)
                     $buttons = array();
                     foreach ($_POST['email'] as $partnerEM) {
