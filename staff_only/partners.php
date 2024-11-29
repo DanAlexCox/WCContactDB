@@ -116,12 +116,7 @@ if(isset($_GET['msg'])){
                         header("Location: partners.php?error=".$error);
                         exit();
                     }
-                } else{
-                    $error = "No valid input detected.";
-                    header("Location: partners.php?error=".$error);
-                    exit();
                 }
-
             }
         //!!!!(later all partner modifications (add, edit, remove) can only be done with proper authorization)!!!!
         //- Add partner details (complete)
