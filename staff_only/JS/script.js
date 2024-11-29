@@ -35,3 +35,10 @@ function confirmPartner() {
     const userConfirmed = confirm("Are you sure you want to add this partner?");
     return userConfirmed; // Proceed if "Yes" (true), cancel if "No" (false)
 }
+
+function confirmClient() {
+    // Display the confirmation popup
+    const userConfirmed = confirm("Are you sure you want to add this partner?");
+    return userConfirmed; // Proceed if "Yes" (true), cancel if "No" (false)
+}
+

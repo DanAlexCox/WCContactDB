@@ -1,0 +1,9 @@
+table{
+    background: rgb(211, 211, 211);
+    border: 2px solid gray;
+    border-radius: 5px;
+    td{
+        border: 1px dotted gray;
+        border-width: medium;
+    }
+}
