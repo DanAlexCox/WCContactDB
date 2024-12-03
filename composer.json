@@ -1,0 +1,16 @@
+{
+    "name": "adala/wc-contact-db",
+    "description": "client package php project",
+    "type": "project",
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "DanAlexCox",
+            "email": "adala738@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
