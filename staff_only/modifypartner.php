@@ -42,8 +42,8 @@ if(isset($_GET['msg'])){
                     <option value=""></option>
                     <?php
                     foreach($viewAllStmt->fetchAll(PDO::FETCH_ASSOC) as $viewOne){
-                        echo "<option value='".$viewOne['partner_ID']."'>".$viewOne['partner_ID'].
-                                ": ".$viewOne['partner_name']." - ".$viewOne['representative']."</option>";
+                        echo "<option value='".$viewOne['Partner_ID']."'>".$viewOne['Partner_ID'].
+                                ": ".$viewOne['Partner_name']." - ".$viewOne['Representative']."</option>";
                     }
                     ?>
                 </select>
@@ -53,16 +53,16 @@ if(isset($_GET['msg'])){
         //Form appears including confirmed from dropdown
             if(isset($_POST['searchbtn'])){
                 $partID = htmlspecialchars($_POST['partnerlist']);
-                $updateFormQuery = "SELECT * FROM `partners` WHERE partner_ID = :pid";
+                $updateFormQuery = "SELECT * FROM `partners` WHERE Partner_ID = :pid";
                 $updateFormStmt = $pdo->prepare($updateFormQuery);
                 $updateFormStmt->bindParam(':pid', $partID);
 
                 if($updateFormStmt->execute()){
                     foreach($updateFormStmt as $row){
                     echo "<form method='post' action='modifypartner.php'>" ;
-                    echo "<input type='text' name='Organisation' value='".htmlspecialchars($row['partner_name'])."' required>";
-                    echo "<input type='text' name='Postcode' value='".htmlspecialchars($row['address'])."' required>";
-                        $repTitle = explode(" ", $row['representative']);
+                    echo "<input type='text' name='Organisation' value='".htmlspecialchars($row['Partner_name'])."' required>";
+                    echo "<input type='text' name='Postcode' value='".htmlspecialchars($row['Address'])."' required>";
+                        $repTitle = explode(" ", $row['Representative']);
                     echo "<select name='RepPrefix' class='prefx'  id='prefixDropdown' required>
                             <option value='".htmlspecialchars($repTitle[0])."'>".$repTitle[0]."</option>
                             <option value='Mr'>Mr</option>
@@ -74,8 +74,8 @@ if(isset($_GET['msg'])){
                             </select>";
                     echo "<input type='text' name='RepForename' value='".htmlspecialchars($repTitle[1])."'required>";
                     echo "<input type='text' name='RepSurname' value='".htmlspecialchars($repTitle[2])."' required>";
-                    echo "<input type='email' name='RepEmail' value='".htmlspecialchars($row['partner_email'])."' required>";
-                    echo "<input type='hidden' name='PartnerID' value='".htmlspecialchars($row['partner_ID'])."'>";
+                    echo "<input type='email' name='RepEmail' value='".htmlspecialchars($row['Partner_email'])."' required>";
+                    echo "<input type='hidden' name='PartnerID' value='".htmlspecialchars($row['Partner_ID'])."'>";
                     echo "<button type='submit' name='updatebtn'>Confirm</button>";
                     echo "</form>";
                     }
@@ -94,8 +94,8 @@ if(isset($_GET['msg'])){
             $updateEm = htmlspecialchars($_POST['RepEmail']);
             $updatingID = htmlspecialchars($_POST['PartnerID']);
 
-            $updateQuery = "UPDATE `partners` SET partner_name = :uppt, address = :upadd, representative = :uprep,
-                                partner_email = :upem WHERE partner_ID = :uppid";
+            $updateQuery = "UPDATE `partners` SET Partner_name = :uppt, Address = :upadd, Representative = :uprep,
+                                Partner_email = :upem WHERE Partner_ID = :uppid";
             $updateStmt = $pdo->prepare($updateQuery);
             $updateStmt->bindParam(':uppt', $updateOrg);
             $updateStmt->bindParam(':upadd', $updateAdd);
