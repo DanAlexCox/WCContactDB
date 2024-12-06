@@ -1,28 +1,104 @@
-html{
+html {
     background-image: linear-gradient(rgb(156, 156, 255), white);
+    height: 100%;
 }
 
-body{
-    margin: 0;
+body {
+    margin: 0; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    font-family: Arial, Helvetica, sans-serif; 
+}
+
+#login_body {
     display: flex;
-    justify-content: center;
-
-    #login_body{
-        display: flex;
-        flex-flow: column wrap;
-        align-self: center;
-        img{
-            height: auto;
-        }
-        form{
-            display:block;
-        }
-    }
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    width: 100%; 
+    max-width: 400px; 
+    padding: 20px; 
+    background-color: rgba(255, 255, 255, 0.9); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px; 
 }
 
-h2, label{
-    font-family:'Times New Roman', Times, serif;
+#login_body img {
+    max-width: 100%; 
+    height: auto; 
+    margin-bottom: 20px; 
+}
+
+#login_body form {
+    width: 100%; 
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; 
+}
+
+h2, label {
+    font-family: 'Times New Roman', Times, serif;
     font-weight: 500;
-    color: rgb(0, 0, 155);
-    text-shadow: 0px 0px 2px blue;
+    color: rgb(0, 0, 155); 
+    text-shadow: 0px 0px 2px blue; 
+    text-align: center; 
+}
+
+#login_body input[type="text"], 
+#login_body input[type="password"] {
+    width: 100%; 
+    padding: 10px; 
+    font-size: 14px; 
+    border: 1px solid rgb(200, 200, 255); 
+    border-radius: 5px; 
+    outline: none;
+    transition: box-shadow 0.3s ease; 
+}
+
+#login_body input[type="text"]:focus,
+#login_body input[type="password"]:focus {
+    box-shadow: 0 0 5px rgb(0, 0, 200); 
+    border-color: rgb(0, 0, 200); 
+}
+
+#login_body button {
+    padding: 10px 15px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    color: white; 
+    background-color: rgb(0, 0, 200); 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+#login_body button:hover {
+    background-color: rgb(0, 0, 150); 
+    transform: scale(1.05); 
+}
+
+#login_body button:active {
+    background-color: rgb(0, 0, 100); 
+    transform: scale(0.95); 
+}
+
+#login_body .error-message {
+    color: red; 
+    font-size: 14px;
+    text-align: center;
+    margin-top: -10px;
+}
+
+@media (max-width: 768px) {
+    #login_body {
+        max-width: 90%; 
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 20px; 
+    }
 }
