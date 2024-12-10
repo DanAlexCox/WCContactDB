@@ -58,7 +58,7 @@ if(isset($_GET['msg'])){
                     $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 
                     if($user) {
-                        if(password_verify($passwordSubmit, $user['password'])) {
+                        if(password_verify($passwordSubmit, $user['Password'])) {
                             //1. Add session data for username and userID
                             $_SESSION['username'] = $user['username'];
                             $_SESSION['User_ID'] = $user['User_ID'];
