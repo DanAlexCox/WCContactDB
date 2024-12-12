@@ -24,7 +24,7 @@ if(isset($_GET['msg'])){
     <head>
         <title>Modify Client</title>
         <link rel="stylesheet" type="text/css" href="CSS/main.css">
-        <link rel="stylesheet" type="text/css" href="CSS/partner.css">
+        <link rel="stylesheet" type="text/css" href="CSS/client.css">
         <link rel="icon" type="image/x-icon" href="CSS/images/w-logo-blue.png">
         <script defer src="JS/script.js"></script>
     </head>
@@ -34,16 +34,16 @@ if(isset($_GET['msg'])){
     <body>
         <?php
         //Get client list (*) dropdown -> confirm button
-            $viewAllQuery = "SELECT * FROM `partners`";
+            $viewAllQuery = "SELECT * FROM `clients`";
             $viewAllStmt = $pdo->query($viewAllQuery);
             ?>
-            <form method="post" action="modifypartner.php">
-                <select name="partnerlist">
+            <form method="post" action="modifyclient.php">
+                <select name="clientlist">
                     <option value=""></option>
                     <?php
                     foreach($viewAllStmt->fetchAll(PDO::FETCH_ASSOC) as $viewOne){
-                        echo "<option value='".$viewOne['partner_ID']."'>".$viewOne['partner_ID'].
-                                ": ".$viewOne['partner_name']." - ".$viewOne['representative']."</option>";
+                        echo "<option value='".$viewOne['Client_ID']."'>".$viewOne['Prefix']." ".$viewOne['Forename']." "
+                                .$viewOne['Surname']." - ".$viewOne['Age']."</option>";
                     }
                     ?>
                 </select>
@@ -52,19 +52,19 @@ if(isset($_GET['msg'])){
             <?php
         //Form appears including confirmed from dropdown
             if(isset($_POST['searchbtn'])){
-                $partID = htmlspecialchars($_POST['partnerlist']);
-                $updateFormQuery = "SELECT * FROM `partners` WHERE partner_ID = :pid";
+                $cliID = htmlspecialchars($_POST['clientlist']);
+                $updateFormQuery = "SELECT * FROM `clients` WHERE Client_ID = :cid";
                 $updateFormStmt = $pdo->prepare($updateFormQuery);
-                $updateFormStmt->bindParam(':pid', $partID);
+                $updateFormStmt->bindParam(':cid', $cliID);
 
                 if($updateFormStmt->execute()){
                     foreach($updateFormStmt as $row){
-                    echo "<form method='post' action='modifypartner.php'>" ;
-                    echo "<input type='text' name='Organisation' value='".htmlspecialchars($row['partner_name'])."' required>";
-                    echo "<input type='text' name='Postcode' value='".htmlspecialchars($row['address'])."' required>";
-                        $repTitle = explode(" ", $row['representative']);
-                    echo "<select name='RepPrefix' class='prefx'  id='prefixDropdown' required>
-                            <option value='".htmlspecialchars($repTitle[0])."'>".$repTitle[0]."</option>
+                    echo "<form method='post' action='modifyclient.php'>" ;
+                    echo "<label for class='CliEml'>Email Address</label>
+                            <input type='email' name='CliEmail' class='CliEml'value='".htmlspecialchars($row['Email'])."' required>";
+                    echo "<label for class='CliPrefix'>Prefix</label>
+                            <select name='CliPrefix' class='CliPfx'  id='prefixDropdown' required>
+                            <option value='".htmlspecialchars($row['Prefix'])."'>".$row['Prefix']."</option>
                             <option value='Mr'>Mr</option>
                             <option value='Mrs'>Mrs</option>
                             <option value='Miss'>Miss</option>
@@ -72,10 +72,39 @@ if(isset($_GET['msg'])){
                             <option value='Prof'>Prof</option>
                             <option value='Other'>Other</option>
                             </select>";
-                    echo "<input type='text' name='RepForename' value='".htmlspecialchars($repTitle[1])."'required>";
-                    echo "<input type='text' name='RepSurname' value='".htmlspecialchars($repTitle[2])."' required>";
-                    echo "<input type='email' name='RepEmail' value='".htmlspecialchars($row['partner_email'])."' required>";
-                    echo "<input type='hidden' name='PartnerID' value='".htmlspecialchars($row['partner_ID'])."'>";
+                    echo "<label for class='CliFnm'>Forename</label>
+                            <input type='text' name='CliForename' class= 'CliFnm' value='".htmlspecialchars($row['Forename'])."'required>";
+                    echo "<label for class='CliSnm'>Surname</label>
+                            <input type='text' name='CliSurname' class = 'CliSnm' value='".htmlspecialchars($row['Surname'])."' required>";
+                    echo "<label for class='CliAge'>Age</label>
+                            <select name='CliAge' class='CliAge' id='ageDropdown' required>
+                            <option value=".htmlspecialchars($row['Age']).">".htmlspecialchars($row['Age'])."</option>";
+                            //Dynamically generate age options from 18 to 100
+                            for ($i = 18; $i <= 100; $i++) {
+                                echo "<option value='$i'>$i</option>";
+                            }
+                    echo "</select><br>";
+                    echo "<label for class='CliGndr'>Gender</label>
+                            <select name='CliGender' class='CliGndr' id='cliGenderDropdown' required>
+                                <option value=".htmlspecialchars($row['Gender']).">".htmlspecialchars($row['Gender'])."</option>
+                                <option value='Male'>Male</option>
+                                <option value='Female'>Female</option>
+                                <option value='Non-Binary'>Non-Binary</option>
+                                <option value='Other'>Other</option>
+                                <option value='Prefer not to say'>Prefer not to say</option>
+                            </select><br>";
+                    echo "<label for class='CliRlgn'>Religion</label>
+                            <select name='CliReligion' class='CliRlgn' id='CliReligionDropdown' required>
+                                <option value=".htmlspecialchars($row['Religion']).">".htmlspecialchars($row['Religion'])."</option>
+                                <option value='Christianity'>Christianity</option>
+                                <option value='Islam'>Islam</option>
+                                <option value='Hinduism'>Hinduism</option>
+                                <option value='Buddhism'>Buddhism</option>
+                                <option value='Judaism'>Judaism</option>
+                                <option value='Atheism'>Atheism</option>
+                                <option value='Other'>Other</option>
+                            </select><br>";
+                    echo "<input type='hidden' name='ClientID' value='".htmlspecialchars($row['Client_ID'])."'>";
                     echo "<button type='submit' name='updatebtn'>Confirm</button>";
                     echo "</form>";
                     }
@@ -86,22 +115,28 @@ if(isset($_GET['msg'])){
                 }
             }
 
-        //Update partner table using form data, sends message and goes back to client.php, else send error message
+        //Update client table using form data, sends message and goes back to client.php, else send error message
         if(isset($_POST['updatebtn'])){
-            $updateOrg = htmlspecialchars($_POST['Organisation']);
-            $updateAdd = htmlspecialchars($_POST['Postcode']);
-            $updateRep = htmlspecialchars($_POST['RepPrefix']) . " " . htmlspecialchars($_POST['RepForename']) . " " . htmlspecialchars($_POST['RepSurname']);
-            $updateEm = htmlspecialchars($_POST['RepEmail']);
-            $updatingID = htmlspecialchars($_POST['PartnerID']);
+            $updatePref = htmlspecialchars($_POST['CliPrefix']);
+            $updateFore = htmlspecialchars($_POST['CliForename']);
+            $updateSurn = htmlspecialchars($_POST['CliSurname']);
+            $updateEm = htmlspecialchars($_POST['CliEmail']);
+            $updateGen = htmlspecialchars($_POST['CliGender']);
+            $updateAge = htmlspecialchars($_POST['CliAge']);
+            $updateReli = htmlspecialchars($_POST['CliReligion']);
+            $updatingID = htmlspecialchars($_POST['ClientID']);
 
-            $updateQuery = "UPDATE `partners` SET partner_name = :uppt, address = :upadd, representative = :uprep,
-                                partner_email = :upem WHERE partner_ID = :uppid";
+            $updateQuery = "UPDATE `clients` SET  Prefix = :uppf, Forename = :upfn, Surname = :upsn,
+                                Email = :upem, Gender = :upgd, Age = :upag, Religion = :uprl WHERE Client_ID = :upcid";
             $updateStmt = $pdo->prepare($updateQuery);
-            $updateStmt->bindParam(':uppt', $updateOrg);
-            $updateStmt->bindParam(':upadd', $updateAdd);
-            $updateStmt->bindParam(':uprep', $updateRep);
+            $updateStmt->bindParam(':uppf', $updatePref);
+            $updateStmt->bindParam(':upfn', $updateFore);
+            $updateStmt->bindParam(':upsn', $updateSurn);
             $updateStmt->bindParam(':upem', $updateEm);
-            $updateStmt->bindParam(':uppid', $updatingID);
+            $updateStmt->bindParam(':upgd', $updateGen);
+            $updateStmt->bindParam(':upag', $updateAge);
+            $updateStmt->bindParam(':uprl', $updateReli);
+            $updateStmt->bindParam(':upcid', $updatingID);
 
             if($updateStmt->execute()){
                 $msg = "Modified successfully.";
