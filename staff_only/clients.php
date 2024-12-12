@@ -36,7 +36,7 @@ if(isset($_GET['msg'])){
         
         //Tasks:
         //- Locate client table (remake sql table)
-            $stmt = "SELECT `partner_ID`, `partner_email`, `partner_name` AS `Partner`, `representative` AS `Contact` FROM `partners` AS `Associates`";
+            $stmt = "SELECT * FROM `clients`";
             $query = $pdo->prepare($stmt);
             $query->execute();
 
@@ -45,17 +45,20 @@ if(isset($_GET['msg'])){
         //- View client table (later make specific permissions for specially authorized users)
 
             echo "<form method = 'post' action = 'clients.php' class = 'clienttable'><table class = 'clnt'>";
-            echo "<tr><th>Partner</th><th>Representative</th><th>Select</th></tr>";
+            echo "<tr><th>Prefix</th><th>Forename</th><th>Surname</th><th>Gender</th><th>Age</th><th>Select</th></tr>";
             foreach($query as $row){
             //verify no dupes
             
             if(!in_array($row, $rowset)){
                 echo "<tr>";
-                echo "<td>".$row['Partner']."</td>";
-                echo "<td>".$row['Contact']."</td>";
-                echo "<td><input type = 'checkbox' class = 'checkbox' name = 'email[]' value = '".$row['partner_email']."'></td>";
-                echo "<input type = 'hidden' name = 'contactname[]' value = '".$row['Partner']."'>";
-                echo "<input type = 'hidden' name = 'partnerid' value = '".$row['partner_ID']."'>";
+                echo "<td>".$row['Prefix']."</td>";
+                echo "<td>".$row['Forename']."</td>";
+                echo "<td>".$row['Surname']."</td>";
+                echo "<td>".$row['Gender']."</td>";
+                echo "<td>".$row['Age']."</td>";
+                echo "<td><input type = 'checkbox' class = 'checkbox' name = 'email[]' value = '".$row['Email']."'></td>";
+                echo "<input type = 'hidden' name = 'contactname[]' value = '".$row['Forename']." ".$row['Surname']."'>";
+                echo "<input type = 'hidden' name = 'clientid' value = '".$row['Client_ID']."'>";
                 echo "</tr>";
                 array_push($rowset, $row);
             }
@@ -75,9 +78,9 @@ if(isset($_GET['msg'])){
                     echo "<form id='emailForm' method='post' onsubmit='return checkPassword();' action='sendcemail.php' class='sndeml'>";
         // Loop through selected checkboxes (complete)
                     $buttons = array();
-                    foreach ($_POST['email'] as $partnerEM) {
-                        echo "<input type='hidden' name='selected_emails[]' value='" . htmlspecialchars($partnerEM) . "'>";
-                        array_push($buttons, $partnerEM);
+                    foreach ($_POST['email'] as $clientEM) {
+                        echo "<input type='hidden' name='selected_emails[]' value='" . htmlspecialchars($clientEM) . "'>";
+                        array_push($buttons, $clientEM);
                     }
                     $buttonsString = implode(", ", $buttons);
 
@@ -102,11 +105,11 @@ if(isset($_GET['msg'])){
                 }
         //- Remove client
                 if(isset($_POST['dletbtn'])){
-                    $partnerid = htmlspecialchars($_POST['partnerid']);
+                    $clientid = htmlspecialchars($_POST['clientid']);
 
-                    $delete_query = "DELETE FROM `partners` WHERE partner_ID = :id";
+                    $delete_query = "DELETE FROM `clients` WHERE Client_ID = :id";
                     $delete_stmt = $pdo->prepare($delete_query);
-                    $delete_stmt->bindParam(':id', $partnerid);
+                    $delete_stmt->bindParam(':id', $clientid);
                     if($delete_stmt->execute()){
                         $msg = "Successfully deleted.";
                         header("Location: clients.php?msg=".$msg);

@@ -51,18 +51,18 @@ if(isset($_GET['msg'])){
                     $emailSubmit = $_POST['Email'];
                     $passwordSubmit = $_POST['Password'];
                 
-                    $login_query = "SELECT * FROM `staff_user` WHERE staff_email = :email";
+                    $login_query = "SELECT * FROM `staff_user` WHERE Staff_email = :email";
                     $stmt = $pdo->prepare($login_query);
                     $stmt->bindParam(':email', $emailSubmit);
                     $stmt->execute();
                     $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 
                     if($user) {
-                        if(password_verify($passwordSubmit, $user['password'])) {
+                        if(password_verify($passwordSubmit, $user['Password'])) {
                             //1. Add session data for username and userID
-                            $_SESSION['username'] = $user['username'];
+                            $_SESSION['username'] = $user['Username'];
                             $_SESSION['User_ID'] = $user['User_ID'];
-                            $_SESSION['useremail'] = $user['staff_email'];
+                            $_SESSION['useremail'] = $user['Staff_email'];
                                 header("Location: ../staff_only/staff_portal.php");
                                 //If not correct password, add relevant error message
                             } else {
