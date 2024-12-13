@@ -4,6 +4,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 require ('../vendor/autoload.php');
+ob_start(); // Start output buffering
 
 session_start();
 include('connectdb.php');
@@ -13,7 +14,7 @@ if(isset($_POST['sndemlbtn'])) {
 
                 $emailfrom = $_SESSION['useremail'];
                 $emailfromname = $_SESSION['username'];
-                $emailfrompass = $_SESSION['passgood'];   //change later to verify password
+                $emailfrompass = $_SESSION['passgood'];
 
                 $title = $_POST['title'];
                 $description = $_POST['description'];
@@ -43,8 +44,7 @@ if(isset($_POST['sndemlbtn'])) {
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                     $mail->Port = 587;
                     $mail->SMTPAuth = true;
-                    $mail->SMTPDebug = 2;
-                    $mail->Debugoutput = 'html';
+                    $mail->SMTPDebug = 0;
         
                     $mail->Username = $emailfrom;
                     $mail->Password   = $emailfrompass;
@@ -58,7 +58,15 @@ if(isset($_POST['sndemlbtn'])) {
                 // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
         
                     $mail->AddAddress($emailto, $emailtoname);
-                    $mail->Body = $description;
+                    $mail->Body = "<html>
+                                        <body style='background-color: #add8e6; padding: 20px'>
+                                            <img src='cid:wc-logo', alt='my-logo'>
+                                            <div style='background-color: #ffffff; border: 1px solid rgb(0, 0, 0);'>"
+                                                .$description.
+                                            "</div>
+                                        </body>
+                                    </html>";
+                    $mail->addEmbeddedImage('CSS/images/w-logo-blue.png', 'wc-logo');
         
                     $mail->isHTML(true);
         
@@ -69,26 +77,22 @@ if(isset($_POST['sndemlbtn'])) {
                     //$mail->addAttachment('images/phpmailer_mini.png');
         
                     if(!$mail->send()) {
-                        echo 'Mailer Error: ' . $mail->ErrorInfo;
+                        error_log('Mailer Error: ' . $mail->ErrorInfo);
                     } else {
                         unset($_SESSION['passgood']);
                         $msg = 'Email sent!';
-                        header("Location: partners.php?msg=".$msg);
+                        header("Location: clients.php?msg=".urlencode($msg));
+                        ob_end_clean(); // Clear output buffer
                         exit();
-                        //Section 2: IMAP
-                        //Uncomment these to save your message in the 'Sent Mail' folder.
-                        #if (save_mail($mail)) {
-                        #    echo "Message saved!";
-                        #}
                     }
                 }
             } catch(Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
             }
-            echo "</div>";
 }   else{
     $error = "Invalid response.";
-    header("Location: partners.php?error=".$error);
+    header("Location: clients.php?error=".urlencode($error));
+    ob_end_clean(); // Clear output buffer
     exit();
 }
 
