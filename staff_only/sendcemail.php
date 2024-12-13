@@ -4,6 +4,8 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 require ('../vendor/autoload.php');
+ob_start(); // Start output buffering
+
 
 session_start();
 include('connectdb.php');
@@ -41,8 +43,7 @@ if(isset($_POST['sndemlbtn'])) {
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                     $mail->Port = 587;
                     $mail->SMTPAuth = true;
-                    $mail->SMTPDebug = 2;
-                    $mail->Debugoutput = 'html';
+                    $mail->SMTPDebug = 0;
         
                     $mail->Username = $emailfrom;
                     $mail->Password   = $emailfrompass;
@@ -73,26 +74,22 @@ if(isset($_POST['sndemlbtn'])) {
                     //$mail->addAttachment('images/phpmailer_mini.png');
         
                     if(!$mail->send()) {
-                        echo 'Mailer Error: ' . $mail->ErrorInfo;
+                        error_log('Mailer Error: ' . $mail->ErrorInfo);
                     } else {
                         unset($_SESSION['passgood']);
                         $msg = 'Email sent!';
-                        header("Location: clients.php?msg=".$msg);
+                        header("Location: clients.php?msg=".urlencode($msg));
+                        ob_end_clean(); // Clear output buffer
                         exit();
-                        //Section 2: IMAP
-                        //Uncomment these to save your message in the 'Sent Mail' folder.
-                        #if (save_mail($mail)) {
-                        #    echo "Message saved!";
-                        #}
                     }
                 }
             } catch(Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
             }
-            echo "</div>";
 }   else{
     $error = "Invalid response.";
-    header("Location: clients.php?error=".$error);
+    header("Location: clients.php?error=".urlencode($error));
+    ob_end_clean(); // Clear output buffer
     exit();
 }
 
