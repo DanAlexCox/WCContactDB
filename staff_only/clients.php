@@ -68,7 +68,7 @@ if(isset($_GET['msg'])){
             echo "<input type='submit' class='dletbtn' name='dletbtn' value='Delete'>";
             echo "<input type='submit' class='mkemlbtn' name='mkemlbtn' value='Contact'>";
             echo "</form>";
-
+        
         //- Contact client
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
                 if(isset($_POST['mkemlbtn'])){

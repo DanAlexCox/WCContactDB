@@ -13,7 +13,7 @@ if(isset($_POST['sndemlbtn'])) {
 
                 $emailfrom = $_SESSION['useremail'];
                 $emailfromname = $_SESSION['username'];
-                $emailfrompass = $_SESSION['passgood'];   //change later to verify password
+                $emailfrompass = $_SESSION['passgood'];
 
                 $title = $_POST['title'];
                 $description = $_POST['description'];
@@ -34,8 +34,6 @@ if(isset($_POST['sndemlbtn'])) {
                     $emailto = $email;
                     $emailtoname = str_replace(",", "", $emailtonameone[$index]);
 
-                    echo "Email: " . $emailto . " is linked to Contact: " . $emailtoname . "<br>";
-
                     $mail=new PHPMailer(true);
                     $mail->CharSet = 'UTF-8';
                     $mail->IsSMTP();
@@ -55,10 +53,16 @@ if(isset($_POST['sndemlbtn'])) {
                 //$mail->AddReplyTo('no-reply@mycomp.com','no-reply');
                     $mail->Subject = $title;
         
-                // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
-        
                     $mail->AddAddress($emailto, $emailtoname);
-                    $mail->Body = $description;
+                    $mail->Body = "<html>
+                                        <body style='background-color: #add8e6; padding: 20px'>
+                                            <img src='cid:wc-logo', alt='my-logo'>
+                                            <div style='background-color: #ffffff; border: 1px solid rgb(0, 0, 0);'>"
+                                                .$description.
+                                            "</div>
+                                        </body>
+                                    </html>";
+                    $mail->addEmbeddedImage('CSS/images/w-logo-blue.png', 'wc-logo');
         
                     $mail->isHTML(true);
         
