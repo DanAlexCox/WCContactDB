@@ -6,7 +6,6 @@ use PHPMailer\PHPMailer\Exception;
 require ('../vendor/autoload.php');
 ob_start(); // Start output buffering
 
-
 session_start();
 include('connectdb.php');
 //Create a new PHPMailer instance
