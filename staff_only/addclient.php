@@ -14,12 +14,17 @@ if(isset($_GET['msg'])){
     // Display a JavaScript alert with the message
     echo "<script>alert('$msg');</script>";
 }
+
+if(!isset($_SESSION['User_ID'])){
+    $msg = 'Must sign in again.';
+    session_unset();
+    session_destroy();
+    header("Location: ../loginsystem/login.php?msg=".urlencode($msg));
+    exit();
+}
 ?>
 
 <html>
-    <?php
-    //check session data
-    ?>
     <head>
         <title>Add Client</title>
         <link rel="stylesheet" type="text/css" href="CSS/main.css">

@@ -1,10 +1,6 @@
 <?php 
 include('connectdb.php');
 session_start();
-if(isset($_SESSION['username']) && isset($_SESSION['User_ID'])){
-    header("Location: ../staff_only/staff_portal.php");
-    exit();
-}
 
 if(isset($_GET['error'])){
     // Sanitize the message to prevent XSS
