@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2024 at 03:03 PM
+-- Generation Time: Dec 16, 2024 at 01:21 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -126,8 +126,7 @@ CREATE TABLE `partners` (
 --
 
 INSERT INTO `partners` (`Partner_ID`, `Partner_name`, `Address`, `Join_date`, `Contribution`, `Representative`, `Partner_email`, `Created_at`, `Updated_at`) VALUES
-(1, 'DCCompany', 'h69 3DE', '2024-11-20', 5, 'Mr Daniel Cox', 'adala738@gmail.com', '2024-12-12 14:01:35', '2024-12-12 14:01:35'),
-(6, 'Womens Consortium', 'R59 3WT', '2024-11-28', 0, 'Mr Daniel Cox', 'adala738@gmail.com', '2024-12-12 14:01:35', '2024-12-12 14:01:35');
+(1, 'DCCompany', 'h69 3DE', '2024-11-20', 5, 'Mr Daniel Cox', 'adala738@gmail.com', '2024-12-12 14:01:35', '2024-12-12 14:01:35');
 
 -- --------------------------------------------------------
 
@@ -140,6 +139,7 @@ CREATE TABLE `staff_user` (
   `Staff_email` varchar(255) NOT NULL,
   `Username` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
+  `Privilege` varchar(255) DEFAULT NULL,
   `Created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `Updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -148,8 +148,8 @@ CREATE TABLE `staff_user` (
 -- Dumping data for table `staff_user`
 --
 
-INSERT INTO `staff_user` (`User_ID`, `Staff_email`, `Username`, `Password`, `Created_at`, `Updated_at`) VALUES
-(3, 'Daniel@womensconsortium.org.uk', 'DanielCox', '$2y$10$f4oV7ZKKnCk4SV7Zxlv.4eoB/CeWZ1hs0LqX9lWy3qZALQrOklwui', '2024-12-12 14:01:47', '2024-12-12 14:01:47');
+INSERT INTO `staff_user` (`User_ID`, `Staff_email`, `Username`, `Password`, `Privilege`, `Created_at`, `Updated_at`) VALUES
+(1, 'Daniel@womensconsortium.org.uk', 'DanielCox', '$2y$10$f4oV7ZKKnCk4SV7Zxlv.4eoB/CeWZ1hs0LqX9lWy3qZALQrOklwui', 'VCM', '2024-12-12 14:01:47', '2024-12-16 12:15:35');
 
 -- --------------------------------------------------------
 
