@@ -65,7 +65,80 @@
                             <option value='VCM'>Administrator</option>
                         </select>
                         <button type='submit' name='registerbtn'>Create</button>
-                        </form>";
+                        </form><br><br>";
+
+                //Get user list (*) dropdown -> confirm button
+            $viewAllQuery = "SELECT * FROM `staff_user`";
+            $viewAllStmt = $pdo->query($viewAllQuery);
+            ?>
+            <form method="post" action="staff_portal.php">
+                <h2>Modify User</h2>
+                <select name="userlist">
+                    <option value="">--SELECT--</option>
+                    <?php
+                    foreach($viewAllStmt->fetchAll(PDO::FETCH_ASSOC) as $viewOne){
+                        echo "<option value='".$viewOne['User_ID']."'>".$viewOne['User_ID'].
+                                ": ".$viewOne['Username']." - ".$viewOne['Privilege']."</option>";
+                    }
+                    ?>
+                </select>
+                <button input='submit' name='searchbtn'>Go</button>
+            </form>
+            <?php
+        //Form appears including confirmed from dropdown
+            if(isset($_POST['searchbtn'])){
+                $subUserID = htmlspecialchars($_POST['userlist']);
+                $updateFormQuery = "SELECT * FROM `staff_user` WHERE User_ID = :uid";
+                $updateFormStmt = $pdo->prepare($updateFormQuery);
+                $updateFormStmt->bindParam(':uid', $subUserID);
+
+                if($updateFormStmt->execute()){
+                    foreach($updateFormStmt as $row){
+                        echo "<form method='post' action='staff_portal.php'>" ;
+                        echo "<input type='text' name='ModUser' value='".htmlspecialchars($row['Username'])."'required>";
+                        echo "<input type='email' name='ModEmail' value='".htmlspecialchars($row['Staff_email'])."' required>";
+                        echo "<select name='ModPriv' class='Priv'  id='privilegeDropdown' required>
+                                <option value='".htmlspecialchars($row['Privilege'])."'>".$row['Privilege']."</option>
+                                <option value='V'>Viewer</option>
+                                <option value='VC'>Communicator</option>
+                                <option value='VCM'>Admin</option>
+                                </select>";
+                        echo "<input type='hidden' name='UserID' value='".htmlspecialchars($row['User_ID'])."'>";
+                        echo "<button type='submit' name='updatebtn'>Confirm</button>";
+                        echo "</form>";
+                    }
+                } else{
+                    $error = "Unable to find any results.";
+                    header("Location: staff_portal.php?error=".$error);
+                    exit();
+                }
+            }
+
+        //Update user table using form data, sends message and goes back to staff_portal.php, else send error message
+        if(isset($_POST['updatebtn'])){
+            $updateUser = htmlspecialchars($_POST['ModUser']);
+            $updateEm = htmlspecialchars($_POST['ModEmail']);
+            $updatePriv = htmlspecialchars($_POST['ModPriv']);
+            $updatingID = htmlspecialchars($_POST['UserID']);
+
+            $updateQuery = "UPDATE `staff_user` SET Username = :upus, Staff_email = :upema,
+                                Privilege = :uppri WHERE User_ID = :upuid";
+            $updateStmt = $pdo->prepare($updateQuery);
+            $updateStmt->bindParam(':upus', $updateUser);
+            $updateStmt->bindParam(':upema', $updateEm);
+            $updateStmt->bindParam(':uppri', $updatePriv);
+            $updateStmt->bindParam(':upuid', $updatingID);
+
+            if($updateStmt->execute()){
+                $msg = "Modified successfully.";
+                header("Location: staff_portal.php?msg=".$msg);
+                exit();
+            } else{
+                $error = "Unable to modify data.";
+                    header("Location: staff_portal.php?error=".$error);
+                    exit();
+            }
+        }
             }
         }
         
