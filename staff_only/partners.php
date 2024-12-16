@@ -61,9 +61,38 @@ if(isset($_GET['msg'])){
             }
             }
             echo "</table>";
+            
+            $userID = htmlspecialchars($_SESSION['User_ID']);
 
-            echo "<input type='submit' class='dletbtn' name='dletbtn' value='Delete'>";
-            echo "<input type='submit' class='mkemlbtn' name='mkemlbtn' value='Contact'>";
+            $permcontstmt = "SELECT Privilege FROM `staff_user` WHERE User_ID = :usid";
+
+            $permcontsql = $pdo->prepare($permcontstmt);
+            $permcontsql->bindParam(':usid', $userID);
+            $permcontsql->execute();
+            $result = $permcontsql->fetch(PDO::FETCH_ASSOC);
+            if ($result){
+                $privilege = $result['Privilege'];
+                if ($privilege === 'VC' || $privilege === 'VCM') {
+                    echo "<input type='submit' class='mkemlbtn' name='mkemlbtn' value='Contact'>";
+                    if ($privilege === 'VCM') {
+                        echo "<input type='submit' class='dletbtn' name='dletbtn' value='Delete'>";
+                        echo "</form>";
+
+                    //!!!!(later all partner modifications (add, edit, remove) can only be done with proper authorization (Complete))!!!!
+                    //- Add partner details (complete)
+                        echo "<a href='addpartner.php'><button>Add a partner</button></a>";
+
+                    //- Modify partner details (complete)
+                        echo "<a href='modifypartner.php'><button>Modify an existing partner</button></a>";
+                    } else{
+                        echo "</form>";
+                    }
+                }
+                else{
+                    echo "</form>";
+                }
+            }
+
             echo "</form>";
 
         //- Contact partners (complete)
@@ -118,14 +147,6 @@ if(isset($_GET['msg'])){
                     }
                 }
             }
-        //!!!!(later all partner modifications (add, edit, remove) can only be done with proper authorization)!!!!
-        //- Add partner details (complete)
-            echo "<a href='addpartner.php'><button>Add a partner</button></a>";
-
-        //- Modify partner details (complete)
-            echo "<a href='modifypartner.php'><button>Modify an existing partner</button></a>";
         ?>
-
-
     </body>
 </html>

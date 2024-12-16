@@ -65,8 +65,36 @@ if(isset($_GET['msg'])){
             }
             echo "</table>";
 
-            echo "<input type='submit' class='dletbtn' name='dletbtn' value='Delete'>";
-            echo "<input type='submit' class='mkemlbtn' name='mkemlbtn' value='Contact'>";
+            $userID = htmlspecialchars($_SESSION['User_ID']);
+
+            $permcontstmt = "SELECT Privilege FROM `staff_user` WHERE User_ID = :usid";
+
+            $permcontsql = $pdo->prepare($permcontstmt);
+            $permcontsql->bindParam(':usid', $userID);
+            $permcontsql->execute();
+            $result = $permcontsql->fetch(PDO::FETCH_ASSOC);
+            if ($result){
+                $privilege = $result['Privilege'];
+                if ($privilege === 'VC' || $privilege === 'VCM') {
+                    echo "<input type='submit' class='mkemlbtn' name='mkemlbtn' value='Contact'>";
+                    if ($privilege === 'VCM') {
+                        echo "<input type='submit' class='dletbtn' name='dletbtn' value='Delete'>";
+                        echo "</form>";
+                    //!!!(all client modifications can only be done with proper authorization (Complete))!!!!
+                    //- Add client details
+                        echo "<a href='addclient.php'><button>Add a client</button></a>";
+
+                    //- Modify client details
+                        echo "<a href='modifyclient.php'><button>Modify an existing client</button></a>";
+                    } else{
+                        echo "</form>";
+                    }
+                }
+                else{
+                    echo "</form>";
+                }
+            }
+
             echo "</form>";
         
         //- Contact client
@@ -121,12 +149,6 @@ if(isset($_GET['msg'])){
                     }
                 }
             }
-        //!!!(all client modifications can only be done with proper authorization)!!!!
-        //- Add client details
-            echo "<a href='addclient.php'><button>Add a client</button></a>";
-
-        //- Modify client details
-            echo "<a href='modifyclient.php'><button>Modify an existing client</button></a>";
         ?>
     </body>
 </html>
