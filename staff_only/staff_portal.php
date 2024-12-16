@@ -1,6 +1,5 @@
 <html>
     <?php
-    //check session data
     session_start();
     if(isset($_GET['error'])){
         // Sanitize the message to prevent XSS
@@ -31,6 +30,8 @@
         ?>
         <link rel="stylesheet" type="text/css" href="CSS/main.css">
         <link rel="icon" type="image/x-icon" href="CSS/images/w-logo-blue.png">
+        <script defer src="JS/script.js"></script>
+        <script src="JS/timer.js" defer></script>
     </head>
     <body>
         <?php

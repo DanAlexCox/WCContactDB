@@ -32,6 +32,7 @@ if(!isset($_SESSION['User_ID'])){
         <link rel="stylesheet" type="text/css" href="CSS/partner.css">
         <link rel="icon" type="image/x-icon" href="CSS/images/w-logo-blue.png">
         <script defer src="JS/script.js"></script>
+        <script src="JS/timer.js" defer></script>
     </head>
     <?php
     include "navbar.php";

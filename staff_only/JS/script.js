@@ -28,7 +28,7 @@ document.getElementById('emailForm').addEventListener('submit', async function (
         console.error("Error during password verification:", error);
         alert("An error occurred. Please try again.");
     }
-});3
+});
 
 function confirmPartner() {
     // Display the confirmation popup
@@ -41,4 +41,3 @@ function confirmClient() {
     const userConfirmed = confirm("Are you sure you want to add this client?");
     return userConfirmed; // Proceed if "Yes" (true), cancel if "No" (false)
 }
-
