@@ -7,7 +7,7 @@
           </a>
           <ul class="side-menu top">
             <?php
-            if($_SERVER['REQUEST_URI'] === "/WCContactDB/staff_only/staff_portal.php"){
+            if(strpos($_SERVER['REQUEST_URI'], "/WCContactDB/staff_only/staff_portal.php") !== false){
                 echo "<li><a href='partners.php'><span class='text'>Partners</span></a></li>";
                 echo "<li><a href='clients.php'><span class='text'>Clients</span></a></li>";
             } else{
