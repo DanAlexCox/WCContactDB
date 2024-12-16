@@ -15,7 +15,7 @@
             }
             ?>
             <li>
-                <a href="logout.php">
+                <a href="logout.php?msg=SuccessfullyLoggedOut">
                     <span class="text">Logout</span>
                 </a>
             </li>
