@@ -1,7 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const popupContainer = document.getElementById('popupContainer');
     const mkemlbtn = document.getElementById('mkemlbtn');
-    
+
+    // Check if popupContainer and mkemlbtn exist
+    if (!popupContainer || !mkemlbtn) {
+        console.error('Popup container or button not found!');
+        return;
+    }
+
     // Prevent form submission and show the popup when the 'Contact' button is clicked
     mkemlbtn.addEventListener('click', (event) => {
         event.preventDefault();  // Prevent form submission

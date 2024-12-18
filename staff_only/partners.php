@@ -87,7 +87,9 @@ if(!isset($_SESSION['User_ID'])){
 
                     //!!!!(later all partner modifications (add, edit, remove) can only be done with proper authorization (Complete))!!!!
                     //- Add partner details (complete)
+                        echo "<div class='button-container'>";
                         echo "<a href='addpartner.php'><button>Add a partner</button></a>";
+                        echo "</div>";
 
                     //- Modify partner details (complete)
                         echo "<a href='modifypartner.php'><button>Modify an existing partner</button></a>";
