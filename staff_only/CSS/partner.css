@@ -1,9 +1,168 @@
-table{
-    background: rgb(211, 211, 211);
-    border: 2px solid gray;
-    border-radius: 5px;
-    td{
-        border: 1px dotted gray;
-        border-width: medium;
-    }
+/* Partner Page Specific Styles */
+
+/* Table Styling */
+.partnertable {
+    margin: 20px auto;
+    width: 90%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ptnr {
+    width: 100%;
+    border: 1px solid #d1e0ee;
+    text-align: left;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.ptnr th {
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    font-weight: bold;
+}
+
+.ptnr td {
+    padding: 10px;
+    border-bottom: 1px solid #d1e0ee;
+}
+
+.ptnr tr:nth-child(even) {
+    background-color: #f4f8fc;
+}
+
+.ptnr tr:hover {
+    background-color: #e6f0fa;
+}
+
+.checkbox {
+    transform: scale(1.2);
+    margin: 5px;
+}
+
+/* Buttons */
+.mkemlbtn, .dletbtn {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.mkemlbtn:hover, .dletbtn:hover {
+    background-color: #004494;
+}
+
+/* Add/Modify Partner Buttons */
+button {
+    margin: 15px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Email Form */
+.pcontact {
+    margin: 20px auto;
+    max-width: 600px;
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #d1e0ee;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sndeml {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sndeml input[type="text"], .sndeml input[type="email"] {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.sndeml input[type="text"]:focus, .sndeml input[type="email"]:focus {
+    border-color: #0056b3;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+}
+
+.sndeml label {
+    font-weight: bold;
+    color: #003f7f;
+}
+
+.sndeml button {
+    background-color: #0056b3;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sndeml button:hover {
+    background-color: #004494;
+}
+
+.hidden {
+    display: none;
+}
+
+#popupContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+    border-radius: 8px;
+}
+
+#popupContainer .pcontact {
+    display: block;
+}
+
+body.overlay {
+    overflow: hidden; /* Prevent scrolling when popup is active */
+}
+
+.overlay::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999; /* Below the popup but above the rest */
 }
