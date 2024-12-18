@@ -29,7 +29,7 @@ if(!isset($_SESSION['User_ID'])){
     <head>
         <title>Modify Partner</title>
         <link rel="stylesheet" type="text/css" href="CSS/main.css">
-        <link rel="stylesheet" type="text/css" href="CSS/partner.css">
+        <link rel="stylesheet" type="text/css" href="CSS/modpartner.css">
         <link rel="icon" type="image/x-icon" href="CSS/images/w-logo-blue.png">
         <script defer src="JS/script.js"></script>
         <script src="JS/timer.js" defer></script>

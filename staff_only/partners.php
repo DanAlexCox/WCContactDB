@@ -33,6 +33,7 @@ if(!isset($_SESSION['User_ID'])){
         <link rel="icon" type="image/x-icon" href="CSS/images/w-logo-blue.png">
         <script defer src="JS/script.js"></script>
         <script src="JS/timer.js" defer></script>
+        <script src="JS/email.js" defer></script>
     </head>
     <?php
     include "navbar.php";
@@ -79,7 +80,7 @@ if(!isset($_SESSION['User_ID'])){
             if ($result){
                 $privilege = $result['Privilege'];
                 if ($privilege === 'VC' || $privilege === 'VCM') {
-                    echo "<input type='submit' class='mkemlbtn' name='mkemlbtn' value='Contact'>";
+                    echo "<input type='submit' id='mkemlbtn' class='mkemlbtn' name='mkemlbtn' value='Contact'>";
                     if ($privilege === 'VCM') {
                         echo "<input type='submit' class='dletbtn' name='dletbtn' value='Delete'>";
                         echo "</form>";
@@ -104,36 +105,39 @@ if(!isset($_SESSION['User_ID'])){
         //- Contact partners (complete)
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
                 if(isset($_POST['mkemlbtn'])){
-                    echo "<div class='pcontact'>";
-        
-        // Display the email form (complete)
-                    echo "<form id='emailForm' method='post' onsubmit='return checkPassword();' action='sendpemail.php' class='sndeml'>";
-        // Loop through selected checkboxes (complete)
-                    $buttons = array();
-                    foreach ($_POST['email'] as $partnerEM) {
-                        echo "<input type='hidden' name='selected_emails[]' value='" . htmlspecialchars($partnerEM) . "'>";
-                        array_push($buttons, $partnerEM);
-                    }
-                    $buttonsString = implode(", ", $buttons);
+                    ?>
+                    <div id="popupContainer" class="hidden">
+    <?php
+        echo "<div class='pcontact'>";
+        echo "<form id='emailForm' method='post' onsubmit='return checkPassword();' action='sendpemail.php' class='sndeml'>";
+        $buttons = array();
+        foreach ($_POST['email'] as $partnerEM) {
+            echo "<input type='hidden' name='selected_emails[]' value='" . htmlspecialchars($partnerEM) . "'>";
+            array_push($buttons, $partnerEM);
+        }
+        $buttonsString = implode(", ", $buttons);
 
-                    $part = array();
-                    foreach($_POST['contactname'] as $contactNM){
-                        echo "<input type = 'hidden' name = 'selected_contacts[]' value = '".htmlspecialchars($contactNM)."'>";
-                        array_push($part, $contactNM);
-                    }
-                    $partString = implode(", ", $part);
+        $part = array();
+        foreach($_POST['contactname'] as $contactNM){
+            echo "<input type = 'hidden' name = 'selected_contacts[]' value = '".htmlspecialchars($contactNM)."'>";
+            array_push($part, $contactNM);
+        }
+        $partString = implode(", ", $part);
 
-                    echo "<label for class='email'>Email</label><br>";
-                    echo "<input type = 'text' class = 'email' name ='emails[]' value = '".htmlspecialchars($buttonsString)."' readonly><br>";
-                    echo "<label for class='title'>Title</label><br>";
-                    echo "<input type = 'text' class = 'title' name = 'title' placeholder = 'Insert title' required><br>";
-                    echo "<label for class='description'>Description</label><br>";
-                    echo "<input type = 'text' class = 'description' name = 'description' placeholder = 'Insert details here'><br>";
-                    echo "<input type = 'hidden' name = 'contacts[]' value = ". htmlspecialchars($partString) .">";
-                    echo "<input type='hidden' name='sndemlbtn' value='1'>";
-                    echo "<button type='submit'>Send</button>";
-                    echo "</form>";
-                    echo "</div>";
+        echo "<label for class='email'>Email</label><br>";
+        echo "<input type = 'text' class = 'email' name ='emails[]' value = '".htmlspecialchars($buttonsString)."' readonly><br>";
+        echo "<label for class='title'>Title</label><br>";
+        echo "<input type = 'text' class = 'title' name = 'title' placeholder = 'Insert title' required><br>";
+        echo "<label for class='description'>Description</label><br>";
+        echo "<input type = 'text' class = 'description' name = 'description' placeholder = 'Insert details here'><br>";
+        echo "<input type = 'hidden' name = 'contacts[]' value = ". htmlspecialchars($partString) .">";
+        echo "<input type='hidden' name='sndemlbtn' value='1'>";
+        echo "<button type='submit'>Send</button>";
+        echo "</form>";
+        echo "</div>";
+    ?>
+</div>
+<?php
                 }
         //- Remove partner (complete)
                 if(isset($_POST['dletbtn'])){

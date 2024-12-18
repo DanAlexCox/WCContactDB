@@ -33,6 +33,7 @@ if(!isset($_SESSION['User_ID'])){
         <link rel="icon" type="image/x-icon" href="CSS/images/w-logo-blue.png">
         <script defer src="JS/script.js"></script>
         <script src="JS/timer.js" defer></script>
+        <script src="JS/email.js" defer></script>
     </head>
     <?php
     include "navbar.php";
@@ -82,7 +83,7 @@ if(!isset($_SESSION['User_ID'])){
             if ($result){
                 $privilege = $result['Privilege'];
                 if ($privilege === 'VC' || $privilege === 'VCM') {
-                    echo "<input type='submit' class='mkemlbtn' name='mkemlbtn' value='Contact'>";
+                    echo "<input type='submit' id='mkemlbtn' class='mkemlbtn' name='mkemlbtn' value='Contact'>";
                     if ($privilege === 'VCM') {
                         echo "<input type='submit' class='dletbtn' name='dletbtn' value='Delete'>";
                         echo "</form>";
@@ -106,6 +107,9 @@ if(!isset($_SESSION['User_ID'])){
         //- Contact client
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
                 if(isset($_POST['mkemlbtn'])){
+                    ?>
+                    <div id="popupContainer" class="hidden">
+    <?php
                     echo "<div class='ccontact'>";
         
         // Display the email form (complete)
@@ -137,6 +141,9 @@ if(!isset($_SESSION['User_ID'])){
                     echo "</form>";
                     echo "</div>";
                 }
+                ?>
+</div>
+<?php
         //- Remove client
                 if(isset($_POST['dletbtn'])){
                     $clientid = htmlspecialchars($_POST['clientid']);
