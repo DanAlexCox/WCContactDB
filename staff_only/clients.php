@@ -51,11 +51,12 @@ if(!isset($_SESSION['User_ID'])){
 
         //- View client table (later make specific permissions for specially authorized users)
 
-            echo "<form method = 'post' action = 'clients.php' class = 'clienttable'><table class = 'clnt'>";
-            echo "<tr><th>Prefix</th><th>Forename</th><th>Surname</th><th>Gender</th><th>Age</th><th>Select</th></tr>";
-            foreach($query as $row){
+        echo "<form method='post' action='clients.php' class='clienttable'>";
+        echo "<table class='clnt'>";
+        echo "<thead><tr><th>Prefix</th><th>Forename</th><th>Surname</th><th>Gender</th><th>Age</th><th>Select</th></tr></thead>";
+        echo "<tbody>";
+        foreach($query as $row){
             //verify no dupes
-            
             if(!in_array($row, $rowset)){
                 echo "<tr>";
                 echo "<td>".$row['Prefix']."</td>";
@@ -63,14 +64,15 @@ if(!isset($_SESSION['User_ID'])){
                 echo "<td>".$row['Surname']."</td>";
                 echo "<td>".$row['Gender']."</td>";
                 echo "<td>".$row['Age']."</td>";
-                echo "<td><input type = 'checkbox' class = 'checkbox' name = 'email[]' value = '".$row['Email']."'></td>";
-                echo "<input type = 'hidden' name = 'contactname[]' value = '".$row['Forename']." ".$row['Surname']."'>";
-                echo "<input type = 'hidden' name = 'clientid' value = '".$row['Client_ID']."'>";
+                echo "<td><input type='checkbox' class='checkbox' name='email[]' value='".$row['Email']."'></td>";
+                echo "<input type='hidden' name='contactname[]' value='".$row['Forename']." ".$row['Surname']."'>";
+                echo "<input type='hidden' name='clientid' value='".$row['Client_ID']."'>";
                 echo "</tr>";
                 array_push($rowset, $row);
             }
-            }
-            echo "</table>";
+        }
+        echo "</tbody>";
+        echo "</table>";
 
             $userID = htmlspecialchars($_SESSION['User_ID']);
 
@@ -89,7 +91,9 @@ if(!isset($_SESSION['User_ID'])){
                         echo "</form>";
                     //!!!(all client modifications can only be done with proper authorization (Complete))!!!!
                     //- Add client details
+                        echo "<div class='button-container'>";
                         echo "<a href='addclient.php'><button>Add a client</button></a>";
+                        echo "</div>";
 
                     //- Modify client details
                         echo "<a href='modifyclient.php'><button>Modify an existing client</button></a>";
