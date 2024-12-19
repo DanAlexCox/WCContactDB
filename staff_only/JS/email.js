@@ -18,8 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close the popup if the user clicks outside of it
     document.addEventListener('click', (event) => {
         if (!popupContainer.contains(event.target) && event.target !== mkemlbtn) {
-            document.body.classList.remove('overlay');
-            popupContainer.classList.add('hidden');
+            history.back();
         }
     });
 });
