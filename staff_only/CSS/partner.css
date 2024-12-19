@@ -88,15 +88,30 @@ button:hover {
     border: 1px solid #d1e0ee;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-height: 500px;
+    height: auto;
 }
 
 .sndeml {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    padding: 20px;
+    min-height: 600px;
+    height: auto; /* Adjust as needed */
 }
 
-.sndeml input[type="text"], .sndeml input[type="email"] {
+textarea.description {
+    height: 150px; /* Set the desired height */
+    width: 100%; /* Ensure it spans the form width */
+    padding: 10px; /* For inner spacing */
+    font-size: 14px; /* Keep text readable */
+    box-sizing: border-box; /* Include padding in width/height */
+    resize: vertical; /* Allow resizing vertically */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+
+.sndeml input[type="text"], .sndeml input[type="email"], .sndeml textarea {
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ced4da;
@@ -105,7 +120,7 @@ button:hover {
     width: 100%;
 }
 
-.sndeml input[type="text"]:focus, .sndeml input[type="email"]:focus {
+.sndeml input[type="text"]:focus, .sndeml input[type="email"]:focus, .sndeml textarea:focus{
     border-color: #0056b3;
     outline: none;
     box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
@@ -140,17 +155,22 @@ button:hover {
     position: fixed;
     top: 50%;
     left: 50%;
+    width: 60%;
+    max-height: 80%; /* Limit the maximum height of the popup */
     transform: translate(-50%, -50%);
     background: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
     z-index: 1000;
     border-radius: 8px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 #popupContainer .pcontact {
     display: block;
 }
+
 
 body.overlay {
     overflow: hidden; /* Prevent scrolling when popup is active */
