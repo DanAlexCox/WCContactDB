@@ -74,14 +74,13 @@ if(isset($_POST['sndemlbtn'])) {
                     $mail->AltBody = 'Description';
         
                 //Attach an image file
-                    //$mail->addAttachment('images/phpmailer_mini.png');
         
                     if(!$mail->send()) {
                         error_log('Mailer Error: ' . $mail->ErrorInfo);
                     } else {
                         unset($_SESSION['passgood']);
                         $msg = 'Email sent!';
-                        header("Location: clients.php?msg=".urlencode($msg));
+                        header("Location: partners.php?msg=".urlencode($msg));
                         ob_end_clean(); // Clear output buffer
                         exit();
                     }
@@ -91,7 +90,7 @@ if(isset($_POST['sndemlbtn'])) {
             }
 }   else{
     $error = "Invalid response.";
-    header("Location: clients.php?error=".urlencode($error));
+    header("Location: partners.php?error=".urlencode($error));
     ob_end_clean(); // Clear output buffer
     exit();
 }

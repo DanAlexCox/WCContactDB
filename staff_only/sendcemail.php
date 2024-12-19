@@ -101,15 +101,7 @@ if(isset($_POST['sndemlbtn'])) {
                             </table>
                         </body>
                     </html>";
-                    
-                                // "<html>
-                                //         <body style='background-color: #add8e6; padding: 20px'>
-                                //             <img src='cid:wc-logo', alt='my-logo'>
-                                //             <div style='background-color: #ffffff; border: 1px solid rgb(0, 0, 0);'>"
-                                //                 .$description.
-                                //             "</div>
-                                //         </body>
-                                //     </html>";
+                
                     $mail->addEmbeddedImage('CSS/images/w-logo-blue.png', 'wc-logo');
         
                     $mail->isHTML(true);
@@ -118,7 +110,6 @@ if(isset($_POST['sndemlbtn'])) {
                     $mail->AltBody = 'Description';
         
                 //Attach an image file
-                    //$mail->addAttachment('images/phpmailer_mini.png');
         
                     if(!$mail->send()) {
                         error_log('Mailer Error: ' . $mail->ErrorInfo);
