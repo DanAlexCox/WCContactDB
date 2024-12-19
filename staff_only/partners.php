@@ -131,7 +131,7 @@ if(!isset($_SESSION['User_ID'])){
         echo "<label for class='title'>Title</label><br>";
         echo "<input type = 'text' class = 'title' name = 'title' placeholder = 'Insert title' required><br>";
         echo "<label for class='description'>Description</label><br>";
-        echo "<input type = 'text' class = 'description' name = 'description' placeholder = 'Insert details here'><br>";
+        echo "<textarea class = 'description' name = 'description' placeholder = 'Insert details here'></textarea><br>";
         echo "<input type = 'hidden' name = 'contacts[]' value = ". htmlspecialchars($partString) .">";
         echo "<input type='hidden' name='sndemlbtn' value='1'>";
         echo "<button type='submit'>Send</button>";
