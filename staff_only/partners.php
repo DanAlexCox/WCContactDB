@@ -81,7 +81,7 @@ if(!isset($_SESSION['User_ID'])){
                 $privilege = $result['Privilege'];
                 if ($privilege === 'VC' || $privilege === 'VCM') {
                     echo "<input type='submit' id='mkemlbtn' class='mkemlbtn' name='mkemlbtn' value='Contact'>";
-                    echo "<input type='submit' class='sendallbtn' name='sendallbtn' value='Send to All'>";
+                    echo "<input type='submit' id='sendallbtn' class='sendallbtn' name='sendallbtn' value='Send to All'>";
                     if ($privilege === 'VCM') {
                         echo "<input type='submit' class='dletbtn' name='dletbtn' value='Delete'>";
                         echo "</form>";
