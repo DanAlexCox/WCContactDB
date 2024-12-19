@@ -19,23 +19,24 @@ if(isset($_POST['sndemlbtn'])) {
                 $title = $_POST['title'];
                 $description = $_POST['description'];
 
-                if (count($_POST['emails']) !== count($_POST['contacts'])) {
+                $emailArray = explode(", ", $_POST['emails'][0]);
+                $contactArray = explode(", ", $_POST['contacts'][0]);
+
+                if (count($emailArray) !== count($contactArray)) {
                     die("Error: Emails and contacts count do not match.");
                 }
 
                 $emailone = [];
                 $emailtonameone = [];
 
-                for ($i = 0; $i < count($_POST['emails']); $i++) {
-                    $emailone[] = $_POST['emails'][$i];
-                    $emailtonameone[] = $_POST['contacts'][$i];
+                for ($i = 0; $i < count($emailArray); $i++) {
+                    $emailone[] = $emailArray[$i];
+                    $emailtonameone[] = $contactArray[$i];
                 }
 
                 foreach ($emailone as $index => $email) {
                     $emailto = $email;
-                    $emailtoname = str_replace(",", "", $emailtonameone[$index]);
-
-                    echo "Email: " . $emailto . " is linked to Contact: " . $emailtoname . "<br>";
+                    $emailtoname = $emailtonameone[$index];
 
                     $mail=new PHPMailer(true);
                     $mail->CharSet = 'UTF-8';
@@ -77,14 +78,13 @@ if(isset($_POST['sndemlbtn'])) {
         
                     if(!$mail->send()) {
                         error_log('Mailer Error: ' . $mail->ErrorInfo);
-                    } else {
-                        unset($_SESSION['passgood']);
-                        $msg = 'Email sent!';
-                        header("Location: partners.php?msg=".urlencode($msg));
-                        ob_end_clean(); // Clear output buffer
-                        exit();
                     }
                 }
+                unset($_SESSION['passgood']);
+                $msg = 'Email sent!';
+                header("Location: partners.php?msg=".urlencode($msg));
+                ob_end_clean(); // Clear output buffer
+                exit();
             } catch(Exception $e) {
                 error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
             }

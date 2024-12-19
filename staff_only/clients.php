@@ -51,7 +51,7 @@ if(!isset($_SESSION['User_ID'])){
 
         //- View client table (later make specific permissions for specially authorized users)
 
-        echo "<form method='post' action='clients.php' class='clienttable'>";
+        echo "<form method='post' action='clients.php?' class='clienttable'>";
         echo "<table class='clnt'>";
         echo "<thead><tr><th>Prefix</th><th>Forename</th><th>Surname</th><th>Gender</th><th>Age</th><th>Select</th></tr></thead>";
         echo "<tbody>";
@@ -64,9 +64,9 @@ if(!isset($_SESSION['User_ID'])){
                 echo "<td>".$row['Surname']."</td>";
                 echo "<td>".$row['Gender']."</td>";
                 echo "<td>".$row['Age']."</td>";
-                echo "<td><input type='checkbox' class='checkbox' name='email[]' value='".$row['Email']."'></td>";
-                echo "<input type='hidden' name='contactname[]' value='".$row['Forename']." ".$row['Surname']."'>";
-                echo "<input type='hidden' name='clientid' value='".$row['Client_ID']."'>";
+                echo "<td><input type='checkbox' class='checkbox' name='email[".$row['Client_ID']."]' value='".$row['Email']."'>";
+                echo "<input type='hidden' name='contactname[".$row['Client_ID']."]' value='".$row['Forename']." ".$row['Surname']."'>";
+                echo "<input type='hidden' name='clientid[".$row['Client_ID']."]' value='".$row['Client_ID']."'></td>";
                 echo "</tr>";
                 array_push($rowset, $row);
             }
@@ -86,6 +86,7 @@ if(!isset($_SESSION['User_ID'])){
                 $privilege = $result['Privilege'];
                 if ($privilege === 'VC' || $privilege === 'VCM') {
                     echo "<input type='submit' id='mkemlbtn' class='mkemlbtn' name='mkemlbtn' value='Contact'>";
+                    echo "<input type='submit' id='sendallbtn' class='sendallbtn' name='sendallbtn' value='Send to All'>";
                     if ($privilege === 'VCM') {
                         echo "<input type='submit' class='dletbtn' name='dletbtn' value='Delete'>";
                         echo "</form>";
@@ -109,8 +110,8 @@ if(!isset($_SESSION['User_ID'])){
             echo "</form>";
         
         //- Contact client
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
-                if(isset($_POST['mkemlbtn'])){
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if(isset($_POST['mkemlbtn']) && isset($_POST['email'])){
                     ?>
                     <div id="popupContainer" class="">
     <?php
@@ -119,27 +120,30 @@ if(!isset($_SESSION['User_ID'])){
         // Display the email form (complete)
                     echo "<form id='emailForm' method='post' onsubmit='return checkPassword();' action='sendcemail.php' class='sndeml'>";
         // Loop through selected checkboxes (complete)
-                    $buttons = array();
-                    foreach ($_POST['email'] as $clientEM) {
-                        echo "<input type='hidden' name='selected_emails[]' value='" . htmlspecialchars($clientEM) . "'>";
-                        array_push($buttons, $clientEM);
-                    }
-                    $buttonsString = implode(", ", $buttons);
+                    $emailArray = array();
+                    $nameArray = array();
+                    $idArray = array();
 
-                    $part = array();
-                    foreach($_POST['contactname'] as $contactNM){
-                        echo "<input type = 'hidden' name = 'selected_contacts[]' value = '".htmlspecialchars($contactNM)."'>";
-                        array_push($part, $contactNM);
+                    foreach ($_POST['email'] as $id => $email) {
+                        $contactName = $_POST['contactname'][$id];
+                        $clientId = $_POST['clientid'][$id];
+
+                        array_push($emailArray, $email);
+                        array_push($nameArray, $contactName);
+                        array_push($idArray, $clientId);
                     }
-                    $partString = implode(", ", $part);
+
+                    $emailString = implode(", ", $emailArray);
+                    $nameString = implode(", ", $nameArray);
+                    $idString = implode(", ", $idArray);
 
                     echo "<label for class='email'>Email</label><br>";
-                    echo "<input type = 'text' class = 'email' name ='emails[]' value = '".htmlspecialchars($buttonsString)."' readonly><br>";
+                    echo "<input type = 'text' class = 'email' name ='emails[]' value = '".htmlspecialchars($emailString)."' readonly><br>";
                     echo "<label for class='title'>Title</label><br>";
                     echo "<input type = 'text' class = 'title' name = 'title' placeholder = 'Insert title' required><br>";
                     echo "<label for class='description'>Description</label><br>";
                     echo "<textarea class = 'description' name = 'description' placeholder = 'Insert details here'></textarea><br>";
-                    echo "<input type = 'hidden' name = 'contacts[]' value = ". htmlspecialchars($partString) .">";
+                    echo "<input type = 'hidden' name = 'contacts[]' value = '". htmlspecialchars($nameString) ."'>";
                     echo "<input type='hidden' name='sndemlbtn' value='1'>";
                     echo "<button type='submit'>Send</button>";
                     echo "</form>";
@@ -148,11 +152,50 @@ if(!isset($_SESSION['User_ID'])){
                 ?>
 </div>
 <?php
+
+        // "Send to All" feature
+    if (isset($_POST['sendallbtn'])) {
+        $allClientsQuery = "SELECT Email, CONCAT(Forename, ' ', Surname) AS FullName FROM `clients`";
+        $allClientsStmt = $pdo->prepare($allClientsQuery);
+        $allClientsStmt->execute();
+
+        $emails = [];
+        $contacts = [];
+        foreach ($allClientsStmt as $row) {
+            $emails[] = htmlspecialchars($row['Email']);
+            $contacts[] = htmlspecialchars($row['FullName']);
+        }
+
+        ?>
+        <div id="popupContainer" class="">
+            <div class='ccontact'>
+                <form id='emailForm' method='post' onsubmit='return checkPassword();' action='sendcemail.php' class='sndeml'>
+                    <label for class='email'>Email</label><br>
+                    <input type='text' class='email' name='emails[]' value='<?php echo implode(", ", $emails); ?>' readonly><br>
+                    <label for class='title'>Title</label><br>
+                    <input type='text' class='title' name='title' placeholder='Insert title' required><br>
+                    <label for class='description'>Description</label><br>
+                    <textarea class='description' name='description' placeholder='Insert details here'></textarea><br>
+                    <input type = 'hidden' name = 'contacts[]' value = '<?php echo implode(", ", $contacts); ?>'>
+                    <input type='hidden' name='sndemlbtn' value='1'>
+                    <button type='submit'>Send</button>
+                </form>
+            </div>
+        </div>
+        <?php
+    }
         //- Remove client
                 if(isset($_POST['dletbtn'])){
-                    $clientid = htmlspecialchars($_POST['clientid']);
+                    $emailArray = array();
+                    $idArray = array();
+                    foreach ($_POST['email'] as $id => $email) {
+                        $clientid = $_POST['clientid'][$id];
 
-                    $delete_query = "DELETE FROM `clients` WHERE Client_ID = :id";
+                        array_push($idArray, $clientid);
+                    }
+                    $idString = implode(", ", $idArray);
+
+                    $delete_query = "DELETE FROM `clients` WHERE Client_ID = (:id)";
                     $delete_stmt = $pdo->prepare($delete_query);
                     $delete_stmt->bindParam(':id', $clientid);
                     if($delete_stmt->execute()){
