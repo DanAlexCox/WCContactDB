@@ -112,7 +112,7 @@ if(!isset($_SESSION['User_ID'])){
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
                 if(isset($_POST['mkemlbtn'])){
                     ?>
-                    <div id="popupContainer" class="hidden">
+                    <div id="popupContainer" class="">
     <?php
                     echo "<div class='ccontact'>";
         

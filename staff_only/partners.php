@@ -51,7 +51,7 @@ if(!isset($_SESSION['User_ID'])){
 
         //- View partnership table (complete later make specific permissions for specially authorized users)
 
-            echo "<form method = 'post' action = 'partners.php' class = 'partnertable'><table class = 'ptnr'>";
+            echo "<form method = 'post' action = 'partners.php?' class = 'partnertable'><table class = 'ptnr'>";
             echo "<tr><th>Partner</th><th>Representative</th><th>Select</th></tr>";
             foreach($query as $row){
             //verify no dupes
@@ -108,8 +108,8 @@ if(!isset($_SESSION['User_ID'])){
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
                 if(isset($_POST['mkemlbtn'])){
                     ?>
-                    <div id="popupContainer" class="hidden">
-    <?php
+                    <div id="popupContainer" class="">
+        <?php
         echo "<div class='pcontact'>";
         echo "<form id='emailForm' method='post' onsubmit='return checkPassword();' action='sendpemail.php' class='sndeml'>";
         $buttons = array();
@@ -137,6 +137,8 @@ if(!isset($_SESSION['User_ID'])){
         echo "<button type='submit'>Send</button>";
         echo "</form>";
         echo "</div>";
+
+        unset($_POST['email'], $_POST['contactname'], $_POST['partnerid'])
     ?>
 </div>
 <?php
