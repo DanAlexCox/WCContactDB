@@ -109,7 +109,7 @@ if(!isset($_SESSION['User_ID'])){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if(isset($_POST['mkemlbtn']) && isset($_POST['email'])){
                     ?>
-                    <div id="popupContainer" class="">
+                    <div id="popupContainer">
         <?php
                     echo "<div class='pcontact'>";
         echo "<form id='emailForm' method='post' onsubmit='return checkPassword();' action='sendpemail.php' class='sndeml'>";
@@ -158,7 +158,7 @@ if(!isset($_SESSION['User_ID'])){
                     }
             
                     ?>
-                    <div id="popupContainer" class="">
+                    <div id="popupContainer">
                         <div class='pcontact'>
                             <form id='emailForm' method='post' onsubmit='return checkPassword();' action='sendpemail.php' class='sndeml'>
                                 <label for class='email'>Email</label><br>

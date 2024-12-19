@@ -15,19 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Prevent form submission and show the popup when the 'Contact' button is clicked
-    mkemlbtn.addEventListener('click', (event) => {
-        event.preventDefault();  // Prevent form submission
-        document.body.classList.add('overlay');
-        popupContainer.classList.remove('hidden');
-    });
-
-    // Prevent form submission and show the popup when the 'Contact' button is clicked
-    sendallbtn.addEventListener('click', (event) => {
-        event.preventDefault();  // Prevent form submission
-        document.body.classList.add('overlay');
-        popupContainer.classList.remove('hidden');
-    });
+    document.body.classList.add('overlay');
 
     // Close the popup if the user clicks outside of it
     document.addEventListener('click', (event) => {
