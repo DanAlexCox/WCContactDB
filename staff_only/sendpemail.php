@@ -84,6 +84,35 @@ if(isset($_POST['sndemlbtn'])) {
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td style='text-align: left; padding: 20px; font-size: 12px; color: #666666; line-height: 1.5;'>
+                                                <hr style='border: none; border-top: 1px solid #dddddd; margin: 20px 0;'>
+                                                <p style='font-weight: bold;'>Women's Consortium | London & Birmingham Office</p>
+                                                <p>
+                                                    <strong>Tel:</strong> 0300 102 1543 / 0843 88 66 771 | 
+                                                    <strong>Mob:</strong> 07477 859 626 | 
+                                                    <strong>Fax:</strong> 0844 357 2177
+                                                </p>
+                                                <p><strong>Email:</strong> $emailfrom</p>
+                                                <p>
+                                                    <a href='https://womensconsortium.org.uk/' style='text-decoration: none; color: #007bff;'>Website</a> |
+                                                    <a href='https://www.facebook.com/womensconsortium.org.uk/' style='text-decoration: none; color: #007bff;'>Facebook</a> |
+                                                    <a href='https://x.com/womenconsortium' style='text-decoration: none; color: #007bff;'>Twitter</a> |
+                                                    <a href='https://www.instagram.com/womensconsortium/' style='text-decoration: none; color: #007bff;'>Instagram</a> |
+                                                    <a href='https://www.linkedin.com/groups/3920244/' style='text-decoration: none; color: #007bff;'>LinkedIn</a>
+                                                </p>
+                                                <br>
+                                                <p>Please Donate to Women's Consortium | 
+                                                    <a href='https://www.totalgiving.co.uk/charity/womens-consortium' style='text-decoration: none; color: #007bff;'>
+                                                        www.totalgiving.co.uk/charity/womens-consortium
+                                                    </a>
+                                                </p>
+                                                <p>
+                                                    Registered Charity Number 1159014 | Company Registration number: 06954256 (Cardiff)
+                                                </p>
+                                                <p>Member of BACP (British Association for Counselling & Psychotherapy)</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td style='text-align: center; padding: 15px; background-color: #f4f4f9; font-size: 12px; color: #888888;'>
                                                 <p style='margin: 0;'>This is an automated email. Please do not reply directly.</p>
                                             </td>
