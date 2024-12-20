@@ -63,7 +63,7 @@ if(isset($_POST['sndemlbtn'])) {
                             <table align='center' width='100%' cellpadding='0' cellspacing='0' style='max-width: 600px; margin: auto; background-color: #ffffff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;'>
                                 <thead>
                                     <tr>
-                                        <td style='background-color: #08b587; padding: 15px; text-align: center;'>
+                                        <td style='background-color:rgb(255, 255, 255);  border-bottom: 1px solid #000000; padding: 15px; text-align: center;'>
                                             <img src='cid:wc-logo' alt='Company Logo' style='display: block; max-width: 150px; margin: auto;'>
                                         </td>
                                     </tr>
@@ -93,9 +93,9 @@ if(isset($_POST['sndemlbtn'])) {
                                 <tfoot>
                                     <tr>
                                         <td style='background-color: #004aad; padding: 10px; text-align: center; color: #ffffff; font-size: 12px;'>
-                                            <p style='margin: 5px 0;'>© 2024 Your Company Name. All rights reserved.</p>
+                                            <p style='margin: 5px 0;'>© 2024 Women's Consortium. All rights reserved.</p>
                                             <p style='margin: 0;'>
-                                                <a href='#' style='color: #ffffff; text-decoration: none;'>Privacy Policy</a> | 
+                                                <a href='https://womensconsortium.org.uk/privacy-policy/' style='color: #ffffff; text-decoration: none;'>Privacy Policy</a> | 
                                                 <a href='#' style='color: #ffffff; text-decoration: none;'>Unsubscribe</a>
                                             </p>
                                         </td>
@@ -105,12 +105,12 @@ if(isset($_POST['sndemlbtn'])) {
                         </body>
                     </html>";
                 
-                    $mail->addEmbeddedImage('CSS/images/w-logo-blue.png', 'wc-logo');
+                    $mail->addEmbeddedImage('CSS/images/logo.png', 'wc-logo');
         
                     $mail->isHTML(true);
         
                 //Replace the plain text body with one created manually
-                    $mail->AltBody = 'Description';
+                    $mail->AltBody = $description;
         
                 //Attach an image file
         

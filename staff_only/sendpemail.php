@@ -59,20 +59,44 @@ if(isset($_POST['sndemlbtn'])) {
                 // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
         
                     $mail->AddAddress($emailto, $emailtoname);
-                    $mail->Body = "<html>
-                                        <body style='background-color: #add8e6; padding: 20px'>
-                                            <img src='cid:wc-logo', alt='my-logo'>
-                                            <div style='background-color: #ffffff; border: 1px solid rgb(0, 0, 0);'>"
-                                                .$description.
-                                            "</div>
+                    $mail->Body = "
+                                    <html>
+                                        <body style='font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 30px; margin: 0;'>
+                                        <table align='center' width='600px' cellpadding='0' cellspacing='0' style='background-color: #ffffff;
+                                                    border: 1px solid #dddddd; border-radius: 8px; overflow: hidden;'>
+                                        <tr>
+                                            <td style='text-align: center; padding: 20px; background-color: #004080; color: #ffffff;'>
+                                            <div style='display: inline-block; padding: 20px; border-radius: 50%; 
+                                                        background: radial-gradient(circle, #ffffff 70%, rgba(244, 244, 249, 0.6) 100%);'>
+                                                <img src='cid:wc-logo' alt='Company Logo' style='max-width: 150px; background-color: #ffffff;'>
+                                            </div>
+                                                <h1 style='margin: 0; font-size: 20px;'>Women's Consortium</h1>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style='padding: 20px; color: #333333; font-size: 14px; line-height: 1.6;'>
+                                                <p style='margin: 0;'>Dear $emailtoname,</p>
+                                                <br>
+                                                <p>$description</p>
+                                                <br>
+                                                <p style='margin: 0;'>Best regards,</p>
+                                                <p style='margin: 0;'><strong>$emailfromname</strong></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style='text-align: center; padding: 15px; background-color: #f4f4f9; font-size: 12px; color: #888888;'>
+                                                <p style='margin: 0;'>This is an automated email. Please do not reply directly.</p>
+                                            </td>
+                                        </tr>
+                                        </table>
                                         </body>
                                     </html>";
-                    $mail->addEmbeddedImage('CSS/images/w-logo-blue.png', 'wc-logo');
+                    $mail->addEmbeddedImage('CSS/images/logo.png', 'wc-logo');
         
                     $mail->isHTML(true);
         
                 //Replace the plain text body with one created manually
-                    $mail->AltBody = 'Description';
+                    $mail->AltBody = $description;
         
                 //Attach an image file
         
