@@ -19,7 +19,10 @@ Consists of:
 3. vendor holds phpmailer and composer files
 
 List of bugs reported:
-1. N/A
+1. partner.php:
+    - blank space under modify buttons are included with the a href link
+2. client.php
+    - blank space under modify buttons are included with the a href link
 
 Future improvements:
 1. login.php - locks out of logging in after 5-10 tries
