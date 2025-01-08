@@ -53,6 +53,8 @@ List of bugs reported:
         when deleting a client
         - temp solution: use side navbar to refresh update the page
     - ctrl+c doesnt work on contacting form
+3. addclient.php
+    - add email input is a text field not email field
 
 Future improvements:
 1. login.php - locks out of logging in after 5-10 tries
