@@ -51,6 +51,7 @@ List of bugs reported:
     - blank space under modify buttons are included with the a href link
     - Error: Cannot modify header information - headers already sent by (output started at /home/womensc1/public_html/contactsys/staff_only/clients.php:69)
         when deleting a client
+        - temp solution: use side navbar to refresh update the page
 
 Future improvements:
 1. login.php - locks out of logging in after 5-10 tries
