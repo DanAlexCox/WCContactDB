@@ -58,6 +58,8 @@ List of bugs reported:
     - add email input is a text field not email field
     - may stay on addclientconfirmed.php
         temp solution: refresh page
+4. sendc/pemail.php
+    - doesn't take into account new lines or tab
 
 Future improvements:
 1. login.php - locks out of logging in after 5-10 tries
