@@ -63,3 +63,4 @@ List of bugs reported:
 
 Future improvements:
 1. login.php - locks out of logging in after 5-10 tries
+2. clients.php/addclient.php/addclientconfirmed.php - Only include clients added from clinic system

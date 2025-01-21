@@ -29,8 +29,5 @@ if(isset($_POST['regclient'])){
         header("Location: addclients.php?error=".$error);
         exit();
     }
-}   
-
-
-
+}
 ?>
