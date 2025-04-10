@@ -58,12 +58,16 @@ if(!isset($_SESSION['User_ID'])){
         foreach($query as $row){
             //verify no dupes
             if(!in_array($row, $rowset)){
+                $dateTime = new DateTime($row['DateOfBirth']);
+                $dob = htmlspecialchars($dateTime->format('d-m-Y'));
+                $currentDate = new DateTime();
+                $clientAge = $currentDate->diff($dateTime)->y;
                 echo "<tr>";
                 echo "<td>".$row['Prefix']."</td>";
                 echo "<td>".$row['Forename']."</td>";
                 echo "<td>".$row['Surname']."</td>";
                 echo "<td>".$row['Gender']."</td>";
-                echo "<td>".$row['Age']."</td>";
+                echo "<td>".$clientAge."</td>";
                 echo "<td><input type='checkbox' class='checkbox' name='email[".$row['Client_ID']."]' value='".$row['Email']."'>";
                 echo "<input type='hidden' name='contactname[".$row['Client_ID']."]' value='".$row['Forename']." ".$row['Surname']."'>";
                 echo "<input type='hidden' name='clientid[".$row['Client_ID']."]' value='".$row['Client_ID']."'></td>";
