@@ -12,9 +12,9 @@ include('connectdb.php');
 
 if(isset($_POST['sndemlbtn'])) {
             try{
-                $emailfrom = $_SESSION['useremail'];
-                $emailfromname = $_SESSION['username'];
-                $emailfrompass = $_SESSION['passgood'];
+                $emailfrom = "marketing@womensconsortium.org.uk";
+                $emailfromname = "WC Marketing";
+                $emailfrompass = "jkYd[uPLmxg|";
 
                 $title = $_POST['title'];
                 $description = $_POST['description'];
