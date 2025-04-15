@@ -28,7 +28,7 @@ if(!isset($_SESSION['User_ID'])){
     <head>
         <title>Promotion</title>
         <link rel="stylesheet" type="text/css" href="CSS/main.css">
-        <link rel="stylesheet" type="text/css" href="CSS/client.css">
+        <link rel="stylesheet" type="text/css" href="CSS/promotion.css">
         <link rel="icon" type="image/x-icon" href="CSS/images/w-logo-blue.png">
         <script defer src="JS/script.js"></script>
         <script src="JS/timer.js" defer></script>
@@ -39,6 +39,106 @@ if(!isset($_SESSION['User_ID'])){
     ?>
     <body>
         <!-- Design the 4 layouts -->
+        <div id='emailbody'>
+          <div id='heading'>
+            <div id='logo'>
+              <img src='CSS/images/logo.png' alt='logo.png'>
+            </div>
+            <h1>See what is coming soon</h1>
+          </div>
+          <div id='layout'>
+            <section class='eventpart'>
+              <section class='title'>
+                <h2>Event Title</h2>
+              </section>
+              <section class='bodysummary'>
+                <p>Check out this event coming soon</p>
+              </section>
+              <section class='singleimage'>
+                <img src='CSS/images/bb54289db635-screen-shot-2018-10-22-at-140657.png' alt='bb54289db635-screen-shot-2018-10-22-at-140657.png' 
+                  style='max-width: 100%;'>
+              </section>
+              <section class='readmore'>
+                <a href=''><button class='morebutton'>READ MORE</button></a>
+              </section>
+            </section>
+            <section class='eventpart'>
+              <section class='title'>
+                <h2>Event Title</h2>
+              </section>
+              <section class='bodysummary'>
+                <p>Check out this event coming soon</p>
+              </section>
+              <section class='singleimage'>
+                <img src='CSS/images/DSC06563-scaled.jpg' alt='DSC06563-scaled.jpg' 
+                  style='max-width: 100%;'>
+              </section>
+              <section class='readmore'>
+                <a href=''><button class='morebutton'>READ MORE</button></a>
+              </section>
+            </section>
+            <section class='eventpart'>
+              <section class='title'>
+                <h2>Event Title</h2>
+              </section>
+              <section class='bodysummary'>
+                <p>Check out this event coming soon</p>
+              </section>
+              <section class='singleimage'>
+                <img src='CSS/images/GettyImages-1085682140-1024x1024.jpg' alt='GettyImages-1085682140-1024x1024.jpg' 
+                  style='max-width: 100%;'>
+              </section>
+              <section class='readmore'>
+                <a href=''><button class='morebutton'>READ MORE</button></a>
+              </section>
+            </section>
+            <section class='eventpart'>
+              <section class='title'>
+                <h2>Event Title</h2>
+              </section>
+              <section class='bodysummary'>
+                <p>Check out this event coming soon</p>
+              </section>
+              <section class='singleimage'>
+                <img src='CSS/images/happy-woman.jpg' alt='happy-woman.jpg' 
+                  style='max-width: 100%;'>
+              </section>
+              <section class='readmore'>
+                <a href=''><button class='morebutton'>READ MORE</button></a>
+              </section>
+            </section>
+            <section class='eventpart'>
+              <section class='title'>
+                <h2>Event Title</h2>
+              </section>
+              <section class='bodysummary'>
+                <p>Check out this event coming soon</p>
+              </section>
+              <section class='singleimage'>
+                <img src='CSS/images/jsonld.jpg' alt='jsonld.jpg' 
+                  style='max-width: 100%;'>
+              </section>
+              <section class='readmore'>
+                <a href=''><button class='morebutton'>READ MORE</button></a>
+              </section>
+            </section>
+            <section class='eventpart'>
+              <section class='title'>
+                <h2>Event Title</h2>
+              </section>
+              <section class='bodysummary'>
+                <p>Check out this event coming soon</p>
+              </section>
+              <section class='singleimage'>
+                <img src='CSS/images/lbfew_charity_2023_mojatu-071-1.jpg' alt='CSS/images/lbfew_charity_2023_mojatu-071-1.jpg' 
+                  style='max-width: 100%;'>
+              </section>
+              <section class='readmore'>
+                <a href=''><button class='morebutton'>READ MORE</button></a>
+              </section>
+            </section>
+          </div>
+        </div>
         <!-- Select from preset layouts -->
         <!-- Form for showing selected preset layout and filling out body with text and images -->
         <!-- Send email to all clients (Until upload, send only to personal email) -->
