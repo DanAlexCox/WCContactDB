@@ -1,0 +1,67 @@
+#emailbody{
+    display: flex;
+    width: 1000px;
+    border: 2px solid black;
+    justify-content: center;
+    align-items: flex-start;
+    flex-flow: row wrap;
+}
+
+#heading{
+    display: flex;
+    flex-flow: column nowrap;
+    padding-left: 30%;
+    padding-right: 30%;
+    align-items: center;
+    max-height: fit-content;
+}
+
+#layout{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-left: 3%;
+    padding-right: 3%;
+    width: 100%;
+}
+
+.eventpart{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 5%;
+    width: 40%;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+#title{
+
+}
+
+#title > h2{
+
+}
+
+#bodysummary{
+
+}
+
+#bodysummary > p{
+
+}
+
+#singleimage{
+
+}
+
+#readmore{
+
+}
+
+#readmore > button{
+    
+}
