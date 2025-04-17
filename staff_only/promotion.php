@@ -47,94 +47,98 @@ if(!isset($_SESSION['User_ID'])){
             <h1>See what is coming soon</h1>
           </div>
           <div id='layout'>
-            <section class='eventpart'>
-              <section class='title'>
-                <h2>Event Title</h2>
+            <section class='left'>
+              <section class='eventpart left top'>
+                <section class='title'>
+                  <h2>Event Title</h2>
+                </section>
+                <section class='bodysummary'>
+                  <p>Check out this event coming soon</p>
+                </section>
+                <section class='singleimage'>
+                  <img src='CSS/images/bb54289db635-screen-shot-2018-10-22-at-140657.png' alt='bb54289db635-screen-shot-2018-10-22-at-140657.png' 
+                    style='max-width: 100%;'>
+                </section>
+                <section class='readmore'>
+                  <a href=''><button class='morebutton'>READ MORE</button></a>
+                </section>
               </section>
-              <section class='bodysummary'>
-                <p>Check out this event coming soon</p>
+              <section class='eventpart left'>
+                <section class='title'>
+                  <h2>Event Title</h2>
+                </section>
+                <section class='bodysummary'>
+                  <p>Check out this event coming soon</p>
+                </section>
+                <section class='singleimage'>
+                  <img src='CSS/images/GettyImages-1085682140-1024x1024.jpg' alt='GettyImages-1085682140-1024x1024.jpg' 
+                    style='max-width: 100%;'>
+                </section>
+                <section class='readmore'>
+                  <a href=''><button class='morebutton'>READ MORE</button></a>
+                </section>
               </section>
-              <section class='singleimage'>
-                <img src='CSS/images/bb54289db635-screen-shot-2018-10-22-at-140657.png' alt='bb54289db635-screen-shot-2018-10-22-at-140657.png' 
-                  style='max-width: 100%;'>
-              </section>
-              <section class='readmore'>
-                <a href=''><button class='morebutton'>READ MORE</button></a>
-              </section>
-            </section>
-            <section class='eventpart'>
-              <section class='title'>
-                <h2>Event Title</h2>
-              </section>
-              <section class='bodysummary'>
-                <p>Check out this event coming soon</p>
-              </section>
-              <section class='singleimage'>
-                <img src='CSS/images/DSC06563-scaled.jpg' alt='DSC06563-scaled.jpg' 
-                  style='max-width: 100%;'>
-              </section>
-              <section class='readmore'>
-                <a href=''><button class='morebutton'>READ MORE</button></a>
-              </section>
-            </section>
-            <section class='eventpart'>
-              <section class='title'>
-                <h2>Event Title</h2>
-              </section>
-              <section class='bodysummary'>
-                <p>Check out this event coming soon</p>
-              </section>
-              <section class='singleimage'>
-                <img src='CSS/images/GettyImages-1085682140-1024x1024.jpg' alt='GettyImages-1085682140-1024x1024.jpg' 
-                  style='max-width: 100%;'>
-              </section>
-              <section class='readmore'>
-                <a href=''><button class='morebutton'>READ MORE</button></a>
-              </section>
-            </section>
-            <section class='eventpart'>
-              <section class='title'>
-                <h2>Event Title</h2>
-              </section>
-              <section class='bodysummary'>
-                <p>Check out this event coming soon</p>
-              </section>
-              <section class='singleimage'>
-                <img src='CSS/images/happy-woman.jpg' alt='happy-woman.jpg' 
-                  style='max-width: 100%;'>
-              </section>
-              <section class='readmore'>
-                <a href=''><button class='morebutton'>READ MORE</button></a>
+              <section class='eventpart left'>
+                <section class='title'>
+                  <h2>Event Title</h2>
+                </section>
+                <section class='bodysummary'>
+                  <p>Check out this event coming soon</p>
+                </section>
+                <section class='singleimage'>
+                  <img src='CSS/images/jsonld.jpg' alt='jsonld.jpg' 
+                    style='max-width: 100%;'>
+                </section>
+                <section class='readmore'>
+                  <a href=''><button class='morebutton'>READ MORE</button></a>
+                </section>
               </section>
             </section>
-            <section class='eventpart'>
-              <section class='title'>
-                <h2>Event Title</h2>
+            <section class='right'>
+              <section class='eventpart right'>
+                <section class='title'>
+                  <h2>Event Title</h2>
+                </section>
+                <section class='bodysummary'>
+                  <p>Check out this event coming soon</p>
+                </section>
+                <section class='singleimage'>
+                  <img src='CSS/images/DSC06563-scaled.jpg' alt='DSC06563-scaled.jpg' 
+                    style='max-width: 100%;'>
+                </section>
+                <section class='readmore'>
+                  <a href=''><button class='morebutton'>READ MORE</button></a>
+                </section>
               </section>
-              <section class='bodysummary'>
-                <p>Check out this event coming soon</p>
+              <section class='eventpart right middle'>
+                <section class='title'>
+                  <h2>Event Title</h2>
+                </section>
+                <section class='bodysummary'>
+                  <p>Check out this event coming soon</p>
+                </section>
+                <section class='singleimage'>
+                  <img src='CSS/images/happy-woman.jpg' alt='happy-woman.jpg' 
+                    style='max-width: 100%;'>
+                </section>
+                <section class='readmore'>
+                  <a href=''><button class='morebutton'>READ MORE</button></a>
+                </section>
               </section>
-              <section class='singleimage'>
-                <img src='CSS/images/jsonld.jpg' alt='jsonld.jpg' 
-                  style='max-width: 100%;'>
-              </section>
-              <section class='readmore'>
-                <a href=''><button class='morebutton'>READ MORE</button></a>
-              </section>
-            </section>
-            <section class='eventpart'>
-              <section class='title'>
-                <h2>Event Title</h2>
-              </section>
-              <section class='bodysummary'>
-                <p>Check out this event coming soon</p>
-              </section>
-              <section class='singleimage'>
-                <img src='CSS/images/lbfew_charity_2023_mojatu-071-1.jpg' alt='CSS/images/lbfew_charity_2023_mojatu-071-1.jpg' 
-                  style='max-width: 100%;'>
-              </section>
-              <section class='readmore'>
-                <a href=''><button class='morebutton'>READ MORE</button></a>
+              <section class='eventpart right'>
+                <section class='title'>
+                  <h2>Event Title</h2>
+                </section>
+                <section class='bodysummary'>
+                  <p>Check out this event coming soon</p>
+                </section>
+                <section class='singleimage'>
+                  <img src='CSS/images/lbfew_charity_2023_mojatu-071-1.jpg' alt='CSS/images/lbfew_charity_2023_mojatu-071-1.jpg' 
+                    style='max-width: 100%;'>
+                </section>
+                <section class='readmore'>
+                  <a href=''><button class='morebutton'>READ MORE</button></a>
+                </section>
               </section>
             </section>
           </div>
