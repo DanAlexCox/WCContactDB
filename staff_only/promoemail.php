@@ -139,7 +139,8 @@
                         style='max-width: 100%;'>
                     </section>
                     <section class='readmore'>
-                        <a href=''><button class='morebutton'>READ MORE</button></a>
+                        <a href=''><button class='morebutton' style='background-color: #0056b3; color: #ffffff; border: none; padding: 10px 20px;
+                                border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; transition: background-color 0.3s;'>READ MORE</button></a>
                     </section>
                     </section>
                     <section class='eventpart' style='display: flex; flex-flow: column nowrap; align-items: center; padding: 5%;
@@ -156,7 +157,8 @@
                         style='max-width: 100%;'>
                     </section>
                     <section class='readmore'>
-                        <a href=''><button class='morebutton'>READ MORE</button></a>
+                        <a href=''><button class='morebutton' style='background-color: #0056b3; color: #ffffff; border: none; padding: 10px 20px;
+                                border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; transition: background-color 0.3s;'>READ MORE</button></a>
                     </section>
                     </section>
                     <section class='eventpart' style='display: flex; flex-flow: column nowrap; align-items: center; padding: 5%;
@@ -173,7 +175,8 @@
                         style='max-width: 100%;'>
                     </section>
                     <section class='readmore'>
-                        <a href=''><button class='morebutton'>READ MORE</button></a>
+                        <a href=''><button class='morebutton' style='background-color: #0056b3; color: #ffffff; border: none; padding: 10px 20px;
+                                border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; transition: background-color 0.3s;'>READ MORE</button></a>
                     </section>
                     </section>
                     <section class='eventpart' style='display: flex; flex-flow: column nowrap; align-items: center; padding: 5%;
@@ -190,7 +193,8 @@
                         style='max-width: 100%;'>
                     </section>
                     <section class='readmore'>
-                        <a href=''><button class='morebutton'>READ MORE</button></a>
+                        <a href=''><button class='morebutton' style='background-color: #0056b3; color: #ffffff; border: none; padding: 10px 20px;
+                                border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; transition: background-color 0.3s;'>READ MORE</button></a>
                     </section>
                     </section>
                     <section class='eventpart' style='display: flex; flex-flow: column nowrap; align-items: center; padding: 5%;
@@ -207,7 +211,8 @@
                         style='max-width: 100%;'>
                     </section>
                     <section class='readmore'>
-                        <a href=''><button class='morebutton'>READ MORE</button></a>
+                        <a href=''><button class='morebutton' style='background-color: #0056b3; color: #ffffff; border: none; padding: 10px 20px;
+                                border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; transition: background-color 0.3s;'>READ MORE</button></a>
                     </section>
                     </section>
                     <section class='eventpart' style='display: flex; flex-flow: column nowrap; align-items: center; padding: 5%;
@@ -224,12 +229,13 @@
                         style='max-width: 100%;'>
                     </section>
                     <section class='readmore'>
-                        <a href=''><button class='morebutton'>READ MORE</button></a>
+                        <a href=''><button class='morebutton' style='background-color: #0056b3; color: #ffffff; border: none; padding: 10px 20px;
+                                border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; transition: background-color 0.3s;'>READ MORE</button></a>
                     </section>
                     </section>
                 </div>
                 </div>";
     //Layout 4.
     $body4 = "";
-
+echo $body3;
 ?>
