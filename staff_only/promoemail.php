@@ -114,8 +114,7 @@
     //Layout 2.
     $body2 = "";
     // Layout 3.
-    $body3 = "<div id='emailbody' style='display: flex; width: 1000px; border: 2px solid black; justify-content: center;
-                                align-items: flex-start; flex-flow: row wrap;'>
+    $body3 = "<div id='emailbody' style='width: 80%; margin: auto; border: 2px solid black; padding: 2%; box-sizing: border-box;'>
                 <div id='heading' style='display: flex; flex-flow: column nowrap; padding-left: 30%; padding-right: 30%;
                                 align-items: center; max-height: fit-content;'>
                     <div id='logo'>
