@@ -1,8 +1,116 @@
 <?php
 //Design the 4 layouts
     //Layout 1. 
-    $body1 = "";
-    
+    $body1 = "<div id='emailbody' style='width: 80%; margin: auto; border: 2px solid black; padding: 2%; box-sizing: border-box;'>
+          <div id='heading' style='text-align: center; margin-bottom: 40px;'>
+            <div id='logo'>
+              <img src='CSS/images/logo.png' alt='logo.png'>
+            </div>
+            <h1>See what is coming soon</h1>
+          </div>
+          <div id='layout' style='display: grid; grid-template-columns: repeat(2, 1fr); gap: 2%;'>
+            <section id='left'>
+              <section class='eventpart left top' style='display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+                padding: 2%; width: 100%; border: 1px solid #ddd; border-radius: 8px;box-shadow: 0 2px 4px rgba(0,0,0,0.1); box-sizing: border-box;
+                height: 50%; background-color: aliceblue;'>
+                <section class='title' style='background-color: white; border: 3px solid black; border-radius: 15px;'>
+                  <h2>Event Title</h2>
+                </section>
+                <section class='bodysummary' style='background-color: bisque; border: 1px solid brown;'>
+                  <p>Check out this event coming soon</p>
+                </section>
+                <section class='singleimage' style='overflow: hidden;'>
+                  <img src='CSS/images/bb54289db635-screen-shot-2018-10-22-at-140657.png' alt='bb54289db635-screen-shot-2018-10-22-at-140657.png' 
+                    style='max-width: 100%;'>
+                </section>
+                <section class='readmore'>
+                  <a href=''><button class='morebutton' style='background-color: #0056b3; color: #ffffff; border: none; padding: 10px 20px;
+                                border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; transition: background-color 0.3s;'>READ MORE</button></a>
+                </section>
+              </section>
+              <section class='eventpart left' style='display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+                padding: 2%; width: 100%; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                box-sizing: border-box; background-image: url(CSS/images/GettyImages-1085682140-1024x1024.jpg); background-size: 100% 100%;
+                height: 25%; background-color: aliceblue;'>
+                <section class='title' style='background-color: white; border: 3px solid black; border-radius: 15px;'>
+                  <h2>Event Title</h2>
+                </section>
+                <section class='bodysummary' style='background-color: bisque; border: 1px solid brown;'>
+                  <p>Check out this event coming soon</p>
+                </section>
+                <section class='readmore'>
+                  <a href=''><button class='morebutton' style='background-color: #0056b3; color: #ffffff; border: none; padding: 10px 20px;
+                                border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; transition: background-color 0.3s;'>READ MORE</button></a>
+                </section>
+              </section>
+              <section class='eventpart left' style='display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+                padding: 2%; width: 100%; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); box-sizing:
+                border-box;background-image: url(CSS/images/jsonld.jpg); background-size: 100% 100%; height: 25%; background-color: aliceblue;'>
+                <section class='title' style='background-color: white; border: 3px solid black; border-radius: 15px;'>
+                  <h2>Event Title</h2>
+                </section>
+                <section class='bodysummary' style='background-color: bisque; border: 1px solid brown;'>
+                  <p>Check out this event coming soon</p>
+                </section>
+                <section class='readmore'>
+                  <a href=''><button class='morebutton' style='background-color: #0056b3; color: #ffffff; border: none; padding: 10px 20px;
+                                border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; transition: background-color 0.3s;'>READ MORE</button></a>
+                </section>
+              </section>
+            </section>
+            <section id='right'>
+              <section class='eventpart right' style='display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+                padding: 2%; width: 100%; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                box-sizing: border-box; background-image: url(CSS/images/DSC06563-scaled.jpg); background-size: 100% 100%; height: 30%;
+                background-color: aquamarine;'>
+                <section class='title' style='background-color: white; border: 3px solid black; border-radius: 15px;'>
+                  <h2>Event Title</h2>
+                </section>
+                <section class='bodysummary' style='background-color: bisque; border: 1px solid brown;'>
+                  <p>Check out this event coming soon</p>
+                </section>
+                <section class='readmore'>
+                  <a href=''><button class='morebutton' style='background-color: #0056b3; color: #ffffff; border: none; padding: 10px 20px;
+                                border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; transition: background-color 0.3s;'>READ MORE</button></a>
+                </section>
+              </section>
+              <section class='eventpart right middle' style='display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+                padding: 2%; width: 100%; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                box-sizing: border-box; height: 40%; background-color: aquamarine;'>
+                <section class='title' style='background-color: white; border: 3px solid black; border-radius: 15px;'>
+                  <h2>Event Title</h2>
+                </section>
+                <section class='bodysummary' style='background-color: bisque; border: 1px solid brown;'>
+                  <p>Check out this event coming soon</p>
+                </section>
+                <section class='singleimage' style='overflow: hidden;'>
+                  <img src='CSS/images/happy-woman.jpg' alt='happy-woman.jpg' 
+                    style='max-width: 100%;'>
+                </section>
+                <section class='readmore'>
+                  <a href=''><button class='morebutton' style='background-color: #0056b3; color: #ffffff; border: none; padding: 10px 20px;
+                                border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; transition: background-color 0.3s;'>READ MORE</button></a>
+                </section>
+              </section>
+              <section class='eventpart right' style='display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+                padding: 2%; width: 100%; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                box-sizing: border-box; background-image: url(CSS/images/lbfew_charity_2023_mojatu-071-1.jpg);
+                background-size: 100% 100%; height: 30%; background-color: aquamarine;'>
+                <section class='title' style='background-color: white; border: 3px solid black; border-radius: 15px;'>
+                  <h2>Event Title</h2>
+                </section>
+                <section class='bodysummary' style='background-color: bisque; border: 1px solid brown;'>
+                  <p>Check out this event coming soon</p>
+                </section>
+                <section class='readmore'>
+                  <a href=''><button class='morebutton' style='background-color: #0056b3; color: #ffffff; border: none; padding: 10px 20px;
+                                border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; transition: background-color 0.3s;'>READ MORE</button></a>
+                </section>
+              </section>
+            </section>
+          </div>
+        </div>";
+
     //Layout 2.
     $body2 = "";
     // Layout 3.
