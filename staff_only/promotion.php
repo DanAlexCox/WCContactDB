@@ -39,9 +39,6 @@ if(!isset($_SESSION['User_ID'])){
     ?>
     <body>
         <!-- Design the 4 layouts -->
-        <div id='emailbody'>
-          
-        </div>
         <!-- Select from preset layouts -->
         <!-- Form for showing selected preset layout and filling out body with text and images -->
         <!-- Send email to all clients (Until upload, send only to personal email) -->

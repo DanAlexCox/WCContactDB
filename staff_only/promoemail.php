@@ -1,3 +1,243 @@
+<link rel='stylesheet' type='text/css' href='CSS/promotion.css'>
+<div id='emailbody' style='width: 60%;
+  margin: auto;
+  border: 2px solid black;
+  padding: 2%;
+  box-sizing: border-box;'>
+  <div id='heading' style='text-align: center;
+  margin-bottom: 40px;'>
+    <div id='logo'>
+      <img src='CSS/images/logo.png' alt='logo.png'>
+    </div>
+  </div>
+  <div id='navbar' style='border: 2px solid blue;
+  padding: 5%;'>
+    <table style='border-bottom: 2px solid black;
+  width: 100%;'><th><a href='' style='color: black;
+  text-decoration: none;'>Therapy</a></th><th><a href='' style='color: black;
+  text-decoration: none;'>Training</a></th><th><a href='' style='color: black;
+  text-decoration: none;'>Events/Activities</a></th></table>
+  </div>
+  <div id='layout' style='display: flex;
+  flex-flow: column wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 2px solid green;
+  padding: 5%;'>
+    <div id='poster' style='display: flex;
+  border: 1px solid red;
+  padding: 2%;
+  flex-flow: column wrap;'>
+      <img src='CSS/images/(1).png' alt='(1).png' style='max-width: 100%;'>
+    </div>
+    <div id='posterbody' style='border: 1px solid turquoise;
+  width: 100%;
+  justify-items: center;'>
+      <p>This is a really enlightening experience. You should check it out</p>
+    </div>
+    <div id='list' style='border: 1px solid purple;
+  padding: 2%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;'>
+      <section class='eventpart' style='display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 5%;
+  width: 30%;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  box-sizing: border-box;'>
+        <section class='title'>
+            <h2>Event Title</h2>
+        </section>
+        <section class='bodysummary'>
+            <p>Check out this event coming soon</p>
+        </section>
+        <section class='singleimage'>
+            <img src='CSS/images/bb54289db635-screen-shot-2018-10-22-at-140657.png' alt='bb54289db635-screen-shot-2018-10-22-at-140657.png' 
+            style='max-width: 100%;'>
+        </section>
+        <section class='readmore'>
+            <a href=''><button class='morebutton' style='background-color: #0056b3;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;'>READ MORE</button></a>
+        </section>
+      </section>
+      <section class='eventpart' style='display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 5%;
+  width: 30%;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  box-sizing: border-box;'>
+        <section class='title'>
+            <h2>Event Title</h2>
+        </section>
+        <section class='bodysummary'>
+            <p>Check out this event coming soon</p>
+        </section>
+        <section class='singleimage'>
+            <img src='CSS/images/DSC06563-scaled.jpg' alt='DSC06563-scaled.jpg' 
+            style='max-width: 100%;'>
+        </section>
+        <section class='readmore'>
+            <a href=''><button class='morebutton' style='background-color: #0056b3;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;'>READ MORE</button></a>
+        </section>
+      </section>
+      <section class='eventpart' style='display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 5%;
+  width: 30%;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  box-sizing: border-box;'>
+        <section class='title'>
+            <h2>Event Title</h2>
+        </section>
+        <section class='bodysummary'>
+            <p>Check out this event coming soon</p>
+        </section>
+        <section class='singleimage'>
+            <img src='CSS/images/GettyImages-1085682140-1024x1024.jpg' alt='GettyImages-1085682140-1024x1024.jpg' 
+            style='max-width: 100%;'>
+        </section>
+        <section class='readmore'>
+            <a href=''><button class='morebutton' style='background-color: #0056b3;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;'>READ MORE</button></a>
+        </section>
+      </section>
+      <section class='eventpart' style='display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 5%;
+  width: 30%;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  box-sizing: border-box;'>
+        <section class='title'>
+            <h2>Event Title</h2>
+        </section>
+        <section class='bodysummary'>
+            <p>Check out this event coming soon</p>
+        </section>
+        <section class='singleimage'>
+            <img src='CSS/images/happy-woman.jpg' alt='happy-woman.jpg' 
+            style='max-width: 100%;'>
+        </section>
+        <section class='readmore'>
+            <a href=''><button class='morebutton' style='background-color: #0056b3;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;'>READ MORE</button></a>
+        </section>
+      </section>
+      <section class='eventpart' style='display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 5%;
+  width: 30%;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  box-sizing: border-box;'>
+        <section class='title'>
+            <h2>Event Title</h2>
+        </section>
+        <section class='bodysummary'>
+            <p>Check out this event coming soon</p>
+        </section>
+        <section class='singleimage'>
+            <img src='CSS/images/jsonld.jpg' alt='jsonld.jpg' 
+            style='max-width: 100%;'>
+        </section>
+        <section class='readmore'>
+            <a href=''><button class='morebutton' style='background-color: #0056b3;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;'>READ MORE</button></a>
+        </section>
+      </section>
+      <section class='eventpart' style='display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 5%;
+  width: 30%;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  box-sizing: border-box;'>
+        <section class='title'>
+            <h2>Event Title</h2>
+        </section>
+        <section class='bodysummary'>
+            <p>Check out this event coming soon</p>
+        </section>
+        <section class='singleimage'>
+            <img src='CSS/images/lbfew_charity_2023_mojatu-071-1.jpg' alt='CSS/images/lbfew_charity_2023_mojatu-071-1.jpg' 
+            style='max-width: 100%;'>
+        </section>
+        <section class='readmore'>
+            <a href=''><button class='morebutton' style='background-color: #0056b3;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;'>READ MORE</button></a>
+        </section>
+      </section>
+    </div>
+  </div>
+  </div>
+</div>
+
 <?php
 //Design the 4 layouts
     //Layout 1. 
@@ -236,5 +476,4 @@
                 </div>";
     //Layout 4.
     $body4 = "";
-echo $body3;
 ?>
