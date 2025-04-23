@@ -1,5 +1,3 @@
-<!-- <link rel='stylesheet' type='text/css' href='CSS/promotion.css'> -->
-
 <?php
 //Design the 4 layouts
 //Remove borders
@@ -376,6 +374,64 @@
                 </div>
                 </div>";
     //Layout 4.
-    $body4 = "";
-    echo $body2;
+    $body4 = "<div id='emailbody' style='width: 60%; margin: auto; border: 2px solid black; padding: 2%; box-sizing: border-box;'>
+                <div id='heading' style='text-align: center; margin-bottom: 40px;'>
+                  <div id='logo'>
+                    <img src='CSS/images/logo.png' alt='logo.png'>
+                  </div>
+                </div>
+                <div id='navbar' style='padding: 5%;'>
+                  <table style='border-bottom: 2px solid black; width: 100%;'>
+                    <th><a href='' style='color: black; text-decoration: none;'>Therapy</a></th>
+                    <th><a href='' style='color: black; text-decoration: none;'>Training</a></th>
+                    <th><a href='' style='color: black; text-decoration: none;'>Events/Activities</a></th>
+                  </table>
+                </div>
+                <div id='layout' style='display: flex; flex-flow: column wrap; justify-content: space-evenly; align-items: center;
+                  padding: 5%;'>
+                  <div id='poster1' style='display: flex; padding: 2%; flex-flow: column wrap;'>
+                    <img src='CSS/images/(1).png' alt='(1).png' style='max-width: 100%;'>
+                  </div>
+                  <div id='posterbody' style='width: 100%; justify-items: center;'>
+                    <p>This is a really enlightening experience. You should check it out</p>
+                  </div>
+                  <div id='poster2' style='display: flex; padding: 2%; flex-flow: column wrap; align-items: center;'>
+                    <img src='CSS/images/lbfew_charity_2023_mojatu-071-1.jpg' alt='lbfew_charity_2023_mojatu-071-1.jpg' style='max-width: 80%;'>
+                  </div>
+                  <div id='services' style='display: flex; flex-flow: column wrap; align-items: center;'>
+                    <h3>Other Services</h3>
+                    <table style='border-collapse: collapse;'><tr>
+                        <th style='border-right: 1px solid #000; padding: 8px;'><a href='https://womensconsortium.org.uk/therapy/' style='color: black; text-decoration: none;'>Therapy</a></th>
+                        <th style='border-right: 1px solid #000; padding: 8px;'><a href='https://womensconsortium.org.uk/training/' style='color: black; text-decoration: none;'>Training</a></th>
+                        <th style='padding: 8px;'><a href='https://womensconsortium.org.uk/events/' style='color: black; text-decoration: none;'>Events/Activities</a></th>
+                      </tr>
+                      <tr>
+                        <td style='border-right: 1px solid #000; padding: 8px;'><a href='https://womensconsortium.org.uk/therapy/counselling/' style='color: black; text-decoration: none;'>Counselling</a></td>
+                        <td style='border-right: 1px solid #000; padding: 8px;'><a href='https://womensconsortium.org.uk/workshops/' style='color: black; text-decoration: none;'>Workshops</a></td>
+                        <td style='padding: 8px;'><a href='https://womensconsortium.org.uk/resources/' style='color: black; text-decoration: none;'>Resources</a></td>
+                      </tr>
+                      <tr>
+                        <td style='border-right: 1px solid #000; padding: 8px;'><a href='https://womensconsortium.org.uk/therapy/neuro-linguistic-programming-nlp/' style='color: black; text-decoration: none;'>NLP</a></td>
+                        <td style='border-right: 1px solid #000; padding: 8px;'><a href='https://womensconsortium.org.uk/past-training-customers/' style='color: black; text-decoration: none;'>Connected Organisations</a></td>
+                        <td style='padding: 8px;'></td>
+                      </tr>
+                      <tr>
+                        <td style='border-right: 1px solid #000; padding: 8px;'><a href='https://womensconsortium.org.uk/therapy/mediation/' style='color: black; text-decoration: none;'>Mediation</a></td>
+                        <td style='border-right: 1px solid #000; padding: 8px;'></td>
+                        <td style='padding: 8px;'></td>
+                      </tr>
+                      <tr>
+                        <td style='border-right: 1px solid #000; padding: 8px;'><a href='https://womensconsortium.org.uk/therapy/personal-development-program-pdp/' style='color: black; text-decoration: none;'>PDP</a></td>
+                        <td style='border-right: 1px solid #000; padding: 8px;'></td>
+                        <td style='padding: 8px;'></td>
+                      </tr>
+                      <tr>
+                        <td style='border-right: 1px solid #000; padding: 8px;'><a href='https://womensconsortium.org.uk/therapy/family-and-couple-counselling/' style='color: black; text-decoration: none;'>Couples/Family Counselling</a></td>
+                        <td style='border-right: 1px solid #000; padding: 8px;'></td>
+                        <td style='padding: 8px;'></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>";
 ?>
