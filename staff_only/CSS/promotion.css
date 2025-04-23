@@ -12,13 +12,24 @@
 }
 
 #navbar{
-  border: 2px solid blue;
   padding: 5%;
 }
 
 #navbar>table {
   border-bottom: 2px solid black;
   width: 100%;
+}
+
+#layout table{
+  
+}
+
+#layout th, #layout td {
+  
+}
+
+#layout th:last-child, #layout td:last-child {
+  
 }
 
 th>a{
@@ -31,7 +42,6 @@ th>a{
   flex-flow: column wrap;
   justify-content: space-evenly;
   align-items: center;
-  border: 2px solid green;
   padding: 5%;
 }
 
