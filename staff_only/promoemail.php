@@ -1,5 +1,4 @@
 <?php
-
 //Design the 4 layouts
     //Layout 1. 
     $body1 = "<div id='emailbody' style='width: 80%; margin: auto; border: 2px solid black; padding: 2%; box-sizing: border-box;'>
@@ -380,7 +379,7 @@
                     <img src='CSS/images/logo.png' alt='logo.png'>
                   </div>
                 </div>
-                <div id='navbar' style='padding: 5%;'>
+                <div id='promonavbar' style='padding: 5%;'>
                   <table style='border-bottom: 2px solid black; width: 100%;'>
                     <th><a href='' style='color: black; text-decoration: none;'>Therapy</a></th>
                     <th><a href='' style='color: black; text-decoration: none;'>Training</a></th>
@@ -435,5 +434,4 @@
                 </div>
               </div>";
 
-echo $body4;
 ?>
