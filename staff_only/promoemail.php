@@ -1,6 +1,6 @@
 <?php
+
 //Design the 4 layouts
-//Remove borders
     //Layout 1. 
     $body1 = "<div id='emailbody' style='width: 80%; margin: auto; border: 2px solid black; padding: 2%; box-sizing: border-box;'>
           <div id='heading' style='text-align: center; margin-bottom: 40px;'>
@@ -374,7 +374,7 @@
                 </div>
                 </div>";
     //Layout 4.
-    $body4 = "<div id='emailbody' style='width: 60%; margin: auto; border: 2px solid black; padding: 2%; box-sizing: border-box;'>
+    $body4 = "<div id='emailbody' style='width: 40%; margin: auto; border: 2px solid black; padding: 2%; box-sizing: border-box;'>
                 <div id='heading' style='text-align: center; margin-bottom: 40px;'>
                   <div id='logo'>
                     <img src='CSS/images/logo.png' alt='logo.png'>
@@ -434,4 +434,6 @@
                   </div>
                 </div>
               </div>";
+
+echo $body4;
 ?>
