@@ -1,0 +1,33 @@
+#reset{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
+#promobody{
+    display: flex;
+}
+
+#presetselect{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+#presetselect input[type="radio"]{
+    width: 10%;
+}
+
+#presetselect .emailbody{
+    padding: 2%;
+}
+
+#layoutbody{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.layoutradio{
+    justify-content: flex-start;
+    width: 30%;
+}
