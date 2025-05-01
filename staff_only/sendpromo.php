@@ -74,7 +74,6 @@ if(isset($_POST['presetfinish'])){
 
     //get images for embed implementation
     preg_match_all("/<img[^>]*src=['\"]([^'\"]+)['\"][^>]*alt=['\"]([^'\"]+)['\"][^>]*>/i", $body, $matches, PREG_SET_ORDER);
-    preg_match_all("/background-image\s*:\s*url\(['\"]?([^'\")]+)['\"]?\)/i", $body, $matches2);
 
     try{
         $emailfrom = "marketing@womensconsortium.org.uk";
@@ -133,17 +132,6 @@ if(isset($_POST['presetfinish'])){
                 $body = str_replace($altWithExt, "$cid", $body);
             }
 
-            foreach ($matches2[1] as $imagePath) {
-                $filename = basename($imagePath);
-                $cidBase = preg_replace('/\.[a-zA-Z0-9]+$/', '', $filename);
-                $cid = preg_replace('/[^a-zA-Z0-9_-]/', '', $cidBase);
-        
-                $mail->addEmbeddedImage($imagePath, $cid);
-        
-                $cidUrl = "cid:$cid";
-                $body = str_replace($imagePath, $cidUrl, $body);
-            }
-
             echo $body;
             $mail->Body = $body;
 
@@ -154,9 +142,9 @@ if(isset($_POST['presetfinish'])){
 
         //Attach an image file
 
-            // if(!$mail->send()) {
-            //     error_log('Mailer Error: ' . $mail->ErrorInfo);
-            // }
+            if(!$mail->send()) {
+                error_log('Mailer Error: ' . $mail->ErrorInfo);
+            }
         // }
         // unset($_SESSION['passgood']);
         // $msg = 'Email sent!';
