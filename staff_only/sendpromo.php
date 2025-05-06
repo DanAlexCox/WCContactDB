@@ -83,17 +83,6 @@ if(isset($_POST['presetfinish'])){
         $title = "Promotion email test";
         $description = "Promo test";
 
-        // $emailone = [];
-        // $emailtonameone = [];
-
-        // for ($i = 0; $i < count($emailArray); $i++) {
-        //     $emailone[] = $emailArray[$i];
-        //     $emailtonameone[] = $contactArray[$i];
-        // }
-
-        // foreach ($emailone as $index => $email) {
-            // $emailto = $email;
-            // $emailtoname = $emailtonameone[$index];
             $emailto = "adala738@gmail.com";
             $emailtoname = "Daniel Cox";
 
@@ -145,12 +134,7 @@ if(isset($_POST['presetfinish'])){
             if(!$mail->send()) {
                 error_log('Mailer Error: ' . $mail->ErrorInfo);
             }
-        // }
-        // unset($_SESSION['passgood']);
-        // $msg = 'Email sent!';
-        // header("Location: partners.php?msg=".urlencode($msg));
-        // ob_end_clean(); // Clear output buffer
-        // exit();
+        
     } catch(Exception $e) {
         error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
     }
