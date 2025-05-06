@@ -14,6 +14,12 @@
     justify-content: space-around;
 }
 
+#selecttext{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
 #presetselect input[type="radio"]{
     width: 10%;
 }
