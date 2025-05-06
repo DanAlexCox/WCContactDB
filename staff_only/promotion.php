@@ -52,7 +52,10 @@ if(!isset($_SESSION['User_ID'])){
                     $layoutSQL->execute();
                     ?>
                     <form method="post" action="promotion.php" id="presetselect">
-                        <h2>Select a preset layout</h2>
+                        <div id="selecttext">
+                            <h2>Select a preset layout</h2>
+                            <p>Note: Small previews have sizes compared to actual sizes (select one for better preview)</p>
+                        </div>
                         <div id="layoutbody">
                             <?php
                             foreach($layoutSQL as $layout){
