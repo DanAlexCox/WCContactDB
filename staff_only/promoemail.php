@@ -1,10 +1,11 @@
 <?php
 //Design the 4 layouts
     //Layout 1. 
+
     $body1 = "<div id='body1' style='width: 80%; margin: auto; border: 2px solid black; padding: 2%; box-sizing: border-box;'>
                 <div id='heading' style='text-align: center; margin-bottom: 15%;'>
                   <div id='logo'>
-                    <img src='CSS/images/logo.png' alt='logo.png' style='width: 100%;'>
+                    <img src='CSS/images/logo.png' alt='logo.png' style='width: 50%;'>
                   </div>
                   <h1>!!HEADER!!</h1>
                 </div>
@@ -142,7 +143,7 @@
     $body2 = "<div id='body2' style='width: 60%; margin: auto; border: 2px solid black; padding: 2%; box-sizing: border-box;'>
                 <div id='heading' style='text-align: center; margin-bottom: 5%;'>
                   <div id='logo'>
-                    <img src='CSS/images/logo.png' alt='logo.png' style='width: 100%;'>
+                    <img src='CSS/images/logo.png' alt='logo.png' style='width: 50%;'>
                   </div>
                 </div>
                 <div id='promonavbar' style='padding: 5%; box-sizing: border-box; width: 100%; overflow: hidden;'>
@@ -444,7 +445,7 @@
     $body4 = "<div id='body4' style='width: 40%; margin: auto; border: 2px solid black; padding: 2%; box-sizing: border-box;'>
                 <div id='heading' style='text-align: center; margin-bottom: 3%;'>
                   <div id='logo'>
-                    <img src='CSS/images/logo.png' alt='logo.png' style='width: 100%;'>
+                    <img src='CSS/images/logo.png' alt='logo.png' style='width: 50%;'>
                   </div>
                 </div>
                 <div id='promonavbar' style='padding: 5%; box-sizing: border-box; width: 100%; overflow: hidden;'>
@@ -526,5 +527,6 @@
                 window.addEventListener('DOMContentLoaded', scaleFourTextSizes);
                 window.addEventListener('resize', scaleFourTextSizes);
               </script>";
+
 
 ?>
