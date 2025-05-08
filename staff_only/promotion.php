@@ -90,44 +90,136 @@ if(!isset($_SESSION['User_ID'])){
                     $singleSQL->execute();
                     $singleData = $singleSQL->fetch();
 
+                    $stringBody = $singleData['Body'];
+
                     ?>
                     <!-- form for inserting information into preview email -->
                     <div id="insertsection">
                         <form method="post" action="sendpromo.php" id="insertform" onsubmit="presetSendConfirm()">
-                            <label for="heading">Heading</label>
-                            <input type="text" name="heading" placeholder="!!HEADER!!" required>
-                            <label for="title1">Title 1</label>
-                            <input type="text" name="title1" placeholder="!!EVENT TITLE 1!!" required>
-                            <label for="title1">Subtitle 1</label>
-                            <input type="text" name="subtitle1" placeholder="!!EVENT SUBTITLE 1!!" required>
-                            <label for="title2">Title 2</label>
-                            <input type="text" name="title2" placeholder="!!EVENT TITLE 2!!" required>
-                            <label for="subtitle2">Subtitle 2</label>
-                            <input type="text" name="subtitle2" placeholder="!!EVENT SUBTITLE 2!!" required>
-                            <label for="title3">Title 3</label>
-                            <input type="text" name="title3" placeholder="!!EVENT TITLE 3!!" required>
-                            <label for="subtitle3">Subtitle 3</label>
-                            <input type="text" name="subtitle3" placeholder="!!EVENT SUBTITLE 3!!" required>
-                            <label for="title4">Title 4</label>
-                            <input type="text" name="title4" placeholder="!!EVENT TITLE 4!!" required>
-                            <label for="subtitle4">Subtitle 4</label>
-                            <input type="text" name="subtitle4" placeholder="!!EVENT SUBTITLE 4!!" required>
-                            <label for="title5">Title 5</label>
-                            <input type="text" name="title5" placeholder="!!EVENT TITLE 5!!">
-                            <label for="subtitle5">Subtitle5</label>
-                            <input type="text" name="subtitle5" placeholder="!!EVENT SUBTITLE 5!!" required>
-                            <label for="title6">Title 6</label>
-                            <input type="text" name="title6" placeholder="!!EVENT TITLE 6!!">
-                            <label for="subtitle6">Subtitle 6</label>
-                            <input type="text" name="subtitle6" placeholder="!!EVENT SUBTITLE 6!!">
+                            <?php 
+                            if(str_contains($stringBody, "!!SUBJECT!!")){
+                                ?>
+                                <label for="subject">Email Subject</label>
+                                <input type="text" name="subject" id="subject" placeholder="!!SUBJECT!!" required>
+                                <?php
+                            }
+                            if(str_contains($stringBody, "!!HEADER!!")){
+                                ?>
+                                <label for="heading">Heading</label>
+                                <input type="text" name="heading" id="heading" placeholder="!!HEADER!!" required>
+                                <?php
+                            }
+                            if(str_contains($stringBody, "!!EVENT TEXT!!")){
+                                ?>
+                                <label for="description">Description</label>
+                                <input type="text" name="description" id="description" placeholder="!!EVENT TEXT!!" required>
+                                <?php
+                            }
+                            if(str_contains($stringBody, "!!EVENT TITLE 1!!")){
+                                ?>
+                                <label for="title1">Title 1</label>
+                                <input type="text" name="title1" id="title1" placeholder="!!EVENT TITLE 1!!" required>
+                                <?php
+                            }
+                            if(str_contains($stringBody, "!!EVENT SUBTITLE 1")){
+                                ?>
+                                <label for="title1">Subtitle 1</label>
+                                <input type="text" name="subtitle1" id="subtitle1" placeholder="!!EVENT SUBTITLE 1!!" required>
+                                <?php
+                            }
+                            if(str_contains($stringBody, "!!EVENT TITLE 2!!")){
+                                ?>
+                                <label for="title2">Title 2</label>
+                                <input type="text" name="title2" id="title2" placeholder="!!EVENT TITLE 2!!" required>
+                                <?php
+                            }
+                            if(str_contains($stringBody, "!!EVENT SUBTITLE 2!!")){
+                                ?>
+                                <label for="subtitle2">Subtitle 2</label>
+                                <input type="text" name="subtitle2" id="subtitle2" placeholder="!!EVENT SUBTITLE 2!!" required>
+                                <?php
+                            }
+                            if(str_contains($stringBody, "!!EVENT TITLE 3!!")){
+                                ?>
+                                <label for="title3">Title 3</label>
+                                <input type="text" name="title3" id="title3" placeholder="!!EVENT TITLE 3!!" required>
+                                <?php
+                            }
+                            if(str_contains($stringBody, "!!EVENT SUBTITLE 3!!")){
+                                ?>
+                                <label for="subtitle3">Subtitle 3</label>
+                                <input type="text" name="subtitle3" id="subtitle3" placeholder="!!EVENT SUBTITLE 3!!" required>
+                                <?php
+                            }
+                            if(str_contains($stringBody, "!!EVENT TITLE 4!!")){
+                                ?>
+                                <label for="title4">Title 4</label>
+                                <input type="text" name="title4" id="title4" placeholder="!!EVENT TITLE 4!!" required>
+                                <?php
+                            }
+                            if(str_contains($stringBody, "!!EVENT SUBTITLE 4!!")){
+                                ?>
+                                <label for="subtitle4">Subtitle 4</label>
+                                <input type="text" name="subtitle4" id="subtitle4" placeholder="!!EVENT SUBTITLE 4!!" required>
+                                <?php
+                            }
+                            if(str_contains($stringBody, "!!EVENT TITLE 5!!")){
+                                ?>
+                                <label for="title5">Title 5</label>
+                                <input type="text" name="title5" id="title5" placeholder="!!EVENT TITLE 5!!">
+                                <?php
+                            }
+                            if(str_contains($stringBody, "!!EVENT SUBTITLE 5!!")){
+                                ?>
+                                <label for="subtitle5">Subtitle5</label>
+                                <input type="text" name="subtitle5" id="subtitle5" placeholder="!!EVENT SUBTITLE 5!!" required>
+                                <?php
+                            }
+                            if(str_contains($stringBody, "!!EVENT TITLE 6!!")){
+                                ?>
+                                <label for="title6">Title 6</label>
+                                <input type="text" name="title6" id="title6" placeholder="!!EVENT TITLE 6!!">
+                                <?php
+                            }
+                            if(str_contains($stringBody, "!!EVENT SUBTITLE 6!!")){
+                                ?>
+                                <label for="subtitle6">Subtitle 6</label>
+                                <input type="text" name="subtitle6" id="subtitle6" placeholder="!!EVENT SUBTITLE 6!!">
+                                <?php
+                            }
+                            ?>
                             <input type="hidden" name="layoutid" value="<?php echo $layoutID; ?>">
                             <button type="submit" name="presetfinish">Send</button>
                         </form>
                     </div>
+
                     <!--Show preview for email-->
-                    <div id="previewsection">
-                        <?php echo $singleData['Body']; ?>
-                    </div>
+                    <template id="previewsection">
+                        <?php echo $stringBody; ?>
+                    </template>
+
+                    <div id="stringBodyContainer"></div>
+
+                    <script>
+                        const container = document.getElementById("stringBodyContainer");
+                        const template = document.getElementById("previewsection");
+                        const input = document.getElementById("description");
+
+                        function getOriginalTemplateHTML() {
+                            return template.innerHTML;
+                        }
+
+                        function renderBody(description) {
+                            const rawTemplate = getOriginalTemplateHTML();
+                            container.innerHTML = rawTemplate.replace(/!!EVENT TEXT!!/g, description);
+                        }
+
+                        renderBody(input.value);
+                        
+                        input.addEventListener("input", function () {
+                            renderBody(this.value);
+                        });
+                    </script>
                     <?php
                 }else{
                 }
