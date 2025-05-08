@@ -1,7 +1,6 @@
 <?php
 //Design the 4 layouts
     //Layout 1. 
-
     $body1 = "<div id='body1' style='width: 80%; margin: auto; border: 2px solid black; padding: 2%; box-sizing: border-box;'>
                 <div id='heading' style='text-align: center; margin-bottom: 15%;'>
                   <div id='logo'>
@@ -158,7 +157,7 @@
                 <div id='layout' style='display: flex; flex-flow: column wrap; justify-content: space-evenly; align-items: center;
                   padding: 5%;'>
                   <div id='poster' style='display: flex; padding: 2%; flex-flow: column wrap;'>
-                    <img src='CSS/images/(1).png' alt='(1).png' style='max-width: 100%;'>
+                    !!EVENT POSTER!!
                   </div>
                   <div id='posterbody' style='width: 100%; justify-items: center;'>
                     <p>!!EVENT TEXT!!</p>
@@ -528,5 +527,5 @@
                 window.addEventListener('resize', scaleFourTextSizes);
               </script>";
 
-echo $body4;
+echo $body2;
 ?>
