@@ -41,3 +41,8 @@ function confirmClient() {
     const userConfirmed = confirm("Are you sure you want to add this client?");
     return userConfirmed; // Proceed if "Yes" (true), cancel if "No" (false)
 }
+
+function presetSendConfirm() {
+    const userConfirmed = confirm("Are you sure you want to send this layout?");
+    return userConfirmed;
+}
