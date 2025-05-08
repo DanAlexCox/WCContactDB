@@ -41,7 +41,9 @@ if(isset($_POST['presetfinish'])){
     $bodyData = $bodySQL->fetch();
 
     //get form data
+    $subject = htmlspecialchars($_POST['subject']);
     $heading = htmlspecialchars($_POST['heading']);
+    $desc = htmlspecialchars($_POST['description']);
     $title1 = htmlspecialchars($_POST['title1']);
     $title2 = htmlspecialchars($_POST['title2']);
     $title3 = htmlspecialchars($_POST['title3']);
@@ -55,10 +57,28 @@ if(isset($_POST['presetfinish'])){
     $subtitle5 = htmlspecialchars($_POST['subtitle5']);
     $subtitle6 = htmlspecialchars($_POST['subtitle6']);
 
-    $body = $bodyData['Body'];
+    $body = "<section class='eventpart' style='display: flex; flex-flow: column nowrap; align-items: center;
+    padding: 5%; width: 30%; border: 1px solid #ddd; margin-bottom: 5%; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px; box-sizing: border-box;'>
+    <section class='title'>
+        <h2>Event Title</h2>
+    </section>
+    <section class='bodysummary'>
+        <p>Check out this event coming soon</p>
+    </section>
+    <section class='singleimage'>
+        <img src='CSS/images/bb54289db635-screen-shot-2018-10-22-at-140657.png' alt='bb54289db635-screen-shot-2018-10-22-at-140657.png' 
+        style='max-width: 100%;'>
+    </section>
+    <section class='readmore'>
+        <a href=''><button class='morebutton' style='background-color: #0056b3; color: #ffffff; border: none; padding: 5% 10%;
+            border-radius: 2%; cursor: pointer; font-weight: bold; transition: background-color 0.3s;'>READ MORE</button></a>
+    </section>
+  </section>";
 
     //replace body template text i.e. !!TEMPLATE_TEXT!!
     $body = str_replace("!!HEADER!!", $heading, $body);
+    $body = str_replace("!!EVENT TEXT!!", $desc, $body);
     $body = str_replace("!!EVENT TITLE 1!!", $title1, $body);
     $body = str_replace("!!EVENT TITLE 2!!", $title2, $body);
     $body = str_replace("!!EVENT TITLE 3!!", $title3, $body);
@@ -80,7 +100,7 @@ if(isset($_POST['presetfinish'])){
         $emailfromname = "WC Marketing";
         $emailfrompass = "jkYd[uPLmxg|";
 
-        $title = "Promotion email test";
+        $title = $subject;
         $description = "Promo test";
 
             $emailto = "adala738@gmail.com";
