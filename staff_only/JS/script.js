@@ -46,3 +46,8 @@ function presetSendConfirm() {
     const userConfirmed = confirm("Are you sure you want to send this layout?");
     return userConfirmed;
 }
+
+function customSendConfirm() {
+    const userConfirmed = confirm("Are you sure you want to send this as an email?");
+    return userConfirmed;
+}
