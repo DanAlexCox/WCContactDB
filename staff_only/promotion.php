@@ -203,22 +203,52 @@ if(!isset($_SESSION['User_ID'])){
                     <script>
                         const container = document.getElementById("stringBodyContainer");
                         const template = document.getElementById("previewsection");
-                        const input = document.getElementById("description");
+
+                        const placeholderConfig = {
+                            "!!SUBJECT!!": "subject",
+                            "!!HEADER!!": "heading",
+                            "!!EVENT TEXT!!": "description",
+                            "!!EVENT TITLE 1!!": "title1",
+                            "!!EVENT SUBTITLE 1!!": "subtitle1",
+                            "!!EVENT TITLE 2!!": "title2",
+                            "!!EVENT SUBTITLE 2!!": "subtitle2",
+                            "!!EVENT TITLE 3!!": "title3",
+                            "!!EVENT SUBTITLE 3!!": "subtitle3",
+                            "!!EVENT TITLE 4!!": "title4",
+                            "!!EVENT SUBTITLE 4!!": "subtitle4",
+                            "!!EVENT TITLE 5!!": "title5",
+                            "!!EVENT SUBTITLE 5!!": "subtitle5",
+                            "!!EVENT TITLE 6!!": "title6",
+                            "!!EVENT SUBTITLE 6!!": "subtitle6"
+                        };
+
+                        const placeholders = {};
+                        for (const [placeholder, id] of Object.entries(placeholderConfig)) {
+                            const input = document.getElementById(id);
+                            if (input) {
+                                placeholders[placeholder] = input;
+                            }
+                        }
 
                         function getOriginalTemplateHTML() {
                             return template.innerHTML;
                         }
 
-                        function renderBody(description) {
-                            const rawTemplate = getOriginalTemplateHTML();
-                            container.innerHTML = rawTemplate.replace(/!!EVENT TEXT!!/g, description);
+                        function renderBody() {
+                            let rawHTML = getOriginalTemplateHTML();
+                            for (const [placeholder, input] of Object.entries(placeholders)) {
+                                const value = input.value || "";
+                                const regex = new RegExp(placeholder, 'g');
+                                rawHTML = rawHTML.replace(regex, value);
+                            }
+                            container.innerHTML = rawHTML;
                         }
 
-                        renderBody(input.value);
-                        
-                        input.addEventListener("input", function () {
-                            renderBody(this.value);
-                        });
+                        for (const input of Object.values(placeholders)) {
+                            input.addEventListener("input", renderBody);
+                        }
+
+                        renderBody();
                     </script>
                     <?php
                 }else{
