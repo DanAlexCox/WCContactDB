@@ -78,8 +78,19 @@ if(!isset($_SESSION['User_ID'])){
 
                 //If promoselect="custom"  open form list for all available valid customisations (logo, title, promonavbar etc.)
                 } elseif($_POST['layoutchoice'] == "custom"){
-                    
-                    // change css accordingly
+                    //select
+                    ?>
+                    <form method="post" action="promotion.php" id="customselect">
+                        <h2>Select a custom option</h2>
+                        <select name="customchoice">
+                            <option value="">--SELECT--</option>
+                            <option value="import">Import image</option>
+                            <option value="blank">Blank page</option>
+                        </select>
+                        <input type="hidden" name="layoutchoice">
+                        <button type="submit" name="customsubmit">Submit</button>
+                    </form>
+                    <?php
                 } elseif(isset($_POST['presetsubmit'])){
                     //if preset layout selected customise
                     $layoutID = htmlspecialchars($_POST['layoutoption']);
@@ -251,9 +262,69 @@ if(!isset($_SESSION['User_ID'])){
                         renderBody();
                     </script>
                     <?php
-                }else{
+                } elseif(isset($_POST['customsubmit'])){
+                    if($_POST['customchoice'] == "import"){
+                        //if customchoice == "import", reveal import form and preview email after importing in html
+                        ?>
+                        <form method="post" action="sendpromo.php" id="importform" onsubmit="customSendConfirm()">
+                            <label for="posterimport">Import poster file</label>
+                            <input type="file" name="posterimport" id="posterimport" accept="image/*">
+                            <button type="submit" name="customfinish">Send</button>
+                        </form>
+
+                        <template id="previewsection">
+                            <div id="imagePreviewWrapper">
+                                <p><strong>Poster Preview:</strong></p>
+                                <img id="imagePreview" src="" alt="Poster preview" style="max-width: 70%; display: none;" />
+                            </div>
+                        </template>
+
+                        <div id="stringBodyContainer"></div>
+
+                        <script>
+                            const fileInput = document.getElementById("posterimport");
+
+                            const previewTemplate = document.getElementById("previewsection");
+                            const previewClone = previewTemplate.content.cloneNode(true);
+                            document.getElementById("stringBodyContainer").appendChild(previewClone);
+
+                            const previewImage = document.getElementById("imagePreview");
+
+                            fileInput.addEventListener("change", function () {
+                                const file = this.files[0];
+
+                                if (!file) {
+                                    previewImage.style.display = "none";
+                                    previewImage.src = "";
+                                    return;
+                                }
+
+                                if (!file.type.startsWith("image/")) {
+                                    alert("Please select a valid image file.");
+                                    previewImage.style.display = "none";
+                                    previewImage.src = "";
+                                    return;
+                                }
+
+                                const reader = new FileReader();
+                                reader.onload = function (e) {
+                                    previewImage.src = e.target.result;
+                                    previewImage.style.display = "block";
+                                };
+                                reader.readAsDataURL(file);
+                            });
+                            </script>
+                        <?php
+
+
+                    } elseif($_POST['customchoice'] == "blank"){
+                        //if customchoice == "blank", reveal form similar to partners/client email send forms
+                        echo "blank";
+                    } else{
+                        echo "Select an option in the dropdown menu or go back to main promotion menu";
+                    }
+                } else{
                 }
-                
                 //Confirm button, after confirmation, sends email to all
             } else{
                 //Select between preset and customisable layout
@@ -261,7 +332,7 @@ if(!isset($_SESSION['User_ID'])){
                 <form method="post" action="promotion.php">
                     <h2>Select an layout option</h2>
                     <select name="layoutchoice">
-                        <option value="">--Select--</option>
+                        <option value="">--SELECT--</option>
                         <option value="preset">Preset Layout</option>
                         <option value="custom">Custom Layout</option>
                     </select>
