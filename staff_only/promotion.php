@@ -267,6 +267,8 @@ if(!isset($_SESSION['User_ID'])){
                         //if customchoice == "import", reveal import form and preview email after importing in html
                         ?>
                         <form method="post" action="sendpromo.php" id="importform" onsubmit="customSendConfirm()">
+                            <label for="title">Title</label>
+                            <input type="text" name="subject" id="subject" placeholder="Insert title here" required>
                             <label for="posterimport">Import poster file</label>
                             <input type="file" name="posterimport" id="posterimport" accept="image/*">
                             <button type="submit" name="customfinish">Send</button>
@@ -319,7 +321,44 @@ if(!isset($_SESSION['User_ID'])){
 
                     } elseif($_POST['customchoice'] == "blank"){
                         //if customchoice == "blank", reveal form similar to partners/client email send forms
-                        echo "blank";
+                        ?>
+                        <form method="post" action="sendpromo.php" id="blankform" onsubmit="customSendConfirm()">
+                            <label for='title'>Title</label><br>
+                            <input type='text' id='title' name='title' placeholder='Insert title' required><br>
+                            <label for='description'>Description</label><br>
+                            <textarea id='description' name='description' placeholder='Insert details here'></textarea><br>
+                            <button type='submit'>Send</button>
+                        </form>
+
+                        <template id="previewsection">
+                            <div id="emailPreview" style="border:1px solid #ccc; padding:10%; margin-top:10%; max-width:80%;">
+                                <h2 id="previewTitle" style="margin-top:0;"></h2>
+                                <p id="previewDescription" style="white-space:pre-wrap;"></p>
+                            </div>
+                        </template>
+
+                        <div id="stringBodyContainer"></div>
+
+                        <script>
+                            const previewClone = document.getElementById("previewsection").content.cloneNode(true);
+                            document.getElementById("stringBodyContainer").appendChild(previewClone);
+
+                            const titleInput = document.getElementById("title");
+                            const descriptionInput = document.getElementById("description");
+                            const previewTitle = document.getElementById("previewTitle");
+                            const previewDescription = document.getElementById("previewDescription");
+
+                            function updatePreview() {
+                                previewTitle.textContent = titleInput.value || "Your title will appear here";
+                                previewDescription.textContent = descriptionInput.value || "Your description will appear here";
+                            }
+
+                            updatePreview();
+
+                            titleInput.addEventListener("input", updatePreview);
+                            descriptionInput.addEventListener("input", updatePreview);
+                        </script>
+                        <?php
                     } else{
                         echo "Select an option in the dropdown menu or go back to main promotion menu";
                     }
