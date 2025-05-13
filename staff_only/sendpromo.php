@@ -57,25 +57,6 @@ if(isset($_POST['presetfinish'])){
     $subtitle5 = htmlspecialchars($_POST['subtitle5']);
     $subtitle6 = htmlspecialchars($_POST['subtitle6']);
 
-    $body = "<section class='eventpart' style='display: flex; flex-flow: column nowrap; align-items: center;
-    padding: 5%; width: 30%; border: 1px solid #ddd; margin-bottom: 5%; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border-radius: 8px; box-sizing: border-box;'>
-    <section class='title'>
-        <h2>Event Title</h2>
-    </section>
-    <section class='bodysummary'>
-        <p>Check out this event coming soon</p>
-    </section>
-    <section class='singleimage'>
-        <img src='CSS/images/bb54289db635-screen-shot-2018-10-22-at-140657.png' alt='bb54289db635-screen-shot-2018-10-22-at-140657.png' 
-        style='max-width: 100%;'>
-    </section>
-    <section class='readmore'>
-        <a href=''><button class='morebutton' style='background-color: #0056b3; color: #ffffff; border: none; padding: 5% 10%;
-            border-radius: 2%; cursor: pointer; font-weight: bold; transition: background-color 0.3s;'>READ MORE</button></a>
-    </section>
-  </section>";
-
     //replace body template text i.e. !!TEMPLATE_TEXT!!
     $body = str_replace("!!HEADER!!", $heading, $body);
     $body = str_replace("!!EVENT TEXT!!", $desc, $body);
@@ -151,13 +132,13 @@ if(isset($_POST['presetfinish'])){
 
         //Attach an image file
 
-            if(!$mail->send()) {
-                error_log('Mailer Error: ' . $mail->ErrorInfo);
-            }
+            // if(!$mail->send()) {
+            //     error_log('Mailer Error: ' . $mail->ErrorInfo);
+            // }
         
     } catch(Exception $e) {
         error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
     }
-}
+} 
 
 ?>
