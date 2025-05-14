@@ -30,257 +30,278 @@ if(!isset($_SESSION['User_ID'])){
     exit();
 }
 
-if(isset($_POST['presetfinish'])){
-    //edit layout to accommodate preset form
-    $layoutID = htmlspecialchars($_POST['layoutid']);
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $contactStmt = "SELECT Email, Forename, Surname FROM clients";
 
-    $bodyStmt = "SELECT * FROM `layout` WHERE Layout_ID = :lid";
-    $bodySQL = $pdo->prepare($bodyStmt);
-    $bodySQL->bindParam(":lid", $layoutID, PDO::PARAM_INT);
-    $bodySQL->execute();
-    $bodyData = $bodySQL->fetch();
-
-    //get form data
-    $subject = htmlspecialchars($_POST['subject']);
-    $heading = htmlspecialchars($_POST['heading']);
-    $desc = htmlspecialchars($_POST['description']);
-    $title1 = htmlspecialchars($_POST['title1']);
-    $title2 = htmlspecialchars($_POST['title2']);
-    $title3 = htmlspecialchars($_POST['title3']);
-    $title4 = htmlspecialchars($_POST['title4']);
-    $title5 = htmlspecialchars($_POST['title5']);
-    $title6 = htmlspecialchars($_POST['title6']);
-    $subtitle1 = htmlspecialchars($_POST['subtitle1']);
-    $subtitle2 = htmlspecialchars($_POST['subtitle2']);
-    $subtitle3 = htmlspecialchars($_POST['subtitle3']);
-    $subtitle4 = htmlspecialchars($_POST['subtitle4']);
-    $subtitle5 = htmlspecialchars($_POST['subtitle5']);
-    $subtitle6 = htmlspecialchars($_POST['subtitle6']);
-
-    //replace body template text i.e. !!TEMPLATE_TEXT!!
-    $body = str_replace("!!HEADER!!", $heading, $body);
-    $body = str_replace("!!EVENT TEXT!!", $desc, $body);
-    $body = str_replace("!!EVENT TITLE 1!!", $title1, $body);
-    $body = str_replace("!!EVENT TITLE 2!!", $title2, $body);
-    $body = str_replace("!!EVENT TITLE 3!!", $title3, $body);
-    $body = str_replace("!!EVENT TITLE 4!!", $title4, $body);
-    $body = str_replace("!!EVENT TITLE 5!!", $title5, $body);
-    $body = str_replace("!!EVENT TITLE 6!!", $title6, $body);
-    $body = str_replace("!!EVENT SUBTITLE 1!!", $subtitle1, $body);
-    $body = str_replace("!!EVENT SUBTITLE 2!!", $subtitle2, $body);
-    $body = str_replace("!!EVENT SUBTITLE 3!!", $subtitle3, $body);
-    $body = str_replace("!!EVENT SUBTITLE 4!!", $subtitle4, $body);
-    $body = str_replace("!!EVENT SUBTITLE 5!!", $subtitle5, $body);
-    $body = str_replace("!!EVENT SUBTITLE 6!!", $subtitle6, $body);
-
-    //get images for embed implementation
-    preg_match_all("/<img[^>]*src=['\"]([^'\"]+)['\"][^>]*alt=['\"]([^'\"]+)['\"][^>]*>/i", $body, $matches, PREG_SET_ORDER);
-
-    try{
-        $emailfrom = "marketing@womensconsortium.org.uk";
-        $emailfromname = "WC Marketing";
-        $emailfrompass = "jkYd[uPLmxg|";
-
-        $title = $subject;
-        $description = "Promo test";
-
-            $emailto = "adala738@gmail.com";
-            $emailtoname = "Daniel Cox";
-
-            $mail=new PHPMailer(true);
-            $mail->CharSet = 'UTF-8';
-            $mail->IsSMTP();
-            $mail->Host = 'ams203.greengeeks.net';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
-            $mail->SMTPAuth = true;
-            $mail->SMTPDebug = 0;
-
-            $mail->Username = $emailfrom;
-            $mail->Password   = $emailfrompass;
-
-        //Do not use user-submitted addresses in here
-            $mail->setFrom($emailfrom, $emailfromname);
-
-        //$mail->AddReplyTo('no-reply@mycomp.com','no-reply');
-            $mail->Subject = $title;
-
-        // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
-
-            $mail->AddAddress($emailto, $emailtoname);
-            foreach ($matches as $imgTag) {
-                $srcPath = $imgTag[1];
-                $altWithExt = $imgTag[2];
+    $contactSQL = $pdo->query($contactStmt);
+    $contactSQL->execute();
         
-                $cidBase = preg_replace('/\.[a-zA-Z0-9]+$/', '', $altWithExt);
-        
-                $cid = preg_replace('/[^a-zA-Z0-9_-]/', '', $cidBase);
+        if(isset($_POST['presetfinish'])){
+            //edit layout to accommodate preset form
+            $layoutID = htmlspecialchars($_POST['layoutid']);
 
-                $mail->addEmbeddedImage($srcPath, $cid);
+            $bodyStmt = "SELECT * FROM `layout` WHERE Layout_ID = :lid";
+            $bodySQL = $pdo->prepare($bodyStmt);
+            $bodySQL->bindParam(":lid", $layoutID, PDO::PARAM_INT);
+            $bodySQL->execute();
+            $bodyData = $bodySQL->fetch();
 
-                $body = str_replace($srcPath, "cid:$cid", $body);
-                $body = str_replace($altWithExt, "$cid", $body);
-            }
+            //get form data
+            $subject = htmlspecialchars($_POST['subject']);
+            $heading = htmlspecialchars($_POST['heading']);
+            $desc = htmlspecialchars($_POST['description']);
+            $title1 = htmlspecialchars($_POST['title1']);
+            $title2 = htmlspecialchars($_POST['title2']);
+            $title3 = htmlspecialchars($_POST['title3']);
+            $title4 = htmlspecialchars($_POST['title4']);
+            $title5 = htmlspecialchars($_POST['title5']);
+            $title6 = htmlspecialchars($_POST['title6']);
+            $subtitle1 = htmlspecialchars($_POST['subtitle1']);
+            $subtitle2 = htmlspecialchars($_POST['subtitle2']);
+            $subtitle3 = htmlspecialchars($_POST['subtitle3']);
+            $subtitle4 = htmlspecialchars($_POST['subtitle4']);
+            $subtitle5 = htmlspecialchars($_POST['subtitle5']);
+            $subtitle6 = htmlspecialchars($_POST['subtitle6']);
 
-            echo $body;
-            $mail->Body = $body;
+            //replace body template text i.e. !!TEMPLATE_TEXT!!
+            $body = str_replace("!!HEADER!!", $heading, $body);
+            $body = str_replace("!!EVENT TEXT!!", $desc, $body);
+            $body = str_replace("!!EVENT TITLE 1!!", $title1, $body);
+            $body = str_replace("!!EVENT TITLE 2!!", $title2, $body);
+            $body = str_replace("!!EVENT TITLE 3!!", $title3, $body);
+            $body = str_replace("!!EVENT TITLE 4!!", $title4, $body);
+            $body = str_replace("!!EVENT TITLE 5!!", $title5, $body);
+            $body = str_replace("!!EVENT TITLE 6!!", $title6, $body);
+            $body = str_replace("!!EVENT SUBTITLE 1!!", $subtitle1, $body);
+            $body = str_replace("!!EVENT SUBTITLE 2!!", $subtitle2, $body);
+            $body = str_replace("!!EVENT SUBTITLE 3!!", $subtitle3, $body);
+            $body = str_replace("!!EVENT SUBTITLE 4!!", $subtitle4, $body);
+            $body = str_replace("!!EVENT SUBTITLE 5!!", $subtitle5, $body);
+            $body = str_replace("!!EVENT SUBTITLE 6!!", $subtitle6, $body);
 
-            $mail->isHTML(true);
+            //get images for embed implementation
+            preg_match_all("/<img[^>]*src=['\"]([^'\"]+)['\"][^>]*alt=['\"]([^'\"]+)['\"][^>]*>/i", $body, $matches, PREG_SET_ORDER);
 
-        //Replace the plain text body with one created manually
-            $mail->AltBody = $description;
-
-        //Attach an image file
-
-            // if(!$mail->send()) {
-            //     error_log('Mailer Error: ' . $mail->ErrorInfo);
-            // }
-        
-    } catch(Exception $e) {
-        error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-    }
-} elseif(isset($_POST['importfinish'])){
-    //get post data
-    $subject = htmlspecialchars($_POST['subject']);
-    if(isset($_FILES['posterimport'])){
-        $uploadDir = 'uploads/';
-        $uploadNam = basename($_FILES['posterimport']['name']);
-        $uploadFile = $uploadDir.$uploadNam;
-
-        if (move_uploaded_file($_FILES['posterimport']['tmp_name'], $uploadFile)) {
             try{
                 $emailfrom = "marketing@womensconsortium.org.uk";
                 $emailfromname = "WC Marketing";
                 $emailfrompass = "jkYd[uPLmxg|";
-        
+
                 $title = $subject;
-                $description = "Promo import test";
-        
-                $emailto = "adala738@gmail.com";
-                $emailtoname = "Daniel Cox";
-    
-                $mail=new PHPMailer(true);
-                $mail->CharSet = 'UTF-8';
-                $mail->IsSMTP();
-                $mail->Host = 'ams203.greengeeks.net';
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->Port = 587;
-                $mail->SMTPAuth = true;
-                $mail->SMTPDebug = 0;
-    
-                $mail->Username = $emailfrom;
-                $mail->Password   = $emailfrompass;
-    
-            //Do not use user-submitted addresses in here
-                $mail->setFrom($emailfrom, $emailfromname);
-    
-            //$mail->AddReplyTo('no-reply@mycomp.com','no-reply');
-                $mail->Subject = $title;
-    
-            // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
-    
-                $mail->AddAddress($emailto, $emailtoname);
-                $body = "<div id='emailbody'>
-                            <h2 id='title' style='margin-top:0;'>$title</h2>
-                            <img src='cid:$uploadNam' alt='Poster Image' style='max-width: 70%;'>
-                        </div>";
+                $description = "Promo test";
+
+                    $emailto = "adala738@gmail.com";
+                    $emailtoname = "Daniel Cox";
+
+                    $mail=new PHPMailer(true);
+                    $mail->CharSet = 'UTF-8';
+                    $mail->IsSMTP();
+                    $mail->Host = 'ams203.greengeeks.net';
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = 587;
+                    $mail->SMTPAuth = true;
+                    $mail->SMTPDebug = 0;
+
+                    $mail->Username = $emailfrom;
+                    $mail->Password   = $emailfrompass;
+
+                //Do not use user-submitted addresses in here
+                    $mail->setFrom($emailfrom, $emailfromname);
+
+                //$mail->AddReplyTo('no-reply@mycomp.com','no-reply');
+                    $mail->Subject = $title;
+
+                // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
+
+                    $mail->AddAddress($emailto, $emailtoname);
+                    foreach ($matches as $imgTag) {
+                        $srcPath = $imgTag[1];
+                        $altWithExt = $imgTag[2];
                 
-                $mail->Body = $body;
-                $mail->addEmbeddedImage($uploadFile, $uploadNam);
-    
-                $mail->isHTML(true);
-    
-            //Replace the plain text body with one created manually
-                $mail->AltBody = $description;
-    
-            //Attach an image file
-    
-                if(!$mail->send()) {
-                    error_log('Mailer Error: ' . $mail->ErrorInfo);
-                } else{
-                    if (file_exists($uploadFile)) {
-                        unlink($uploadFile); // delete the file
+                        $cidBase = preg_replace('/\.[a-zA-Z0-9]+$/', '', $altWithExt);
+                
+                        $cid = preg_replace('/[^a-zA-Z0-9_-]/', '', $cidBase);
+
+                        $mail->addEmbeddedImage($srcPath, $cid);
+
+                        $body = str_replace($srcPath, "cid:$cid", $body);
+                        $body = str_replace($altWithExt, "$cid", $body);
                     }
-                    $msg = "Successful email sent.";
-                    header("Location: promotion.php?msg=".urlencode($msg));
-                    exit();
-                }
-            
+
+                    echo $body;
+                    $mail->Body = $body;
+
+                    $mail->isHTML(true);
+
+                //Replace the plain text body with one created manually
+                    $mail->AltBody = $description;
+
+                //Attach an image file
+
+                    // if(!$mail->send()) {
+                    //     error_log('Mailer Error: ' . $mail->ErrorInfo);
+                    // }
+                
             } catch(Exception $e) {
                 error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-            }    
-        } else {
-            $error = "File upload failed.";
-            header("Location: promotion.php?error=".urlencode($error));
-            exit();
-        }
-    } else{
-        $error = "No image imported";
-        header("Location: promotion.php?error=".urlencode($error));
-        exit();
-    }
-} elseif(isset($_POST['blankfinish'])){
-    $title = htmlspecialchars($_POST['title']);
-    $descBody = htmlspecialchars($_POST['description']);
-    try{
-        $emailfrom = "marketing@womensconsortium.org.uk";
-        $emailfromname = "WC Marketing";
-        $emailfrompass = "jkYd[uPLmxg|";
+            }
+        } elseif(isset($_POST['importfinish'])){
+            //get post data
+            $subject = htmlspecialchars($_POST['subject']);
+            if(isset($_FILES['posterimport'])){
 
-        $description = "Promo import test";
+                $uploadDir = 'uploads/';
+                $uploadNam = basename($_FILES['posterimport']['name']);
+                $uploadFile = $uploadDir.$uploadNam;
 
-        $emailto = "adala738@gmail.com";
-        $emailtoname = "Daniel Cox";
+                if (move_uploaded_file($_FILES['posterimport']['tmp_name'], $uploadFile)) {
+                    try{
+                        foreach($contactSQL as $contact){
+                            if(!empty($contact['Forename']) == TRUE && !empty($contact['Surname']) == TRUE){
+                                $contactName = $contact['Forename']." ".$contact['Surname'];
+                            } else{
+                                $emailArray = explode("@", $contact['Email']);
+                                $contactName = $emailArray['0'];
+                            }
+                            $emailfrom = "marketing@womensconsortium.org.uk";
+                            $emailfromname = "WC Marketing";
+                            $emailfrompass = "jkYd[uPLmxg|";
+                    
+                            $title = $subject;
+                            $description = $subject;
+                    
+                            $emailto = $contact['Email'];
+                            $emailtoname = $contactName;
+                
+                            $mail=new PHPMailer(true);
+                            $mail->CharSet = 'UTF-8';
+                            $mail->IsSMTP();
+                            $mail->Host = 'ams203.greengeeks.net';
+                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                            $mail->Port = 587;
+                            $mail->SMTPAuth = true;
+                            $mail->SMTPDebug = 0;
+                
+                            $mail->Username = $emailfrom;
+                            $mail->Password   = $emailfrompass;
+                
+                            //Do not use user-submitted addresses in here
+                            $mail->setFrom($emailfrom, $emailfromname);
+                
+                            //$mail->AddReplyTo('no-reply@mycomp.com','no-reply');
+                            $mail->Subject = $title;
+                
+                            // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
+                
+                            $mail->AddAddress($emailto, $emailtoname);
+                            $body = "<div id='emailbody'>
+                                        <h2 id='title' style='margin-top:0;'>$title</h2>
+                                        <img src='cid:$uploadNam' alt='Poster Image' style='max-width: 70%;'>
+                                    </div>";
+                            
+                            $mail->Body = $body;
+                            $mail->addEmbeddedImage($uploadFile, $uploadNam);
+                
+                            $mail->isHTML(true);
+                
+                            //Replace the plain text body with one created manually
+                            $mail->AltBody = $description;
+                
+                            //Attach an image file
+                
+                            if(!$mail->send()) {
+                                error_log('Mailer Error: ' . $mail->ErrorInfo);
+                            }        
+                        }
+                        if (file_exists($uploadFile)) {
+                            unlink($uploadFile); // delete the file
+                        }
+                        $msg = "Successful email sent.";
+                        header("Location: promotion.php?msg=".urlencode($msg));
+                        exit();
+                    } catch(Exception $e) {
+                        error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+                    }    
+                } else {
+                    $error = "File upload failed.";
+                    header("Location: promotion.php?error=".urlencode($error));
+                    exit();
+                }
+            } else{
+                $error = "No image imported";
+                header("Location: promotion.php?error=".urlencode($error));
+                exit();
+            }
+        } elseif(isset($_POST['blankfinish'])){
+            $title = htmlspecialchars($_POST['title']);
+            $descBody = htmlspecialchars($_POST['description']);
+            
+            try{
+                foreach($contactSQL as $contact){
+                    if(!empty($contact['Forename']) == TRUE && !empty($contact['Surname']) == TRUE){
+                        $contactName = $contact['Forename']." ".$contact['Surname'];
+                    } else{
+                        $emailArray = explode("@", $contact['Email']);
+                        $contactName = $emailArray['0'];
+                    }
+                    $emailfrom = "marketing@womensconsortium.org.uk";
+                    $emailfromname = "WC Marketing";
+                    $emailfrompass = "jkYd[uPLmxg|";
 
-        $mail=new PHPMailer(true);
-        $mail->CharSet = 'UTF-8';
-        $mail->IsSMTP();
-        $mail->Host = 'ams203.greengeeks.net';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
-        $mail->SMTPAuth = true;
-        $mail->SMTPDebug = 0;
+                    $description = $title;
 
-        $mail->Username = $emailfrom;
-        $mail->Password   = $emailfrompass;
+                    $emailto = $contact['Email'];
+                    $emailtoname = $contactName;
 
-    //Do not use user-submitted addresses in here
-        $mail->setFrom($emailfrom, $emailfromname);
+                    $mail=new PHPMailer(true);
+                    $mail->CharSet = 'UTF-8';
+                    $mail->IsSMTP();
+                    $mail->Host = 'ams203.greengeeks.net';
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = 587;
+                    $mail->SMTPAuth = true;
+                    $mail->SMTPDebug = 0;
 
-    //$mail->AddReplyTo('no-reply@mycomp.com','no-reply');
-        $mail->Subject = $title;
+                    $mail->Username = $emailfrom;
+                    $mail->Password   = $emailfrompass;
 
-    // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
+                    //Do not use user-submitted addresses in here
+                    $mail->setFrom($emailfrom, $emailfromname);
 
-        $mail->AddAddress($emailto, $emailtoname);
-        $body = "<div id='emailBody' style='border:1px solid #ccc; padding:10%; margin-top:10%; max-width:80%;'>
-                    <h2 id='title' style='margin-top:0;'>$title</h2>
-                    <p id='previewDescription' style='white-space:pre-wrap;'>$descBody</p>
-                </div>";
-        
-        $mail->Body = $body;
+                    //$mail->AddReplyTo('no-reply@mycomp.com','no-reply');
+                    $mail->Subject = $title;
 
-        $mail->isHTML(true);
+                    // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
 
-    //Replace the plain text body with one created manually
-        $mail->AltBody = $description;
+                    $mail->AddAddress($emailto, $emailtoname);
+                    $body = "<div id='emailBody' style='border:1px solid #ccc; padding:10%; margin-top:10%; max-width:80%;'>
+                                <h2 id='title' style='margin-top:0;'>$title</h2>
+                                <p id='previewDescription' style='white-space:pre-wrap;'>$descBody</p>
+                            </div>";
+                    
+                    $mail->Body = $body;
+                    $mail->isHTML(true);
 
-    //Attach an image file
+                    //Replace the plain text body with one created manually
+                    $mail->AltBody = $description;
 
-        if(!$mail->send()) {
-            error_log('Mailer Error: ' . $mail->ErrorInfo);
+                    //Attach an image file
+
+                    if(!$mail->send()) {
+                        error_log('Mailer Error: ' . $mail->ErrorInfo);
+                    }
+                }
+                $msg = "Successful email sent.";
+                header("Location: promotion.php?msg=".urlencode($msg));
+                exit();
+            } catch(Exception $e) {
+                error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+            }
         } else{
-            $msg = "Successful email sent.";
+            $msg = "No submitted email form.";
             header("Location: promotion.php?msg=".urlencode($msg));
             exit();
         }
-    } catch(Exception $e) {
-        error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-    }
-} else{
-    $msg = "No submitted email form.";
-    header("Location: promotion.php?msg=".urlencode($msg));
-    exit();
 }
 
 ?>

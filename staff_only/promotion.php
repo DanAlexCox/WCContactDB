@@ -376,7 +376,7 @@ if(!isset($_SESSION['User_ID'])){
                     <h2>Select an layout option</h2>
                     <select name="layoutchoice">
                         <option value="">--SELECT--</option>
-                        <option value="preset">Preset Layout (Needs extra work)</option>
+                        <!-- <option value="preset">Preset Layout (Needs extra work)</option> -->
                         <option value="custom">Custom Layout (Import/blank email)</option>
                     </select>
                     <button type="submit" name="layoutbtn">Proceed</button>
