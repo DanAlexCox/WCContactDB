@@ -266,12 +266,12 @@ if(!isset($_SESSION['User_ID'])){
                     if($_POST['customchoice'] == "import"){
                         //if customchoice == "import", reveal import form and preview email after importing in html
                         ?>
-                        <form method="post" action="sendpromo.php" id="importform" onsubmit="customSendConfirm()">
+                        <form method="post" action="sendpromo.php" id="importform" enctype="multipart/form-data" onsubmit="return customSendConfirm()">
                             <label for="title">Title</label>
                             <input type="text" name="subject" id="subject" placeholder="Insert title here" required>
                             <label for="posterimport">Import poster file</label>
                             <input type="file" name="posterimport" id="posterimport" accept="image/*">
-                            <button type="submit" name="customfinish">Send</button>
+                            <button type="submit" name="importfinish">Send</button>
                         </form>
 
                         <template id="previewsection">
