@@ -139,6 +139,91 @@ if(isset($_POST['presetfinish'])){
     } catch(Exception $e) {
         error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
     }
-} 
+} elseif(isset($_POST['importfinish'])){
+    //get post data
+    $subject = htmlspecialchars($_POST['subject']);
+    if(isset($_FILES['posterimport'])){
+        $uploadDir = 'uploads/';
+        $uploadNam = basename($_FILES['posterimport']['name']);
+        $uploadFile = $uploadDir.$uploadNam;
+
+        if (move_uploaded_file($_FILES['posterimport']['tmp_name'], $uploadFile)) {
+            try{
+                $emailfrom = "marketing@womensconsortium.org.uk";
+                $emailfromname = "WC Marketing";
+                $emailfrompass = "jkYd[uPLmxg|";
+        
+                $title = $subject;
+                $description = "Promo import test";
+        
+                $emailto = "adala738@gmail.com";
+                $emailtoname = "Daniel Cox";
+    
+                $mail=new PHPMailer(true);
+                $mail->CharSet = 'UTF-8';
+                $mail->IsSMTP();
+                $mail->Host = 'ams203.greengeeks.net';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port = 587;
+                $mail->SMTPAuth = true;
+                $mail->SMTPDebug = 0;
+    
+                $mail->Username = $emailfrom;
+                $mail->Password   = $emailfrompass;
+    
+            //Do not use user-submitted addresses in here
+                $mail->setFrom($emailfrom, $emailfromname);
+    
+            //$mail->AddReplyTo('no-reply@mycomp.com','no-reply');
+                $mail->Subject = $title;
+    
+            // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
+    
+                $mail->AddAddress($emailto, $emailtoname);
+                $body = "<div id='emailbody'>
+                            <img src='cid:$uploadNam' alt='Poster Image' style='max-width: 70%;'>
+                        </div>";
+                
+                $mail->Body = $body;
+                $mail->addEmbeddedImage($uploadFile, $uploadNam);
+    
+                $mail->isHTML(true);
+    
+            //Replace the plain text body with one created manually
+                $mail->AltBody = $description;
+    
+            //Attach an image file
+    
+                if(!$mail->send()) {
+                    error_log('Mailer Error: ' . $mail->ErrorInfo);
+                } else{
+                    if (file_exists($uploadFile)) {
+                        unlink($uploadFile); // delete the file
+                    }
+                    $msg = "Successful email sent.";
+                    header("Location: promotion.php?msg=".urlencode($msg));
+                    exit();
+                }
+            
+            } catch(Exception $e) {
+                error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+            }    
+        } else {
+            $error = "File upload failed.";
+            header("Location: promotion.php?error=".urlencode($error));
+            exit();
+        }
+    } else{
+        $error = "No image imported";
+        header("Location: promotion.php?error=".urlencode($error));
+        exit();
+    }
+} elseif(isset($_POST['blankfinish'])){
+
+} else{
+    $msg = "No submitted email form.";
+    header("Location: promotion.php?msg=".urlencode($msg));
+    exit();
+}
 
 ?>
