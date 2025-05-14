@@ -327,7 +327,7 @@ if(!isset($_SESSION['User_ID'])){
                             <input type='text' id='title' name='title' placeholder='Insert title' required><br>
                             <label for='description'>Description</label><br>
                             <textarea id='description' name='description' placeholder='Insert details here'></textarea><br>
-                            <button type='submit'>Send</button>
+                            <button type='submit' name="blankfinish">Send</button>
                         </form>
 
                         <template id="previewsection">
