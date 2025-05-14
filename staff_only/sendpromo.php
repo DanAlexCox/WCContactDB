@@ -181,6 +181,7 @@ if(isset($_POST['presetfinish'])){
     
                 $mail->AddAddress($emailto, $emailtoname);
                 $body = "<div id='emailbody'>
+                            <h2 id='title' style='margin-top:0;'>$title</h2>
                             <img src='cid:$uploadNam' alt='Poster Image' style='max-width: 70%;'>
                         </div>";
                 
@@ -219,7 +220,63 @@ if(isset($_POST['presetfinish'])){
         exit();
     }
 } elseif(isset($_POST['blankfinish'])){
+    $title = htmlspecialchars($_POST['title']);
+    $descBody = htmlspecialchars($_POST['description']);
+    try{
+        $emailfrom = "marketing@womensconsortium.org.uk";
+        $emailfromname = "WC Marketing";
+        $emailfrompass = "jkYd[uPLmxg|";
 
+        $description = "Promo import test";
+
+        $emailto = "adala738@gmail.com";
+        $emailtoname = "Daniel Cox";
+
+        $mail=new PHPMailer(true);
+        $mail->CharSet = 'UTF-8';
+        $mail->IsSMTP();
+        $mail->Host = 'ams203.greengeeks.net';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+        $mail->SMTPAuth = true;
+        $mail->SMTPDebug = 0;
+
+        $mail->Username = $emailfrom;
+        $mail->Password   = $emailfrompass;
+
+    //Do not use user-submitted addresses in here
+        $mail->setFrom($emailfrom, $emailfromname);
+
+    //$mail->AddReplyTo('no-reply@mycomp.com','no-reply');
+        $mail->Subject = $title;
+
+    // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
+
+        $mail->AddAddress($emailto, $emailtoname);
+        $body = "<div id='emailBody' style='border:1px solid #ccc; padding:10%; margin-top:10%; max-width:80%;'>
+                    <h2 id='title' style='margin-top:0;'>$title</h2>
+                    <p id='previewDescription' style='white-space:pre-wrap;'>$descBody</p>
+                </div>";
+        
+        $mail->Body = $body;
+
+        $mail->isHTML(true);
+
+    //Replace the plain text body with one created manually
+        $mail->AltBody = $description;
+
+    //Attach an image file
+
+        if(!$mail->send()) {
+            error_log('Mailer Error: ' . $mail->ErrorInfo);
+        } else{
+            $msg = "Successful email sent.";
+            header("Location: promotion.php?msg=".urlencode($msg));
+            exit();
+        }
+    } catch(Exception $e) {
+        error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+    }
 } else{
     $msg = "No submitted email form.";
     header("Location: promotion.php?msg=".urlencode($msg));
