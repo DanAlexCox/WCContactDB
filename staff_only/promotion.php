@@ -360,11 +360,15 @@ if(!isset($_SESSION['User_ID'])){
                         </script>
                         <?php
                     } else{
-                        echo "Select an option in the dropdown menu or go back to main promotion menu";
+                        $error = "Invalid promo input.";
+                        header("Location: promotion.php?error=".urlencode($error));
+                        exit();
                     }
                 } else{
+                    $error = "Invalid promo input.";
+                    header("Location: promotion.php?error=".urlencode($error));
+                    exit();
                 }
-                //Confirm button, after confirmation, sends email to all
             } else{
                 //Select between preset and customisable layout
                 ?>
@@ -372,8 +376,8 @@ if(!isset($_SESSION['User_ID'])){
                     <h2>Select an layout option</h2>
                     <select name="layoutchoice">
                         <option value="">--SELECT--</option>
-                        <option value="preset">Preset Layout</option>
-                        <option value="custom">Custom Layout</option>
+                        <option value="preset">Preset Layout (Needs extra work)</option>
+                        <option value="custom">Custom Layout (Import/blank email)</option>
                     </select>
                     <button type="submit" name="layoutbtn">Proceed</button>
                 </form>
