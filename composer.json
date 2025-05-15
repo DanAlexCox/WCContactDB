@@ -3,7 +3,8 @@
     "description": "client package php project",
     "type": "project",
     "require": {
-        "phpmailer/phpmailer": "^6.9"
+        "phpmailer/phpmailer": "^6.9",
+        "phpoffice/phpspreadsheet": "^4.2"
     },
     "license": "MIT",
     "authors": [
