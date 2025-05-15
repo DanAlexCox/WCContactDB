@@ -44,7 +44,7 @@ if(!isset($_SESSION['User_ID'])){
         <div id="importbody">
             <?php
             if(!isset($_POST['importchoice'])){
-            ?>
+                ?>
                 <h1>Import new clients</h1>
                 <?php
                 //Form for selecting import method
@@ -57,7 +57,7 @@ if(!isset($_SESSION['User_ID'])){
                     </select>
                     <button type="submit">Proceed</button>
                 </form>
-            <?php
+                <?php
             } else{
                 if($_POST['importchoice'] == "new"){
                     if(!isset($_POST['newimportchoice'])){
@@ -157,7 +157,9 @@ if(!isset($_SESSION['User_ID'])){
                                 ?><p style="color:red;">File upload failed</p><?php
                             }
                         } else {
-                            
+                            $error = "Invalid input.";
+                            header("Location: import.php?error=".urlencode($error));
+                            exit();
                         }
                     } else{
                         $error = "Invalid input.";
@@ -165,31 +167,9 @@ if(!isset($_SESSION['User_ID'])){
                         exit();
                     }
                 } elseif($_POST['importchoice'] == "update"){
-                    if(!isset($_POST['upimportchoice'])){
-                        //Form to select import method for new client/s
-                        ?>
-                        <form method="post" action="import.php" id="updatemethod">
-                            <h2>How would you like to import new client/s?</h2>
-                            <select name="upimportchoice">
-                                <option value="manual">Manually for singular client</option>
-                                <option value="group">Automatically via spreadsheet</option>
-                            </select>
-                            <input type="hidden" name="importchoice" value="update">
-                            <button type="submit">Proceed</button>
-                        </form>
-                        <?php
-                    } elseif($_POST['upimportchoice'] =="manual"){
-                        //Form to update single client
-                        header("Location: modifyclient.php");
-                        exit();
-                    } elseif($_POST['upimportchoice'] == "group"){
-                        //Form to import spreadsheet of clients
-                        echo "group";
-                    } else{
-                        $error = "Invalid input.";
-                        header("Location: import.php?error=".urlencode($error));
-                        exit();
-                    }
+                    //Form to update single client
+                    header("Location: modifyclient.php");
+                    exit();
                 } else{
                     $error = "Invalid input.";
                     header("Location: import.php?error=".urlencode($error));
