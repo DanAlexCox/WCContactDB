@@ -32,7 +32,8 @@ if(isset($_GET['msg'])){
             } 
             if(isset($success_message)){
                 echo "<p style='color:green;'>$success_message</p>";
-            }?> 
+            }
+            ?> 
             <form class="login_form" action="login.php" method="post">
                 <label for id="login_email">Email</label>
                 <input type="email" id="login_email" name="Email" placeholder="Insert here" required></input><br>
@@ -40,9 +41,9 @@ if(isset($_GET['msg'])){
                 <input type="password" id="login_pass" name="Password" placeholder="Insert here" required></input><br>
                 <button type="submit" name="loginbtn">Login</input>
             </form>
+            <a href="newuser.php"><button id="newuserbutton">New User?</button></a>
             <?php
             //If correct email and password (OPTIONAL: opens up security question form and if thats correct...):
-                
                 if(isset($_POST['loginbtn'])) {
                     $emailSubmit = $_POST['Email'];
                     $passwordSubmit = $_POST['Password'];
@@ -78,5 +79,4 @@ if(isset($_GET['msg'])){
             ?>
         </div>
     </body>
-
 </html>
