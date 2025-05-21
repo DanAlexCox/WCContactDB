@@ -53,16 +53,10 @@
                         <h2>Create User</h2>
                         <label for='new_email'>Set Email Address</label>
                         <input type='email' placeholder='Email Address' name='new_email' required><br><br>
-                        <label for='new_username'>Set Username</label>
-                        <input type='text' placeholder='Username' name='new_username' required><br><br>
-                        <label for='new_password'>Set Password</label>
-                        <input type='password' placeholder='Password' name='new_password' required><br><br>
-                        <label for='new_permissions'>Set Permissions</label>
                         <select name='new_permissions' class='new_perms'>
                             <option value=''>--SELECT--</option>
                             <option value='V'>Viewer</option>
                             <option value='VC'>Communicator</option>
-                            <option value='VCM'>Administrator</option>
                         </select>
                         <button type='submit' name='registerbtn'>Create</button>
                         </form><br><br>";
@@ -95,8 +89,6 @@
                 if($updateFormStmt->execute()){
                     foreach($updateFormStmt as $row){
                         echo "<form method='post' action='staff_portal.php'>" ;
-                        echo "<input type='text' name='ModUser' value='".htmlspecialchars($row['Username'])."'required>";
-                        echo "<input type='email' name='ModEmail' value='".htmlspecialchars($row['Staff_email'])."' required>";
                         echo "<select name='ModPriv' class='Priv'  id='privilegeDropdown' required>
                                 <option value='".htmlspecialchars($row['Privilege'])."'>".$row['Privilege']."</option>
                                 <option value='V'>Viewer</option>
@@ -116,16 +108,11 @@
 
         //Update user table using form data, sends message and goes back to staff_portal.php, else send error message
         if(isset($_POST['updatebtn'])){
-            $updateUser = htmlspecialchars($_POST['ModUser']);
-            $updateEm = htmlspecialchars($_POST['ModEmail']);
             $updatePriv = htmlspecialchars($_POST['ModPriv']);
             $updatingID = htmlspecialchars($_POST['UserID']);
 
-            $updateQuery = "UPDATE `staff_user` SET Username = :upus, Staff_email = :upema,
-                                Privilege = :uppri WHERE User_ID = :upuid";
+            $updateQuery = "UPDATE `staff_user` SET Privilege = :uppri WHERE User_ID = :upuid";
             $updateStmt = $pdo->prepare($updateQuery);
-            $updateStmt->bindParam(':upus', $updateUser);
-            $updateStmt->bindParam(':upema', $updateEm);
             $updateStmt->bindParam(':uppri', $updatePriv);
             $updateStmt->bindParam(':upuid', $updatingID);
 
