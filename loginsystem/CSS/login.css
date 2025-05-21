@@ -12,7 +12,7 @@ body {
     font-family: Arial, Helvetica, sans-serif; 
 }
 
-#login_body {
+#login_body , #newuserbody{
     display: flex;
     flex-direction: column; 
     align-items: center; 
@@ -31,7 +31,7 @@ body {
     margin-bottom: 20px; 
 }
 
-#login_body form {
+#login_body form, #newuserbody form {
     width: 100%; 
     display: flex;
     flex-direction: column; 
@@ -47,7 +47,9 @@ h2, label {
 }
 
 #login_body input[type="text"], 
-#login_body input[type="password"] {
+#login_body input[type="password"],
+#newuserbody input[type="text"], 
+#newuserbody input[type="password"] {
     width: 100%; 
     padding: 10px; 
     font-size: 14px; 
@@ -58,12 +60,15 @@ h2, label {
 }
 
 #login_body input[type="text"]:focus,
-#login_body input[type="password"]:focus {
+#login_body input[type="password"]:focus,
+#newuserbody input[type="text"]:focus,
+#newuserbody input[type="password"]:focus {
     box-shadow: 0 0 5px rgb(0, 0, 200); 
     border-color: rgb(0, 0, 200); 
 }
 
-#login_body button {
+#login_body button,
+#newuserbody button {
     padding: 10px 15px; 
     font-size: 16px; 
     font-weight: bold; 
@@ -75,17 +80,20 @@ h2, label {
     transition: background-color 0.3s ease, transform 0.2s ease; 
 }
 
-#login_body button:hover {
+#login_body button:hover,
+#newuserbody button:hover {
     background-color: rgb(0, 0, 150); 
     transform: scale(1.05); 
 }
 
-#login_body button:active {
+#login_body button:active,
+#newuserbody button:active {
     background-color: rgb(0, 0, 100); 
     transform: scale(0.95); 
 }
 
-#login_body .error-message {
+#login_body .error-message,
+#newuserbody .error-message {
     color: red; 
     font-size: 14px;
     text-align: center;
@@ -93,7 +101,7 @@ h2, label {
 }
 
 @media (max-width: 768px) {
-    #login_body {
+    #login_body, #newuserbody {
         max-width: 90%; 
         padding: 15px;
     }
