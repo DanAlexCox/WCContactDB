@@ -53,11 +53,6 @@
                         <h2>Create User</h2>
                         <label for='new_email'>Set Email Address</label>
                         <input type='email' placeholder='Email Address' name='new_email' required><br><br>
-                        <select name='new_permissions' class='new_perms'>
-                            <option value=''>--SELECT--</option>
-                            <option value='V'>Viewer</option>
-                            <option value='VC'>Communicator</option>
-                        </select>
                         <button type='submit' name='registerbtn'>Create</button>
                         </form><br><br>";
 
