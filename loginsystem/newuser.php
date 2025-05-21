@@ -25,6 +25,7 @@ if(isset($_GET['msg'])){
     </head>
     <body>
         <div id="newuserbody">
+            <a href="login.php"><button id="gobackbutton">Back to login page</button></a>
             <?php
             //Verifying valid email present form
             if(isset($_POST['emailsubmitted'])){
