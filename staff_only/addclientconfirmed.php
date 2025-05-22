@@ -6,18 +6,18 @@ if(isset($_POST['regclient'])){
     $newfore = htmlspecialchars($_POST['Forename']);
     $newsur = htmlspecialchars($_POST['Surname']);
     $newgend = $_POST['Gender'];
-    $newage = $_POST['Age'];
+    $newdob = $_POST['adddob'];
     $newreli = $_POST['Religion'];
     $neweml = $_POST['EmailAddress'];
 
-    $clnt_query = "INSERT `clients`(Email, Prefix, Forename, Surname, Gender, Age, Religion) VALUES (:ce, :pr, :fn, :sn, :gd, :ag, :rg)";
+    $clnt_query = "INSERT `clients`(Email, Prefix, Forename, Surname, Gender, DateOfBirth, Religion) VALUES (:ce, :pr, :fn, :sn, :gd, :db, :rg)";
     $clnt_stmt = $pdo->prepare($clnt_query);
     $clnt_stmt->bindParam(':ce', $neweml);
     $clnt_stmt->bindParam(':pr', $newpref);
     $clnt_stmt->bindParam(':fn', $newfore);
     $clnt_stmt->bindParam(':sn', $newsur);
     $clnt_stmt->bindParam(':gd', $newgend);
-    $clnt_stmt->bindParam(':ag', $newage);
+    $clnt_stmt->bindParam(':db', $newdob);
     $clnt_stmt->bindParam(':rg', $newreli);
     
     if($clnt_stmt->execute()){

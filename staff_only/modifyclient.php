@@ -48,8 +48,12 @@ if(!isset($_SESSION['User_ID'])){
                     <option value=""></option>
                     <?php
                     foreach($viewAllStmt->fetchAll(PDO::FETCH_ASSOC) as $viewOne){
+                        $dateTime = new DateTime($viewOne['DateOfBirth']);
+                        $dob = htmlspecialchars($dateTime->format('d-m-Y'));
+                        $currentDate = new DateTime();
+                        $clientAge = $currentDate->diff($dateTime)->y;
                         echo "<option value='".$viewOne['Client_ID']."'>".$viewOne['Prefix']." ".$viewOne['Forename']." "
-                                .$viewOne['Surname']." - ".$viewOne['Age']."</option>";
+                                .$viewOne['Surname']." - ".$clientAge."</option>";
                     }
                     ?>
                 </select>
@@ -82,14 +86,8 @@ if(!isset($_SESSION['User_ID'])){
                             <input type='text' name='CliForename' class= 'CliFnm' value='".htmlspecialchars($row['Forename'])."'required>";
                     echo "<label for class='CliSnm'>Surname</label>
                             <input type='text' name='CliSurname' class = 'CliSnm' value='".htmlspecialchars($row['Surname'])."' required>";
-                    echo "<label for class='CliAge'>Age</label>
-                            <select name='CliAge' class='CliAge' id='ageDropdown' required>
-                            <option value=".htmlspecialchars($row['Age']).">".htmlspecialchars($row['Age'])."</option>";
-                            //Dynamically generate age options from 18 to 100
-                            for ($i = 18; $i <= 100; $i++) {
-                                echo "<option value='$i'>$i</option>";
-                            }
-                    echo "</select><br>";
+                    echo "<label for class='dob'>Date of Birth:</label>
+                            <input type='date' name='adddob' class='dob' value='".htmlspecialchars($row['DateOfBirth'])."' required><br>";
                     echo "<label for class='CliGndr'>Gender</label>
                             <select name='CliGender' class='CliGndr' id='cliGenderDropdown' required>
                                 <option value=".htmlspecialchars($row['Gender']).">".htmlspecialchars($row['Gender'])."</option>
@@ -128,19 +126,19 @@ if(!isset($_SESSION['User_ID'])){
             $updateSurn = htmlspecialchars($_POST['CliSurname']);
             $updateEm = htmlspecialchars($_POST['CliEmail']);
             $updateGen = htmlspecialchars($_POST['CliGender']);
-            $updateAge = htmlspecialchars($_POST['CliAge']);
+            $updateDob = htmlspecialchars($_POST['adddob']);
             $updateReli = htmlspecialchars($_POST['CliReligion']);
             $updatingID = htmlspecialchars($_POST['ClientID']);
 
             $updateQuery = "UPDATE `clients` SET  Prefix = :uppf, Forename = :upfn, Surname = :upsn,
-                                Email = :upem, Gender = :upgd, Age = :upag, Religion = :uprl WHERE Client_ID = :upcid";
+                                Email = :upem, Gender = :upgd, DateOfBirth = :updb, Religion = :uprl WHERE Client_ID = :upcid";
             $updateStmt = $pdo->prepare($updateQuery);
             $updateStmt->bindParam(':uppf', $updatePref);
             $updateStmt->bindParam(':upfn', $updateFore);
             $updateStmt->bindParam(':upsn', $updateSurn);
             $updateStmt->bindParam(':upem', $updateEm);
             $updateStmt->bindParam(':upgd', $updateGen);
-            $updateStmt->bindParam(':upag', $updateAge);
+            $updateStmt->bindParam(':updb', $updateDob);
             $updateStmt->bindParam(':uprl', $updateReli);
             $updateStmt->bindParam(':upcid', $updatingID);
 

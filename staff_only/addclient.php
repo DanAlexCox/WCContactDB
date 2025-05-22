@@ -59,16 +59,8 @@ if(!isset($_SESSION['User_ID'])){
                 <input type="text" name="Forename" class="Fornm" placeholder="Enter here" required>
                 <label for class="Surnm">Surname</label>
                 <input type="text" name="Surname" class="Surnm" placeholder="Enter here" required><br>
-                <label for="ageDropdown" class="age">Age</label>
-                <select name="Age" class="age" id="ageDropdown" required>
-                    <option value="">--Select--</option>
-                    <!-- Dynamically generate age options from 18 to 100 -->
-                    <script>
-                        for (let i = 18; i <= 100; i++) {
-                        document.write(`<option value="${i}">${i}</option>`);
-                        }
-                    </script>
-                </select><br>
+                <label for class="dob">Date of Birth:</label>
+                <input type="date" name="adddob" class="dob" required><br>
                 <label for="genderDropdown" class="gender">Gender</label>
                 <select name="Gender" class="gender" id="genderDropdown" required>
                     <option value="">--Select--</option>
