@@ -43,22 +43,7 @@ if(!isset($_SESSION['User_ID'])){
         ?>
         <div id="importbody">
             <?php
-            if(!isset($_POST['importchoice'])){
-                ?>
-                <h1>Import new clients</h1>
-                <?php
-                //Form for selecting import method
-                ?>
-                <form method="post" action="import.php" id="importmethod">
-                    <h2>Select the type of import you would like to proceed with</h2>
-                    <select name="importchoice">
-                        <option value="new">Add New Clients</option>
-                        <option value="update">Update Existing Clients</option>
-                    </select>
-                    <button type="submit">Proceed</button>
-                </form>
-                <?php
-            } else{
+            if(isset($_POST['importchoice'])){
                 if($_POST['importchoice'] == "new"){
                     if(!isset($_POST['newimportchoice'])){
                         //Form to select import method for new client/s
@@ -78,16 +63,6 @@ if(!isset($_SESSION['User_ID'])){
                         header("Location: addclient.php");
                         exit();
                     } elseif($_POST['newimportchoice'] == "group"){
-                        //Form to import spreadsheet of clients
-                        ?>
-                        <form method="post" action="import.php" id="newspreadsheet" enctype="multipart/form-data">
-                            <label for="posterimport">Import a valid spreadsheet file</label>
-                            <input type="file" name="spreadsheetimport" id="spreadsheetimport" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required>
-                            <input type="hidden" name="importchoice" value="new">
-                            <input type="hidden" name="newimportchoice" value="group">
-                            <button type="submit" name="newspreadsheet">Import</button>
-                        </form>
-                        <?php
                         if(isset($_POST['newspreadsheet'])){
                             //read imported file
                             $uploadDir = 'uploads/';
@@ -157,12 +132,19 @@ if(!isset($_SESSION['User_ID'])){
                                 ?><p style="color:red;">File upload failed</p><?php
                             }
                         } else {
-                            $error = "Invalid input.";
-                            header("Location: import.php?error=".urlencode($error));
-                            exit();
+                            //Form to import spreadsheet of clients
+                            ?>
+                            <form method="post" action="import.php" id="newspreadsheet" enctype="multipart/form-data">
+                                <label for="posterimport">Import a valid spreadsheet file</label>
+                                <input type="file" name="spreadsheetimport" id="spreadsheetimport" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required>
+                                <input type="hidden" name="importchoice" value="new">
+                                <input type="hidden" name="newimportchoice" value="group">
+                                <button type="submit" name="newspreadsheet">Import</button>
+                            </form>
+                            <?php
                         }
                     } else{
-                        $error = "Invalid input.";
+                        $error = "Invalid new choice input.";
                         header("Location: import.php?error=".urlencode($error));
                         exit();
                     }
@@ -171,10 +153,26 @@ if(!isset($_SESSION['User_ID'])){
                     header("Location: modifyclient.php");
                     exit();
                 } else{
-                    $error = "Invalid input.";
+                    $error = "Invalid choice input.";
                     header("Location: import.php?error=".urlencode($error));
                     exit();
                 }
+                
+            } else{
+                ?>
+                <h1>Import new clients</h1>
+                <?php
+                //Form for selecting import method
+                ?>
+                <form method="post" action="import.php" id="importmethod">
+                    <h2>Select the type of import you would like to proceed with</h2>
+                    <select name="importchoice">
+                        <option value="new">Add New Clients</option>
+                        <option value="update">Update Existing Clients</option>
+                    </select>
+                    <button type="submit">Proceed</button>
+                </form>
+                <?php
             }
             ?>
         </div>
