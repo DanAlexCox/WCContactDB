@@ -1,4 +1,6 @@
 <?php
+
+set_time_limit(0);
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -31,10 +33,10 @@ if(!isset($_SESSION['User_ID'])){
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $contactStmt = "SELECT Email, Forename, Surname FROM clients";
+    // $contactStmt = "SELECT Email, Forename, Surname FROM clients";
 
-    $contactSQL = $pdo->query($contactStmt);
-    $contactSQL->execute();
+    // $contactSQL = $pdo->query($contactStmt);
+    // $contactSQL->execute();
         
         if(isset($_POST['presetfinish'])){
             //edit layout to accommodate preset form
@@ -156,69 +158,71 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                 if (move_uploaded_file($_FILES['posterimport']['tmp_name'], $uploadFile)) {
                     try{
-                        foreach($contactSQL as $contact){
-                            if(!empty($contact['Forename']) == TRUE && !empty($contact['Surname']) == TRUE){
-                                $contactName = $contact['Forename']." ".$contact['Surname'];
-                            } else{
-                                $emailArray = explode("@", $contact['Email']);
-                                $contactName = $emailArray['0'];
-                            }
-                            $emailfrom = "marketing@womensconsortium.org.uk";
-                            $emailfromname = "WC Marketing";
-                            $emailfrompass = "jkYd[uPLmxg|";
+
+                        // foreach($contactSQL as $contact){
+                        //     if(!empty($contact['Forename']) == TRUE && !empty($contact['Surname']) == TRUE){
+                        //         $contactName = $contact['Forename']." ".$contact['Surname'];
+                        //     } else{
+                        //         $emailArray = explode("@", $contact['Email']);
+                        //         $contactName = $emailArray['0'];
+                        //     }
+                        //     $emailfrom = "marketing@womensconsortium.org.uk";
+                        //     $emailfromname = "WC Marketing";
+                        //     $emailfrompass = "jkYd[uPLmxg|";
                     
-                            $title = $subject;
-                            $description = $subject;
+                        //     $title = $subject;
+                        //     $description = $subject;
                     
-                            $emailto = $contact['Email'];
-                            $emailtoname = $contactName;
+                        //     // $emailto = $contact['Email'];
+                        //     // $emailtoname = $contactName;
                 
-                            $mail=new PHPMailer(true);
-                            $mail->CharSet = 'UTF-8';
-                            $mail->IsSMTP();
-                            $mail->Host = 'ams203.greengeeks.net';
-                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                            $mail->Port = 587;
-                            $mail->SMTPAuth = true;
-                            $mail->SMTPDebug = 0;
+                        //     $mail=new PHPMailer(true);
+                        //     $mail->CharSet = 'UTF-8';
+                        //     $mail->IsSMTP();
+                        //     $mail->Host = 'ams203.greengeeks.net';
+                        //     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                        //     $mail->Port = 587;
+                        //     $mail->SMTPAuth = true;
+                        //     $mail->SMTPDebug = 0;
                 
-                            $mail->Username = $emailfrom;
-                            $mail->Password   = $emailfrompass;
+                        //     $mail->Username = $emailfrom;
+                        //     $mail->Password   = $emailfrompass;
                 
-                            //Do not use user-submitted addresses in here
-                            $mail->setFrom($emailfrom, $emailfromname);
+                        //     //Do not use user-submitted addresses in here
+                        //     $mail->setFrom($emailfrom, $emailfromname);
                 
-                            //$mail->AddReplyTo('no-reply@mycomp.com','no-reply');
-                            $mail->Subject = $title;
+                        //     //$mail->AddReplyTo('no-reply@mycomp.com','no-reply');
+                        //     $mail->Subject = $title;
                 
-                            // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
+                        //     // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
                 
-                            $mail->AddAddress($emailto, $emailtoname);
-                            $body = "<div id='emailbody'>
-                                        <h2 id='title' style='margin-top:0;'>$title</h2>
-                                        <img src='cid:$uploadNam' alt='Poster Image' style='max-width: 70%;'>
-                                    </div>";
+                        //     $mail->AddAddress($emailto, $emailtoname);
+                        //     $body = "<div id='emailbody'>
+                        //                 <h2 id='title' style='margin-top:0;'>$title</h2>
+                        //                 <img src='cid:$uploadNam' alt='Poster Image' style='max-width: 70%;'>
+                        //             </div>";
                             
-                            $mail->Body = $body;
-                            $mail->addEmbeddedImage($uploadFile, $uploadNam);
+                        //     $mail->Body = $body;
+                        //     $mail->addEmbeddedImage($uploadFile, $uploadNam);
                 
-                            $mail->isHTML(true);
+                        //     $mail->isHTML(true);
                 
-                            //Replace the plain text body with one created manually
-                            $mail->AltBody = $description;
+                        //     //Replace the plain text body with one created manually
+                        //     $mail->AltBody = $description;
                 
-                            //Attach an image file
+                        //     //Attach an image file
                 
-                            if(!$mail->send()) {
-                                error_log('Mailer Error: ' . $mail->ErrorInfo);
-                            }        
-                        }
-                        if (file_exists($uploadFile)) {
-                            unlink($uploadFile); // delete the file
-                        }
-                        $msg = "Successful email sent.";
-                        header("Location: promotion.php?msg=".urlencode($msg));
-                        exit();
+                        //     if(!$mail->send()) {
+                        //         error_log('Mailer Error: ' . $mail->ErrorInfo);
+                        //     }  
+                        //     usleep(100000);      
+                        // }
+                        // if (file_exists($uploadFile)) {
+                        //     unlink($uploadFile); // delete the file
+                        // }
+                        // $msg = "Successful email sent.";
+                        // header("Location: promotion.php?msg=".urlencode($msg));
+                        // exit();
                     } catch(Exception $e) {
                         error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
                     }    
@@ -237,21 +241,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $descBody = htmlspecialchars($_POST['description']);
             
             try{
-                foreach($contactSQL as $contact){
-                    if(!empty($contact['Forename']) == TRUE && !empty($contact['Surname']) == TRUE){
-                        $contactName = $contact['Forename']." ".$contact['Surname'];
-                    } else{
-                        $emailArray = explode("@", $contact['Email']);
-                        $contactName = $emailArray['0'];
-                    }
+                for($i=0; $i <100; $i++){
+                // foreach($contactSQL as $contact){
+                    // if(!empty($contact['Forename']) == TRUE && !empty($contact['Surname']) == TRUE){
+                    //     $contactName = $contact['Forename']." ".$contact['Surname'];
+                    // } else{
+                    //     $emailArray = explode("@", $contact['Email']);
+                    //     $contactName = $emailArray['0'];
+                    // }
                     $emailfrom = "marketing@womensconsortium.org.uk";
                     $emailfromname = "WC Marketing";
                     $emailfrompass = "jkYd[uPLmxg|";
 
                     $description = $title;
 
-                    $emailto = $contact['Email'];
-                    $emailtoname = $contactName;
+                    // $emailto = $contact['Email'];
+                    // $emailtoname = $contactName;
+
+                    $emailto = "adala738@gmail.com";
+                    $emailtoname = "Client Dan";
 
                     $mail=new PHPMailer(true);
                     $mail->CharSet = 'UTF-8';
@@ -290,6 +298,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     if(!$mail->send()) {
                         error_log('Mailer Error: ' . $mail->ErrorInfo);
                     }
+                    usleep(100000);
                 }
                 $msg = "Successful email sent.";
                 header("Location: promotion.php?msg=".urlencode($msg));
