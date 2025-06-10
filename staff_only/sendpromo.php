@@ -241,7 +241,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $descBody = htmlspecialchars($_POST['description']);
             
             try{
-                for($i=0; $i <100; $i++){
+                for($i=0; $i <500; $i++){
                 // foreach($contactSQL as $contact){
                     // if(!empty($contact['Forename']) == TRUE && !empty($contact['Surname']) == TRUE){
                     //     $contactName = $contact['Forename']." ".$contact['Surname'];
