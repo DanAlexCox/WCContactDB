@@ -12,6 +12,8 @@
                 echo "<li><a href='clients.php'><span class='text'>Clients</span></a></li>";
                 echo "<li><a href='promotion.php'><span class='text'>Promotion</span></a></li>";
                 echo "<li><a href='import.php'><span class='text'>Import</span></a></li>";
+                //If User_ID privileges = VCM, add emailtable.php
+                echo "<li><a href='emails.php'><span class='text'>Pending Emails</span></a></li>";
             } else{
                 echo "<li><a href='staff_portal.php'><span class='text'>Back to portal</span></a></li>";
             }
