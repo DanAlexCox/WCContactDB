@@ -44,7 +44,7 @@ foreach($queueSQL as $entry){
         $description = $uploadNam;
         $body = "<div id='emailbody'>
                     <img src='cid:$uploadNam' alt='Poster Image' style='max-width: 70%;'>
-                </div>;";
+                </div>";
         $mail->addEmbeddedImage($uploadFile, $uploadNam);
     } else{
         $description = $entry['Body'];
