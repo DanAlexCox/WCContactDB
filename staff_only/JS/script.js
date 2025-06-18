@@ -42,12 +42,12 @@ function confirmClient() {
     return userConfirmed; // Proceed if "Yes" (true), cancel if "No" (false)
 }
 
-function presetSendConfirm() {
+function presetQueueConfirm() {
     const userConfirmed = confirm("Are you sure you want to send this layout?");
     return userConfirmed;
 }
 
-function customSendConfirm() {
+function customQueueConfirm() {
     const userConfirmed = confirm("Are you sure you want to send this as an email?");
     return userConfirmed;
 }
