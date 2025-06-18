@@ -40,6 +40,7 @@ if(!isset($_SESSION['User_ID'])){
         include "navbar.php";
         ?>
         <div class="promobody">
+            <h3>IMPORTANT: Submitting emails will queue up and send up to 200 emails every hour</h3>
             <?php
             if(isset($_POST['layoutchoice'])){
                 ?><form method="post" action="promotion.php" id="reset">
@@ -322,11 +323,13 @@ if(!isset($_SESSION['User_ID'])){
                     } elseif($_POST['customchoice'] == "blank"){
                         //if customchoice == "blank", reveal form similar to partners/client email send forms
                         ?>
-                        <form method="post" action="sendpromo.php" id="blankform" onsubmit="customSendConfirm()">
+                        <form method="post" action="addpendingemail.php" id="blankform" onsubmit="customSendConfirm()">
                             <label for='title'>Title</label><br>
                             <input type='text' id='title' name='title' placeholder='Insert title' required><br>
                             <label for='description'>Description</label><br>
                             <textarea id='description' name='description' placeholder='Insert details here'></textarea><br>
+                            <input type="hidden" name="emailtype" value="allclients">
+                            <input type="hidden" name="addpending">
                             <button type='submit' name="blankfinish">Send</button>
                         </form>
 
