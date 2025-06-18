@@ -7,10 +7,10 @@ use PHPMailer\PHPMailer\Exception;
 
 require __DIR__.'/../vendor/autoload.php';
 
-//Select the latest 200 emails queued to be sent (test latest 1 email)
+//Select the latest 200 emails queued to be sent
 $queueStmt = "SELECT `emailqueue`.*, `clients`.Email FROM `emailqueue`
                 INNER JOIN `clients` ON `clients`.Client_ID = `emailqueue`.Client_ID
-                WHERE EmailStatus_ID = 1 LIMIT 1";
+                WHERE EmailStatus_ID = 1 LIMIT 200";
 $queueSQL = $pdo->query($queueStmt);
 $queueSQL->execute();
 //foreach loop sending to queued email addresses
