@@ -267,12 +267,14 @@ if(!isset($_SESSION['User_ID'])){
                     if($_POST['customchoice'] == "import"){
                         //if customchoice == "import", reveal import form and preview email after importing in html
                         ?>
-                        <form method="post" action="sendpromo.php" id="importform" enctype="multipart/form-data" onsubmit="return customSendConfirm()">
+                        <form method="post" action="addpendingemail.php" id="importform" enctype="multipart/form-data" onsubmit="return customQueueConfirm()">
                             <label for="title">Title</label>
-                            <input type="text" name="subject" id="subject" placeholder="Insert title here" required>
+                            <input type="text" name="title" id="title" placeholder="Insert title here" required>
                             <label for="posterimport">Import poster file</label>
                             <input type="file" name="posterimport" id="posterimport" accept="image/*">
-                            <button type="submit" name="importfinish">Send</button>
+                            <input type="hidden" name="emailtype" value="allclients">
+                            <input type="hidden" name="addpending">
+                            <button type="submit" name="importfinish">Send to queue</button>
                         </form>
 
                         <template id="previewsection">
@@ -323,14 +325,14 @@ if(!isset($_SESSION['User_ID'])){
                     } elseif($_POST['customchoice'] == "blank"){
                         //if customchoice == "blank", reveal form similar to partners/client email send forms
                         ?>
-                        <form method="post" action="addpendingemail.php" id="blankform" onsubmit="customSendConfirm()">
+                        <form method="post" action="addpendingemail.php" id="blankform" onsubmit="customQueueConfirm()">
                             <label for='title'>Title</label><br>
                             <input type='text' id='title' name='title' placeholder='Insert title' required><br>
                             <label for='description'>Description</label><br>
                             <textarea id='description' name='description' placeholder='Insert details here'></textarea><br>
                             <input type="hidden" name="emailtype" value="allclients">
                             <input type="hidden" name="addpending">
-                            <button type='submit' name="blankfinish">Send</button>
+                            <button type='submit' name="blankfinish">Send to queue</button>
                         </form>
 
                         <template id="previewsection">
