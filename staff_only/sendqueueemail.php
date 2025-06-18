@@ -22,7 +22,6 @@ foreach($queueSQL as $entry){
     $emailfromname = "WC Marketing";
     $emailfrompass = "jkYd[uPLmxg|";
     $title = $entry['Subject'];
-    $description = $entry['Body'];
 
     $mail=new PHPMailer(true);
     $mail->CharSet = 'UTF-8';
@@ -39,10 +38,21 @@ foreach($queueSQL as $entry){
     $mail->setFrom($emailfrom, $emailfromname);
 
     $mail->Subject = $title;
-
+    if(is_file("uploads/".$entry['Body']) && getimagesize("uploads/".$entry['Body'])){
+        $uploadNam = $entry['Body'];
+        $uploadFile = 'uploads/'.$entry['Body'];
+        $description = $uploadNam;
+        $body = "<div id='emailbody'>
+                    <img src='cid:$uploadNam' alt='Poster Image' style='max-width: 70%;'>
+                </div>;";
+        $mail->addEmbeddedImage($uploadFile, $uploadNam);
+    } else{
+        $description = $entry['Body'];
+        $body = $description;
+    }
     $mail->AddAddress($emailto, $emailtoname);
-
-    $mail->Body = $description;
+    
+    $mail->Body = $body;
     $mail->isHTML(true);
     $mail->AltBody = $description;
 
