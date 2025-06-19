@@ -13,7 +13,6 @@
                 echo "<li><a href='promotion.php'><span class='text'>Promotion</span></a></li>";
                 echo "<li><a href='import.php'><span class='text'>Import</span></a></li>";
                 //If User_ID privileges = VCM, add email.php
-
                 $uid = $_SESSION['User_ID'];
                 $checkUser = "SELECT Privilege FROM `staff_user` WHERE User_ID = :uid";
                 $checkUserSQL = $pdo->prepare($checkUser);
