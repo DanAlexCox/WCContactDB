@@ -11,6 +11,10 @@ require __DIR__.'/../vendor/autoload.php';
 $queueStmt = "SELECT `emailqueue`.*, `clients`.Email FROM `emailqueue`
                 INNER JOIN `clients` ON `clients`.Client_ID = `emailqueue`.Client_ID
                 WHERE EmailStatus_ID = 1 LIMIT 200";
+//Test with first queue id
+// $queueStmt = "SELECT `emailqueue`.*, `clients`.Email FROM `emailqueue`
+//                 INNER JOIN `clients` ON `clients`.Client_ID = `emailqueue`.Client_ID
+//                 WHERE Queue_ID = 1 LIMIT 1";
 $queueSQL = $pdo->query($queueStmt);
 $queueSQL->execute();
 //foreach loop sending to queued email addresses
@@ -38,9 +42,11 @@ foreach($queueSQL as $entry){
     $mail->setFrom($emailfrom, $emailfromname);
 
     $mail->Subject = $title;
-    if(is_file("uploads/".$entry['Body']) && getimagesize("uploads/".$entry['Body'])){
-        $uploadNam = $entry['Body'];
-        $uploadFile = 'uploads/'.$entry['Body'];
+
+    $uploadDir = __DIR__ . '/uploads/';
+    $uploadNam = $entry['Body'];
+    $uploadFile = $uploadDir . $uploadNam;
+    if(is_file($uploadFile) && getimagesize($uploadFile)){
         $description = $uploadNam;
         $body = "<div id='emailbody'>
                     <img src='cid:$uploadNam' alt='Poster Image' style='max-width: 70%;'>
